@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Logs - Kiro2API</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <style>
+        .top-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+        .top-bar h1 { margin: 0; font-size: 18px; white-space: nowrap; }
+        .nav { display: flex; gap: 12px; }
+        .nav a { color: #7c8cf8; text-decoration: none; padding: 6px 14px; border: 1px solid #7c8cf8; border-radius: 6px; font-size: 14px; }
+        .nav a:hover, .nav a.active { background: #7c8cf8; color: #fff; }
+        .phase-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+        .phase-inbound_raw     { background: #1e3a5f; color: #60a5fa; }
+        .phase-inbound_mapped  { background: #1e4a3a; color: #34d399; }
+        .phase-outbound_raw    { background: #3a2a1e; color: #fb923c; }
+        .phase-outbound_mapped { background: #3a1e3a; color: #c084fc; }
+        .view-btn { cursor: pointer; background: none; border: 1px solid #444; color: #aaa; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        .view-btn:hover { border-color: #7c8cf8; color: #7c8cf8; }
+        td { font-size: 13px; }
+        .mono { font-family: monospace; font-size: 12px; color: #aaa; }
+        .loading-cell { text-align: center; color: #aaa; padding: 12px !important; font-size: 13px; }
+        .pagination { display: flex; gap: 8px; align-items: center; margin-top: 16px; justify-content: center; }
+        .pagination button { background: #1a1f2e; border: 1px solid #333; color: #aaa; padding: 4px 12px; border-radius: 4px; cursor: pointer; }
+        .pagination button:hover:not(:disabled) { border-color: #7c8cf8; color: #7c8cf8; }
+        .pagination button:disabled { opacity: 0.4; cursor: default; }
+        .pagination span { color: #aaa; font-size: 13px; }
+
+        /* tooltip */
+        .tip { position: fixed; background: #1a1f2e; border: 1px solid #444; color: #e6edf3; font-size: 12px; font-family: monospace; padding: 6px 10px; border-radius: 6px; max-width: 480px; word-break: break-all; white-space: pre-wrap; z-index: 2000; pointer-events: none; box-shadow: 0 4px 16px rgba(0,0,0,.5); }
+        .tip-copied { color: #34d399; font-size: 11px; margin-top: 4px; }
+
+        /* 弹窗 */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 1000; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; }
+        .modal-overlay.open { display: flex; }
+        .modal { background: #161b22; border: 1px solid #30363d; border-radius: 10px; width: 100%; max-width: 1200px; height: 90vh; display: flex; flex-direction: column; }
+        .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 1px solid #30363d; flex-shrink: 0; }
+        .modal-header h3 { margin: 0; font-size: 14px; color: #e6edf3; font-family: monospace; }
+        .modal-header-actions { display: flex; gap: 8px; align-items: center; }
+        .modal-close { cursor: pointer; background: none; border: none; color: #aaa; font-size: 20px; line-height: 1; padding: 0 4px; }
+        .modal-close:hover { color: #fff; }
+        .modal-tabs { display: flex; gap: 0; padding: 0 20px; border-bottom: 1px solid #30363d; flex-shrink: 0; background: #161b22; }
+        .modal-tab { cursor: pointer; padding: 10px 18px; font-size: 13px; color: #aaa; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+        .modal-tab.active { color: #7c8cf8; border-bottom-color: #7c8cf8; }
+        .modal-tab:hover { color: #e6edf3; }
+        .modal-body { flex: 1; overflow: auto; padding: 16px 20px; background: #0d1117; border-radius: 0 0 10px 10px; }
+        .tab-content { display: none; height: 100%; }
+        .tab-content.active { display: block; }
+
+        /* JSON 树 */
+        .json-tree { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 13px; line-height: 1.6; color: #e6edf3; }
+        .jn { display: block; padding-left: 20px; }
+        .jn-key { color: #79c0ff; }
+        .jn-str { color: #a5d6ff; }
+        .jn-num { color: #f2cc60; }
+        .jn-bool { color: #ff7b72; }
+        .jn-null { color: #8b949e; }
+        .jn-toggle { cursor: pointer; user-select: none; display: inline-block; width: 16px; text-align: center; color: #8b949e; font-size: 11px; }
+        .jn-toggle:hover { color: #7c8cf8; }
+        .jn-collapsed > .jn-children { display: none; }
+        .jn-collapsed > .jn-summary { display: inline; }
+        .jn-summary { display: none; color: #8b949e; font-size: 12px; }
+        .jn-bracket { color: #8b949e; }
+        .plain-text { font-family: monospace; font-size: 12px; color: #e6edf3; white-space: pre-wrap; word-break: break-all; }
+        .toolbar { display: flex; gap: 8px; margin-bottom: 10px; }
+        .toolbar button { background: #1a1f2e; border: 1px solid #333; color: #aaa; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+        .toolbar button:hover { border-color: #7c8cf8; color: #7c8cf8; }
+        .jn-expand-btn { cursor: pointer; color: #7c8cf8; font-size: 11px; margin-left: 4px; }
+        .jn-expand-btn:hover { text-decoration: underline; }
+        .jn-ellipsis { color: #8b949e; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top-bar">
+        <h1>📋 Request Logs</h1>
+        <div class="nav">
+            <a href="/">Token Dashboard</a>
+            <a href="/static/logs.html" class="active">Request Logs</a>
+        </div>
+        <button class="refresh-btn" onclick="clearFilter()">🔄 刷新</button>
+    </div>
+    <div id="filterBar" style="display:none;align-items:center;gap:8px;margin-bottom:10px;font-size:13px;color:#aaa;">
+        <span>筛选：</span><span id="filterLabel" style="color:#e6edf3;"></span>
+        <button onclick="clearFilter()" style="background:none;border:1px solid #444;color:#aaa;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:12px;">✕ 清除</button>
+    </div>
+    <div class="main-card">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>阶段</th>
+                        <th>模型</th>
+                        <th>URL</th>
+                        <th>Tokens</th>
+                        <th>上下文%</th>
+                        <th>积分</th>
+                        <th>状态码</th>
+                        <th>工具</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="logTableBody">
+                    <tr><td colspan="11" class="loading-cell">加载中...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination" id="pagination"></div>
+    </div>
+</div>
+
+<!-- 弹窗 -->
+<div class="modal-overlay" id="modalOverlay" onclick="onOverlayClick(event)">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="modalTitle">详情</h3>
+            <div class="modal-header-actions">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+        </div>
+        <div class="modal-tabs">
+            <div class="modal-tab active" onclick="switchTab('headers',this)">Headers</div>
+            <div class="modal-tab" onclick="switchTab('body',this)">Body</div>
+        </div>
+        <div class="modal-body">
+            <div class="tab-content active" id="tab-headers">
+                <div class="toolbar">
+                    <button onclick="expandAll('headers-tree')">全部展开</button>
+                    <button onclick="collapseAll('headers-tree')">全部折叠</button>
+                </div>
+                <div class="json-tree" id="headers-tree"></div>
+            </div>
+            <div class="tab-content" id="tab-body">
+                <div class="toolbar">
+                    <button onclick="expandAll('body-tree')">全部展开</button>
+                    <button onclick="collapseAll('body-tree')">全部折叠</button>
+                </div>
+                <div class="json-tree" id="body-tree"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentPage = 1;
+const pageSize = 20;
+let filterPhase = '';
+let filterRequestID = '';
+
+function setFilter(type, value, label) {
+    filterPhase = '';
+    filterRequestID = '';
+    if (type === 'phase') filterPhase = value;
+    if (type === 'request_id') filterRequestID = value;
+    document.getElementById('filterBar').style.display = 'flex';
+    document.getElementById('filterLabel').textContent = label;
+    loadLogs(1);
+}
+
+function clearFilter() {
+    filterPhase = '';
+    filterRequestID = '';
+    document.getElementById('filterBar').style.display = 'none';
+    loadLogs(1);
+}
+
+// ── JSON 树渲染 ──────────────────────────────────────────────
+function renderJSON(container, data) {
+    container.innerHTML = '';
+    try {
+        const parsed = typeof data === 'string' ? JSON.parse(data) : data;
+        container.appendChild(buildNode(parsed));
+    } catch {
+        const p = document.createElement('div');
+        p.className = 'plain-text';
+        p.textContent = data || '(空)';
+        container.appendChild(p);
+    }
+}
+
+function buildNode(val, key) {
+    const wrap = document.createElement('div');
+    wrap.className = 'jn';
+
+    const keySpan = key !== undefined
+        ? `<span class="jn-key">${escHtml(JSON.stringify(key))}</span><span class="jn-bracket">: </span>`
+        : '';
+
+    if (val === null) {
+        wrap.innerHTML = keySpan + `<span class="jn-null">null</span>`;
+    } else if (typeof val === 'boolean') {
+        wrap.innerHTML = keySpan + `<span class="jn-bool">${val}</span>`;
+    } else if (typeof val === 'number') {
+        wrap.innerHTML = keySpan + `<span class="jn-num">${val}</span>`;
+    } else if (typeof val === 'string') {
+        // 尝试嵌套 JSON
+        let inner = null;
+        if ((val.startsWith('{') || val.startsWith('[')) && val.length > 2) {
+            try { inner = JSON.parse(val); } catch {}
+        }
+        if (inner !== null) {
+            wrap.innerHTML = keySpan + `<span class="jn-toggle">▼</span><span class="jn-bracket">"(json) "</span><span class="jn-summary">…</span>`;
+            const children = document.createElement('div');
+            children.className = 'jn-children';
+            children.appendChild(buildNode(inner));
+            wrap.appendChild(children);
+            wrap.querySelector('.jn-toggle').addEventListener('click', () => toggleNode(wrap));
+        } else if (val.length > 120) {
+            // 长字符串：截断显示，点击展开
+            const preview = escHtml(JSON.stringify(val.slice(0, 120)));
+            const full = escHtml(JSON.stringify(val));
+            wrap.innerHTML = keySpan +
+                `<span class="jn-str jn-str-short">${preview.slice(0,-1)}<span class="jn-ellipsis">…" <span class="jn-expand-btn">[展开]</span></span></span>` +
+                `<span class="jn-str jn-str-full" style="display:none">${full} <span class="jn-expand-btn">[收起]</span></span>`;
+            wrap.querySelectorAll('.jn-expand-btn').forEach(btn => btn.addEventListener('click', () => {
+                wrap.querySelector('.jn-str-short').style.display =
+                    wrap.querySelector('.jn-str-short').style.display === 'none' ? '' : 'none';
+                wrap.querySelector('.jn-str-full').style.display =
+                    wrap.querySelector('.jn-str-full').style.display === 'none' ? '' : 'none';
+            }));
+        } else {
+            wrap.innerHTML = keySpan + `<span class="jn-str">${escHtml(JSON.stringify(val))}</span>`;
+        }
+    } else if (Array.isArray(val)) {
+        const len = val.length;
+        wrap.innerHTML = keySpan + `<span class="jn-toggle">▼</span><span class="jn-bracket">[</span><span class="jn-summary">${len} items</span>`;
+        const children = document.createElement('div');
+        children.className = 'jn-children';
+        val.forEach((v, i) => children.appendChild(buildNode(v, i)));
+        const close = document.createElement('span');
+        close.className = 'jn-bracket';
+        close.textContent = ']';
+        wrap.appendChild(children);
+        wrap.appendChild(close);
+        wrap.querySelector('.jn-toggle').addEventListener('click', () => toggleNode(wrap));
+    } else if (typeof val === 'object') {
+        const keys = Object.keys(val);
+        wrap.innerHTML = keySpan + `<span class="jn-toggle">▼</span><span class="jn-bracket">{</span><span class="jn-summary">${keys.length} keys</span>`;
+        const children = document.createElement('div');
+        children.className = 'jn-children';
+        keys.forEach(k => children.appendChild(buildNode(val[k], k)));
+        const close = document.createElement('span');
+        close.className = 'jn-bracket';
+        close.textContent = '}';
+        wrap.appendChild(children);
+        wrap.appendChild(close);
+        wrap.querySelector('.jn-toggle').addEventListener('click', () => toggleNode(wrap));
+    }
+    return wrap;
+}
+
+function toggleNode(node) {
+    const collapsed = node.classList.toggle('jn-collapsed');
+    const toggle = node.querySelector(':scope > .jn-toggle');
+    if (toggle) toggle.textContent = collapsed ? '▶' : '▼';
+}
+
+function expandAll(id) {
+    document.getElementById(id).querySelectorAll('.jn-collapsed').forEach(n => {
+        n.classList.remove('jn-collapsed');
+        const t = n.querySelector(':scope > .jn-toggle');
+        if (t) t.textContent = '▼';
+    });
+}
+
+function collapseAll(id) {
+    document.getElementById(id).querySelectorAll('.jn-toggle').forEach(t => {
+        const node = t.parentElement;
+        node.classList.add('jn-collapsed');
+        t.textContent = '▶';
+    });
+}
+
+function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── 表格 ────────────────────────────────────────────────────
+async function loadLogs(page = 1) {
+    currentPage = page;
+    const tbody = document.getElementById('logTableBody');
+    tbody.innerHTML = '<tr><td colspan="11" class="loading-cell">加载中...</td></tr>';
+
+    const params = new URLSearchParams({ page, size: pageSize });
+    if (filterPhase) params.set('phase', filterPhase);
+    if (filterRequestID) params.set('request_id', filterRequestID);
+    const res = await fetch(`/api/logs?${params}`);
+    const json = await res.json();
+
+    tbody.innerHTML = '';
+    if (!json.data || json.data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="11" class="loading-cell">暂无记录</td></tr>';
+        renderPagination(0); return;
+    }
+
+    json.data.forEach(row => {
+        const tr = document.createElement('tr');
+        const shortReqId = row.request_id ? row.request_id.slice(-8) : '-';
+        const tools = row.tool_names && row.tool_names !== 'null' && row.tool_names !== '[]'
+            ? JSON.parse(row.tool_names).join(', ') : '-';
+        tr.innerHTML = `
+            <td class="mono filter-click" data-filter-type="request_id" data-filter-value="${row.request_id}" data-filter-label="Request ID: ...${shortReqId}" title="${row.request_id}" style="cursor:pointer;" >...${shortReqId}</td>
+            <td><span class="phase-badge phase-${row.phase} filter-click" data-filter-type="phase" data-filter-value="${row.phase}" data-filter-label="阶段: ${row.phase}" style="cursor:pointer;">${row.phase}</span></td>
+            <td>${row.model || '-'}</td>
+            <td class="mono" style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${row.url}">${row.url||'-'}</td>
+            <td>${row.estimated_tokens||'-'}</td>
+            <td>${row.context_usage_pct ? row.context_usage_pct.toFixed(2) + '%' : '-'}</td>
+            <td>${row.credits_used ? row.credits_used.toFixed(2) : '-'}</td>
+            <td>${row.status_code||'-'}</td>
+            <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${tools}">${tools}</td>
+            <td class="mono">${fmtTime(row.created_at)}</td>
+            <td><button class="view-btn" onclick="openModal(${row.id},'${row.phase} #${row.id}')">查看</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+    renderPagination(json.total);
+}
+
+// ── 弹窗 ────────────────────────────────────────────────────
+async function openModal(id, title) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('headers-tree').innerHTML = '<div class="plain-text">加载中...</div>';
+    document.getElementById('body-tree').innerHTML = '<div class="plain-text">加载中...</div>';
+    switchTab('headers', document.querySelector('.modal-tab'));
+    document.getElementById('modalOverlay').classList.add('open');
+
+    const res = await fetch(`/api/logs/${id}/body`);
+    const json = await res.json();
+    renderJSON(document.getElementById('headers-tree'), json.headers);
+    renderJSON(document.getElementById('body-tree'), json.body);
+}
+
+function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+}
+
+function onOverlayClick(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function switchTab(tab, el) {
+    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    if (el) el.classList.add('active');
+    document.getElementById(`tab-${tab}`).classList.add('active');
+}
+
+const timeFmt = new Intl.DateTimeFormat('sv', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit' });
+function fmtTime(s) {
+    if (!s) return '-';
+    const d = new Date(s.endsWith('Z') ? s : s.replace(' ', 'T') + 'Z');
+    return isNaN(d) ? s : timeFmt.format(d).replace('T', ' ');
+}
+
+function renderPagination(total) {
+    const totalPages = Math.ceil(total / pageSize);
+    document.getElementById('pagination').innerHTML = `
+        <button onclick="loadLogs(${currentPage-1})" ${currentPage<=1?'disabled':''}>上一页</button>
+        <span>第 ${currentPage} / ${totalPages||1} 页，共 ${total} 条</span>
+        <button onclick="loadLogs(${currentPage+1})" ${currentPage>=totalPages?'disabled':''}>下一页</button>
+    `;
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+loadLogs();
+
+// ── Tooltip + 点击复制 ───────────────────────────────────────
+const tip = document.createElement('div');
+tip.className = 'tip';
+tip.style.display = 'none';
+document.body.appendChild(tip);
+
+document.addEventListener('mouseover', e => {
+    const el = e.target.closest('[title]');
+    if (!el || !el.title) return;
+    tip.innerHTML = escHtml(el.title) + '<div class="tip-copied" style="display:none">✓ 已复制</div>';
+    tip.style.display = 'block';
+    moveTip(e);
+});
+document.addEventListener('mousemove', e => {
+    if (tip.style.display === 'none') return;
+    moveTip(e);
+});
+document.addEventListener('mouseout', e => {
+    if (!e.target.closest('[title]')) return;
+    tip.style.display = 'none';
+});
+document.addEventListener('click', e => {
+    const fc = e.target.closest('.filter-click');
+    if (fc) {
+        tip.style.display = 'none';
+        setFilter(fc.dataset.filterType, fc.dataset.filterValue, fc.dataset.filterLabel);
+        return;
+    }
+    const el = e.target.closest('[title]');
+    if (!el || !el.title) return;
+    navigator.clipboard.writeText(el.title).then(() => {
+        const copied = tip.querySelector('.tip-copied');
+        if (copied) { copied.style.display = 'block'; setTimeout(() => copied.style.display = 'none', 1500); }
+    });
+});
+function moveTip(e) {
+    const x = e.clientX + 14, y = e.clientY + 14;
+    tip.style.left = Math.min(x, window.innerWidth - tip.offsetWidth - 10) + 'px';
+    tip.style.top = Math.min(y, window.innerHeight - tip.offsetHeight - 10) + 'px';
+}
+</script>
+</body>
+</html>

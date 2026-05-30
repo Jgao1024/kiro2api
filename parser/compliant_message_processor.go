@@ -125,6 +125,18 @@ func (cmp *CompliantMessageProcessor) processEventMessage(message *EventStreamMe
 	}
 
 	// 未知事件类型，记录日志但不报错
+	// 对计量/上下文事件特殊处理，透传 payload 供上层消费
+	if eventType == "meteringEvent" || eventType == "contextUsageEvent" {
+		var payload map[string]any
+		if len(message.Payload) > 0 {
+			_ = utils.FastUnmarshal(message.Payload, &payload)
+		}
+		if payload == nil {
+			payload = map[string]any{}
+		}
+		payload["type"] = eventType
+		return []SSEEvent{{Event: eventType, Data: payload}}, nil
+	}
 	logger.Debug("未知事件类型",
 		logger.String("event_type", eventType),
 		logger.Any("available_handlers", func() []string {

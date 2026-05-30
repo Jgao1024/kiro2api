@@ -10,6 +10,7 @@ import (
 	"kiro2api/config"
 	"kiro2api/converter"
 	"kiro2api/logger"
+	"kiro2api/record"
 	"kiro2api/types"
 	"kiro2api/utils"
 
@@ -46,6 +47,8 @@ func StartServer(port string, authToken string, authService *auth.AuthService) {
 
 	// API端点 - 纯数据服务
 	r.GET("/api/tokens", handleTokenPoolAPI)
+	r.GET("/api/logs", handleLogsAPI)
+	r.GET("/api/logs/:id/body", handleLogBodyAPI)
 
 	// GET /v1/models 端点
 	r.GET("/v1/models", func(c *gin.Context) {
@@ -83,6 +86,24 @@ func StartServer(port string, authToken string, authService *auth.AuthService) {
 		tokenWithUsage, body, err := reqCtx.GetTokenWithUsageAndBody()
 		if err != nil {
 			return // 错误已在GetTokenWithUsageAndBody中处理
+		}
+
+		// 记录 inbound_raw（调用方原始请求）
+		{
+			var m struct {
+				Model string `json:"model"`
+			}
+			_ = utils.SafeUnmarshal(body, &m)
+			record.Save(record.Entry{
+				RequestID:       c.GetString("request_id"),
+				Phase:           record.PhaseInboundRaw,
+				Direction:       record.DirectionRequest,
+				URL:             c.Request.URL.String(),
+				Model:           m.Model,
+				Headers:         extractRelevantHeaders(c),
+				Body:            string(body),
+				EstimatedTokens: len(body) / 4,
+			})
 		}
 
 		// 先解析为通用map以便处理工具格式
@@ -187,6 +208,24 @@ func StartServer(port string, authToken string, authService *auth.AuthService) {
 		tokenInfo, body, err := reqCtx.GetTokenAndBody()
 		if err != nil {
 			return // 错误已在GetTokenAndBody中处理
+		}
+
+		// 记录 inbound_raw（调用方原始请求）
+		{
+			var m struct {
+				Model string `json:"model"`
+			}
+			_ = utils.SafeUnmarshal(body, &m)
+			record.Save(record.Entry{
+				RequestID:       c.GetString("request_id"),
+				Phase:           record.PhaseInboundRaw,
+				Direction:       record.DirectionRequest,
+				URL:             c.Request.URL.String(),
+				Model:           m.Model,
+				Headers:         extractRelevantHeaders(c),
+				Body:            string(body),
+				EstimatedTokens: len(body) / 4,
+			})
 		}
 
 		var openaiReq types.OpenAIRequest

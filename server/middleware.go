@@ -38,7 +38,7 @@ func RequestIDMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		rid := c.GetHeader("X-Request-ID")
 		if rid == "" {
-			rid = "req_" + utils.GenerateUUID()
+			rid = utils.GenerateUUID()
 		}
 		c.Set("request_id", rid)
 		c.Writer.Header().Set("X-Request-ID", rid)

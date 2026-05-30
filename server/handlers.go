@@ -12,6 +12,7 @@ import (
 	"kiro2api/config"
 	"kiro2api/logger"
 	"kiro2api/parser"
+	"kiro2api/record"
 	"kiro2api/types"
 	"kiro2api/utils"
 
@@ -208,6 +209,29 @@ func handleNonStreamRequest(c *gin.Context, anthropicReq types.AnthropicRequest,
 		return
 	}
 
+	// 记录 outbound_raw（非流式，body 已读完）
+	{
+		var respHeaders map[string]string
+		var respStatus int
+		if h, ok := c.Get("cw_resp_headers"); ok {
+			respHeaders, _ = h.(map[string]string)
+		}
+		if s, ok := c.Get("cw_resp_status"); ok {
+			respStatus, _ = s.(int)
+		}
+		record.Save(record.Entry{
+			RequestID:      c.GetString("request_id"),
+			Phase:          record.PhaseOutboundRaw,
+			Direction:      record.DirectionResponse,
+			URL:            config.CodeWhispererURL,
+			Model:          anthropicReq.Model,
+			Headers:        respHeaders,
+			Body:           string(body),
+			StatusCode:     respStatus,
+			ConversationID: c.GetString("conversation_id"),
+		})
+	}
+
 	// 使用新的符合AWS规范的解析器，但在非流式模式下增加超时保护
 	compliantParser := parser.NewCompliantEventStreamParser()
 	compliantParser.SetMaxErrors(config.ParserMaxErrors) // 限制最大错误次数以防死循环
@@ -356,14 +380,14 @@ func handleNonStreamRequest(c *gin.Context, anthropicReq types.AnthropicRequest,
 	outputTokens := 0
 	for _, contentBlock := range contexts {
 		blockType, _ := contentBlock["type"].(string)
-		
+
 		switch blockType {
 		case "text":
 			// 文本块：基于实际发送的文本内容
 			if text, ok := contentBlock["text"].(string); ok {
 				outputTokens += estimator.EstimateTextTokens(text)
 			}
-		
+
 		case "tool_use":
 			// 工具调用块：基于实际发送的工具名称和参数
 			// 这里使用与 SSE 响应相同的 token 计算逻辑
@@ -411,6 +435,32 @@ func handleNonStreamRequest(c *gin.Context, anthropicReq types.AnthropicRequest,
 			logger.Bool("saw_tool_use", sawToolUse),
 			logger.Int("content_count", len(contexts)),
 		)...)
+
+	// 记录 outbound_mapped（Anthropic 非流式响应）
+	toolNames := make([]string, 0)
+	for _, cb := range contexts {
+		if cb["type"] == "tool_use" {
+			if name, ok := cb["name"].(string); ok {
+				toolNames = append(toolNames, name)
+			}
+		}
+	}
+	// 非流式响应没有 meteringEvent，credits 无法从响应中获取
+	mappedBody, _ := utils.SafeMarshal(anthropicResp)
+	record.Save(record.Entry{
+		RequestID:       c.GetString("request_id"),
+		Phase:           record.PhaseOutboundMapped,
+		Direction:       record.DirectionResponse,
+		URL:             c.Request.URL.String(),
+		Model:           anthropicReq.Model,
+		Body:            string(mappedBody),
+		EstimatedTokens: outputTokens,
+		StatusCode:      200,
+		ConversationID:  c.GetString("conversation_id"),
+		ToolCallCount:   len(toolNames),
+		ToolNames:       toolNames,
+	})
+
 	c.JSON(http.StatusOK, anthropicResp)
 }
 

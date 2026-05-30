@@ -5,6 +5,7 @@ import (
 
 	"kiro2api/auth"
 	"kiro2api/logger"
+	"kiro2api/record"
 	"kiro2api/server"
 
 	"github.com/joho/godotenv"
@@ -24,6 +25,11 @@ func main() {
 	logger.Debug("日志系统初始化完成",
 		logger.String("config_level", os.Getenv("LOG_LEVEL")),
 		logger.String("config_file", os.Getenv("LOG_FILE")))
+
+	// 初始化请求记录数据库
+	if err := record.Init(""); err != nil {
+		logger.Error("初始化请求记录数据库失败", logger.Err(err))
+	}
 
 	// 🚀 创建AuthService实例（使用依赖注入）
 	logger.Info("正在创建AuthService...")

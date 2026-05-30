@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 
 	"kiro2api/config"
 	"kiro2api/converter"
 	"kiro2api/logger"
 	"kiro2api/parser"
+	"kiro2api/record"
 	"kiro2api/types"
 	"kiro2api/utils"
 
@@ -29,6 +31,29 @@ func handleOpenAINonStreamRequest(c *gin.Context, anthropicReq types.AnthropicRe
 	if err != nil {
 		handleResponseReadError(c, err)
 		return
+	}
+
+	// 记录 outbound_raw（非流式，body 已读完）
+	{
+		var respHeaders map[string]string
+		var respStatus int
+		if h, ok := c.Get("cw_resp_headers"); ok {
+			respHeaders, _ = h.(map[string]string)
+		}
+		if s, ok := c.Get("cw_resp_status"); ok {
+			respStatus, _ = s.(int)
+		}
+		record.Save(record.Entry{
+			RequestID:      c.GetString("request_id"),
+			Phase:          record.PhaseOutboundRaw,
+			Direction:      record.DirectionResponse,
+			URL:            config.CodeWhispererURL,
+			Model:          anthropicReq.Model,
+			Headers:        respHeaders,
+			Body:           string(body),
+			StatusCode:     respStatus,
+			ConversationID: c.GetString("conversation_id"),
+		})
 	}
 
 	// 使用新的符合AWS规范的解析器
@@ -93,6 +118,27 @@ func handleOpenAINonStreamRequest(c *gin.Context, anthropicReq types.AnthropicRe
 			logger.String("direction", "downstream_send"),
 			logger.Bool("saw_tool_use", sawToolUse),
 		)...)
+
+	// 记录 outbound_mapped（OpenAI 非流式响应）
+	toolNames := make([]string, 0)
+	for _, tool := range result.GetToolCalls() {
+		toolNames = append(toolNames, tool.Name)
+	}
+	mappedBody, _ := utils.SafeMarshal(openaiResp)
+	record.Save(record.Entry{
+		RequestID:       c.GetString("request_id"),
+		Phase:           record.PhaseOutboundMapped,
+		Direction:       record.DirectionResponse,
+		URL:             c.Request.URL.String(),
+		Model:           anthropicReq.Model,
+		Body:            string(mappedBody),
+		EstimatedTokens: len(allContent) / 4,
+		StatusCode:      200,
+		ConversationID:  c.GetString("conversation_id"),
+		ToolCallCount:   len(toolNames),
+		ToolNames:       toolNames,
+	})
+
 	c.JSON(http.StatusOK, openaiResp)
 }
 
@@ -154,10 +200,12 @@ func handleOpenAIStreamRequest(c *gin.Context, anthropicReq types.AnthropicReque
 	const maxConsecutiveErrors = 3
 
 	// 使用更大的缓冲区避免数据丢失
+	var rawBuf strings.Builder
 	buf := make([]byte, 8192) // 增加到8KB
 	for hasMoreData {
 		n, err := resp.Body.Read(buf)
 		if n > 0 {
+			rawBuf.Write(buf[:n])
 			totalBytesRead += n
 			consecutiveErrors = 0 // 重置错误计数
 
@@ -406,4 +454,44 @@ func handleOpenAIStreamRequest(c *gin.Context, anthropicReq types.AnthropicReque
 	// 发送结束标记
 	fmt.Fprintf(c.Writer, "data: [DONE]\n\n")
 	c.Writer.Flush()
+
+	// 记录 outbound_raw（流式，body 已收集完整）
+	{
+		var respHeaders map[string]string
+		var respStatus int
+		if h, ok := c.Get("cw_resp_headers"); ok {
+			respHeaders, _ = h.(map[string]string)
+		}
+		if s, ok := c.Get("cw_resp_status"); ok {
+			respStatus, _ = s.(int)
+		}
+		record.Save(record.Entry{
+			RequestID:      c.GetString("request_id"),
+			Phase:          record.PhaseOutboundRaw,
+			Direction:      record.DirectionResponse,
+			URL:            config.CodeWhispererURL,
+			Model:          anthropicReq.Model,
+			Headers:        respHeaders,
+			Body:           rawBuf.String(),
+			StatusCode:     respStatus,
+			ConversationID: c.GetString("conversation_id"),
+		})
+	}
+
+	// 记录 outbound_mapped（OpenAI 流式响应汇总）
+	toolNames := make([]string, 0, len(toolIndexByToolUseId))
+	for id := range toolIndexByToolUseId {
+		toolNames = append(toolNames, id)
+	}
+	record.Save(record.Entry{
+		RequestID:      c.GetString("request_id"),
+		Phase:          record.PhaseOutboundMapped,
+		Direction:      record.DirectionResponse,
+		URL:            c.Request.URL.String(),
+		Model:          anthropicReq.Model,
+		StatusCode:     200,
+		ConversationID: c.GetString("conversation_id"),
+		ToolCallCount:  len(toolNames),
+		ToolNames:      toolNames,
+	})
 }

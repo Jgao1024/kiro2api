@@ -10,6 +10,7 @@ import (
 	"kiro2api/config"
 	"kiro2api/converter"
 	"kiro2api/logger"
+	"kiro2api/record"
 	"kiro2api/types"
 	"kiro2api/utils"
 
@@ -116,6 +117,19 @@ func executeCodeWhispererRequest(c *gin.Context, anthropicReq types.AnthropicReq
 			logger.Int("status_code", resp.StatusCode),
 		)...)
 
+	// 记录 outbound_raw（CW 原始响应，body 是流式不读取，只记录状态码和响应头）
+	{
+		respHeaders := make(map[string]string, len(resp.Header))
+		for k, v := range resp.Header {
+			respHeaders[k] = v[0]
+		}
+		// 流式响应的 body 由 stream_processor 在读完后统一记录
+		// 非流式响应的 body 由 handler 在读完后统一记录
+		// 这里只把响应头和状态码存入 context
+		c.Set("cw_resp_headers", respHeaders)
+		c.Set("cw_resp_status", resp.StatusCode)
+	}
+
 	return resp, nil
 }
 
@@ -175,6 +189,40 @@ func buildCodeWhispererRequest(c *gin.Context, anthropicReq types.AnthropicReque
 	req.Header.Set("x-amzn-kiro-agent-mode", "spec")
 	req.Header.Set("x-amz-user-agent", "aws-sdk-js/1.0.18 KiroIDE-0.2.13-66c23a8c5d15afabec89ef9954ef52a119f10d369df04d548fc6c1eac694b0d1")
 	req.Header.Set("user-agent", "aws-sdk-js/1.0.18 ua/2.1 os/darwin#25.0.0 lang/js md/nodejs#20.16.0 api/codewhispererstreaming#1.0.18 m/E KiroIDE-0.2.13-66c23a8c5d15afabec89ef9954ef52a119f10d369df04d548fc6c1eac694b0d1")
+
+	// 将 conversationId 存入 context，供后续 record 使用
+	c.Set("conversation_id", cwReq.ConversationState.ConversationId)
+
+	// 记录 inbound_mapped（转换后发给 CW 的请求）
+	toolNames := make([]string, 0)
+	for _, t := range cwReq.ConversationState.CurrentMessage.UserInputMessage.UserInputMessageContext.Tools {
+		if t.ToolSpecification.Name != "" {
+			toolNames = append(toolNames, t.ToolSpecification.Name)
+		}
+	}
+	record.Save(record.Entry{
+		RequestID: c.GetString("request_id"),
+		Phase:     record.PhaseInboundMapped,
+		Direction: record.DirectionRequest,
+		URL:       config.CodeWhispererURL,
+		Model:     anthropicReq.Model,
+		Headers: func() map[string]string {
+			h := make(map[string]string, len(req.Header))
+			for k, v := range req.Header {
+				if k == "Authorization" && len(v[0]) > 20 {
+					h[k] = v[0][:10] + "***" + v[0][len(v[0])-7:]
+				} else {
+					h[k] = v[0]
+				}
+			}
+			return h
+		}(),
+		Body:            string(cwReqBody),
+		EstimatedTokens: len(cwReqBody) / 4,
+		ConversationID:  cwReq.ConversationState.ConversationId,
+		ToolCallCount:   len(toolNames),
+		ToolNames:       toolNames,
+	})
 
 	return req, nil
 }
