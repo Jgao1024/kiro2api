@@ -14,6 +14,7 @@ type AuthConfig struct {
 	RefreshToken string `json:"refreshToken"`
 	ClientID     string `json:"clientId,omitempty"`
 	ClientSecret string `json:"clientSecret,omitempty"`
+	Region       string `json:"region,omitempty"`
 	Disabled     bool   `json:"disabled,omitempty"`
 }
 

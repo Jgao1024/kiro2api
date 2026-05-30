@@ -83,7 +83,13 @@ func refreshIdCToken(authConfig AuthConfig) (types.TokenInfo, error) {
 		return types.TokenInfo{}, fmt.Errorf("序列化IdC请求失败: %v", err)
 	}
 
-	req, err := http.NewRequest("POST", config.IdcRefreshTokenURL, bytes.NewBuffer(reqBody))
+	region := authConfig.Region
+	if region == "" {
+		region = "us-east-1"
+	}
+	idcURL := fmt.Sprintf("https://oidc.%s.amazonaws.com/token", region)
+
+	req, err := http.NewRequest("POST", idcURL, bytes.NewBuffer(reqBody))
 	if err != nil {
 		return types.TokenInfo{}, fmt.Errorf("创建IdC请求失败: %v", err)
 	}

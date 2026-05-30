@@ -25,6 +25,7 @@ func init() {
 	// 创建统一的HTTP客户端
 	SharedHTTPClient = &http.Client{
 		Transport: &http.Transport{
+			Proxy: http.ProxyFromEnvironment,
 			// 连接建立配置
 			DialContext: (&net.Dialer{
 				Timeout:   15 * time.Second,
