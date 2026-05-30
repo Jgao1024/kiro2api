@@ -7,12 +7,14 @@ import (
 
 // ModelMap 模型映射表
 var ModelMap = map[string]string{
-	"claude-sonnet-4-5":          "CLAUDE_SONNET_4_5_20250929_V1_0",
-	"claude-sonnet-4-5-20250929": "CLAUDE_SONNET_4_5_20250929_V1_0",
-	"claude-sonnet-4-20250514":   "CLAUDE_SONNET_4_20250514_V1_0",
-	"claude-3-7-sonnet-20250219": "CLAUDE_3_7_SONNET_20250219_V1_0",
-	"claude-3-5-haiku-20241022":  "auto",
-	"claude-haiku-4-5-20251001":  "auto",
+	"claude-haiku-4-5":  "claude-haiku-4.5",
+	"claude-haiku-4.5":  "claude-haiku-4.5",
+	"claude-sonnet-4.6": "claude-sonnet-4.6",
+	"claude-sonnet-4-6": "claude-sonnet-4.6",
+	"claude-opus-4.7": "claude-opus-4.7",
+	"claude-opus-4-7": "claude-opus-4.7",
+	"claude-opus-4.8": "claude-opus-4.8",
+	"claude-opus-4-8": "claude-opus-4.8",
 }
 
 // RefreshTokenURL 刷新token的URL (social方式)
