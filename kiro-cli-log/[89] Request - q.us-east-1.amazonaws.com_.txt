@@ -1,0 +1,1070 @@
+POST / HTTP/1.1
+content-type: application/x-amz-json-1.0
+x-amz-target: AmazonCodeWhispererStreamingService.GenerateAssistantResponse
+content-length: 88356
+user-agent: aws-sdk-rust/1.3.16 ua/2.1 api/codewhispererstreaming/0.1.16551 os/macos lang/rust/1.92.0 md/appVersion-2.4.1 app/AmazonQ-For-CLI
+x-amz-user-agent: aws-sdk-rust/1.3.16 ua/2.1 api/codewhispererstreaming/0.1.16551 os/macos lang/rust/1.92.0 m/F app/AmazonQ-For-CLI
+x-amzn-codewhisperer-optout: true
+authorization: Bearer aoaAAAAAGobnRU6VnfGywgRvv8ifHjV7dIfkdlaM7PEKZkPjSbseulXyimxZk2rmSrwavc4Qzg9bV0gXXoCLFyKjUCbe0:MGQCMHmsEYEwNhUCgLLmzBLkCVEk5BjZ0qKRpHj7OQQeKdjO0UnUdnMTZAoOseJiWqUa9wIwS9GuqbVv4lP5a6a0p4zQCKBWZZy4dV8vLOAAJxc8m6Ls0WglD3BOywgiLUVciIRx
+amz-sdk-request: attempt=1; max=3
+amz-sdk-invocation-id: 5b6902f4-2731-422c-9d75-2f63c59f41c8
+accept: */*
+accept-encoding: gzip
+host: q.us-east-1.amazonaws.com
+
+{
+  "conversationState": {
+    "conversationId": "706309e2-e1c2-4468-82f7-44b36728988e",
+    "history": [
+      {
+        "userInputMessage": {
+          "content": "\nThe current model is minimax-m2.5.\n",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "content": "I will fully incorporate this information when generating my responses, and explicitly acknowledge relevant parts of the summary when answering questions."
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "--- CONTEXT ENTRY BEGIN ---\nCurrent time: Sunday, 2026-05-31T09:31:06.862+08:00\n--- CONTEXT ENTRY END ---\n\n--- USER MESSAGE BEGIN ---\n你好\n--- USER MESSAGE END ---",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "564576ec-86b0-4768-bfca-59d113fb10c1",
+          "content": "你好！有什么我可以帮助你的吗？无论是代码、开发问题还是其他技术相关的任务，随时可以告诉我。"
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "--- CONTEXT ENTRY BEGIN ---\nCurrent time: Sunday, 2026-05-31T09:31:51.213+08:00\n--- CONTEXT ENTRY END ---\n\n--- USER MESSAGE BEGIN ---\n看一下https://github.com/caidaoli/kiro2api 这个项目是干嘛的？\n--- USER MESSAGE END ---",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "b6e1ee3d-b24b-45e2-8ae8-979904a3d306",
+          "content": "",
+          "toolUses": [
+            {
+              "toolUseId": "tooluse_8pVyEPWJfQPUH7evfiSVCc",
+              "name": "web_fetch",
+              "input": {
+                "url": "https://github.com/caidaoli/kiro2api",
+                "mode": "truncated"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "",
+          "userInputMessageContext": {
+            "toolResults": [
+              {
+                "toolUseId": "tooluse_8pVyEPWJfQPUH7evfiSVCc",
+                "content": [
+                  {
+                    "text": "[Skip to content][1]\n\n## Navigation Menu\n\nToggle navigation\n[ Sign in ][2]\nAppearance settings\n* Platform\n  * AI CODE CREATION\n    * [\n      GitHub CopilotWrite better code with AI\n      ][3]\n    * [\n      GitHub SparkBuild and deploy intelligent apps\n      ][4]\n    * [\n      GitHub ModelsManage and compare prompts\n      ][5]\n    * [\n      MCP Registry^{New}Integrate external tools\n      ][6]\n  * DEVELOPER WORKFLOWS\n    * [\n      ActionsAutomate any workflow\n      ][7]\n    * [\n      CodespacesInstant dev environments\n      ][8]\n    * [\n      IssuesPlan and track work\n      ][9]\n    * [\n      Code ReviewManage code changes\n      ][10]\n  * APPLICATION SECURITY\n    * [\n      GitHub Advanced SecurityFind and fix vulnerabilities\n      ][11]\n    * [\n      Code securitySecure your code as you build\n      ][12]\n    * [\n      Secret protectionStop leaks before they start\n      ][13]\n  * EXPLORE\n    * [Why GitHub][14]\n    * [Documentation][15]\n    * [Blog][16]\n    * [Changelog][17]\n    * [Marketplace][18]\n  [View all features][19]\n* Solutions\n  * BY COMPANY SIZE\n    * [Enterprises][20]\n    * [Small and medium teams][21]\n    * [Startups][22]\n    * [Nonprofits][23]\n  * BY USE CASE\n    * [App Modernization][24]\n    * [DevSecOps][25]\n    * [DevOps][26]\n    * [CI/CD][27]\n    * [View all use cases][28]\n  * BY INDUSTRY\n    * [Healthcare][29]\n    * [Financial services][30]\n    * [Manufacturing][31]\n    * [Government][32]\n    * [View all industries][33]\n  [View all solutions][34]\n* Resources\n  * EXPLORE BY TOPIC\n    * [AI][35]\n    * [Software Development][36]\n    * [DevOps][37]\n    * [Security][38]\n    * [View all topics][39]\n  * EXPLORE BY TYPE\n    * [Customer stories][40]\n    * [Events & webinars][41]\n    * [Ebooks & reports][42]\n    * [Business insights][43]\n    * [GitHub Skills][44]\n  * SUPPORT & SERVICES\n    * [Documentation][45]\n    * [Customer support][46]\n    * [Community forum][47]\n    * [Trust center][48]\n    * [Partners][49]\n  [View all resources][50]\n* Open Source\n  * COMMUNITY\n    * [\n      GitHub SponsorsFund open source developers\n      ][51]\n  * PROGRAMS\n    * [Security Lab][52]\n    * [Maintainer Community][53]\n    * [Accelerator][54]\n    * [GitHub Stars][55]\n    * [Archive Program][56]\n  * REPOSITORIES\n    * [Topics][57]\n    * [Trending][58]\n    * [Collections][59]\n* Enterprise\n  * ENTERPRISE SOLUTIONS\n    * [\n      Enterprise platformAI-powered developer platform\n      ][60]\n  * AVAILABLE ADD-ONS\n    * [\n      GitHub Advanced SecurityEnterprise-grade security features\n      ][61]\n    * [\n      Copilot for BusinessEnterprise-grade AI features\n      ][62]\n    * [\n      Premium SupportEnterprise-grade 24/7 support\n      ][63]\n* [Pricing][64]\nSearch or jump to...\n\n# Search code, repositories, users, issues, pull requests...\n\nSearch\nClear\n[Search syntax tips][65]\n\n# Provide feedback\n\nWe read every piece of feedback, and take your input very seriously.\n\nInclude my email address so I can be contacted\nCancel Submit feedback\n\n# Saved searches\n\n## Use saved searches to filter your results more quickly\n\nName\nQuery\n\nTo see all available qualifiers, see our [documentation][66].\n\nCancel Create saved search\n[ Sign in ][67]\n[ Sign up ][68]\nAppearance settings\nResetting focus\nYou signed in with another tab or window. [Reload][69] to refresh your session. You signed out in another tab or window. [Reload][70] to refresh your session. You switched accounts on another tab or window. [Reload][71] to refresh your session. Dismiss alert\n[ caidaoli ][72] / ** [kiro2api][73] ** Public\n* [ Notifications ][74] You must be signed in to change notification settings\n* [ Fork 189 ][75]\n* [ Star 610 ][76]\n* [ Code ][77]\n* [ Issues 7 ][78]\n* [ Pull requests 4 ][79]\n* [ Actions ][80]\n* [ Projects ][81]\n* [ Security and quality 0 ][82]\n* [ Insights ][83]\nAdditional navigation options\n* [ Code ][84]\n* [ Issues ][85]\n* [ Pull requests ][86]\n* [ Actions ][87]\n* [ Projects ][88]\n* [ Security and quality ][89]\n* [ Insights ][90]\n\n# caidaoli/kiro2api\n\nmain\n[Branches][91][Tags][92]\nGo to file\nCode\nOpen more actions menu\n\n## Folders and files\n\n─────────────────────────────┬─────────────────────────────┬───────────────────┬────────────────\nName                         │Name                         │Last commit message│Last commit date\n─────────────────────────────┴─────────────────────────────┴───────────────────┴────────────────\n## Latest commit                                           \n                                                           \n## History                                                 \n                                                           \n[224 Commits][93]                                          \n[][94]224 Commits                                          \n─────────────────────────────┬─────────────────────────────┬───────────────────┬────────────────\n[.github/workflows][95]      │[.github/workflows][96]      │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[auth][97]                   │[auth][98]                   │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[config][99]                 │[config][100]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[converter][101]             │[converter][102]             │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[doc][103]                   │[doc][104]                   │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[logger][105]                │[logger][106]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[parser][107]                │[parser][108]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[server][109]                │[server][110]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[static][111]                │[static][112]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[types][113]                 │[types][114]                 │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[utils][115]                 │[utils][116]                 │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[.dockerignore][117]         │[.dockerignore][118]         │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[.env.example][119]          │[.env.example][120]          │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[.gitignore][121]            │[.gitignore][122]            │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[CLAUDE.md][123]             │[CLAUDE.md][124]             │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[Dockerfile][125]            │[Dockerfile][126]            │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[README.md][127]             │[README.md][128]             │             [Content truncated - showing first 8000 characters]"
+                  }
+                ],
+                "status": "success"
+              }
+            ]
+          },
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "8ce081e3-9667-499f-931a-bf6ee043c386",
+          "content": "让我获取 README 的具体内容：",
+          "toolUses": [
+            {
+              "toolUseId": "tooluse_gqrcoTC9KEZfw4Ghyll1Pm",
+              "name": "web_fetch",
+              "input": {
+                "url": "https://raw.githubusercontent.com/caidaoli/kiro2api/main/README.md",
+                "mode": "selective"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "",
+          "userInputMessageContext": {
+            "toolResults": [
+              {
+                "toolUseId": "tooluse_gqrcoTC9KEZfw4Ghyll1Pm",
+                "content": [
+                  {
+                    "text": "Tool use was cancelled by the user"
+                  }
+                ],
+                "status": "error"
+              }
+            ]
+          },
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "ab469624-2c67-4411-86fc-414279ff2d86",
+          "content": "Tool uses were interrupted, waiting for the next user prompt"
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "--- CONTEXT ENTRY BEGIN ---\nCurrent time: Sunday, 2026-05-31T09:34:40.062+08:00\n--- CONTEXT ENTRY END ---\n\n--- USER MESSAGE BEGIN ---\n把你整理的信息，保存到/Users/jgao/Git/kiro2api/docs 目录。\n--- USER MESSAGE END ---",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "ab6a9ebc-352a-486c-a834-7d1ec321c24e",
+          "content": "\n\n让我先获取项目的README信息，然后保存到指定目录：\n",
+          "toolUses": [
+            {
+              "toolUseId": "tooluse_kFI2ytngNErRH7yye1z3qG",
+              "name": "web_fetch",
+              "input": {
+                "mode": "full",
+                "url": "https://raw.githubusercontent.com/caidaoli/kiro2api/main/README.md"
+              }
+            }
+          ],
+          "reasoningContent": {
+            "reasoningText": {
+              "text": "用户想让我把之前整理的信息保存到 /Users/jgao/Git/kiro2api/docs 目录。但实际上我之前并没有成功获取到项目的详细信息，只是看到了GitHub页面的部分内容。我需要先重新获取README的内容，然后保存到指定目录。\n\n让我先尝试获取项目的README内容，然后创建docs目录并保存。\n"
+            }
+          }
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "",
+          "userInputMessageContext": {
+            "toolResults": [
+              {
+                "toolUseId": "tooluse_kFI2ytngNErRH7yye1z3qG",
+                "content": [
+                  {
+                    "text": "# kiro2api **高性能 AI API 代理服务器** *统一 Anthropic Claude、OpenAI 和 AWS CodeWhisperer 的智能网关* [![Go](https://img.shields.io/badge/Go-1.24.0-blue.svg)](https://golang.org/) [![Gin](https://img.shields.io/badge/Gin-1.11.0-green.svg)](https://github.com/gin-gonic/gin) [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/) ## 核心特性 ### 1. Claude Code 原生集成 ```bash # 一行配置，立即享受本地代理 export ANTHROPIC_BASE_URL=\"http://localhost:8080/v1\" export ANTHROPIC_API_KEY=\"your-kiro-token\" # Claude Code 无感切换，所有功能完美支持 claude-code --model claude-sonnet-4 \"帮我重构这段代码\" ``` **支持功能**: - 完整 Anthropic API 兼容 - 流式响应零延迟 - 工具调用完整支持 - 多模态图片处理 ### 2. 多账号池管理 ```json { \"多账号配置\": [ {\"auth\": \"Social\", \"refreshToken\": \"个人账号1\"}, {\"auth\": \"Social\", \"refreshToken\": \"个人账号2\"}, {\"auth\": \"IdC\", \"refreshToken\": \"企业账号\"} ], \"选择策略\": \"sequential - 按配置顺序依次使用\" } ``` **核心特性**: - **顺序选择**: 按配置顺序依次使用账号 - **故障转移**: 账号用完自动切换到下一个 - **使用监控**: 实时监控每个账号的使用情况 ### 3. 双认证方式支持 ```bash # Social 认证 KIRO_AUTH_TOKEN='[{\"auth\":\"Social\",\"refreshToken\":\"your-social-token\"}]' # IdC 认证 KIRO_AUTH_TOKEN='[{ \"auth\":\"IdC\", \"refreshToken\":\"enterprise-token\", \"clientId\":\"enterprise-client-id\", \"clientSecret\":\"enterprise-secret\" }]' # 混合认证 - 最佳实践 KIRO_AUTH_TOKEN='[ {\"auth\":\"IdC\",\"refreshToken\":\"primary-enterprise\"}, {\"auth\":\"Social\",\"refreshToken\":\"backup-personal\"} ]' ``` ### 4. 图片输入支持（data URL） ```bash # Claude Code 中直接使用图片 claude-code \"分析这张图片的内容\" --image screenshot.png # 支持的图片格式 ✅ data URL 的 PNG/JPEG 等常见格式 ⚠️ 目前仅支持 `data:` URL，不支持远程 HTTP 图片地址 ``` **说明**: - Claude Code 传入本地图片时会转为 `data:` URL，服务端按照 `Anthropic`/`OpenAI` 规范解析并转发。 - 不做额外图片压缩或远程下载处理，避免引入不必要复杂度（KISS/YAGNI）。 ## 系统架构 ```mermaid graph TB subgraph \"客户端层\" A1[Anthropic Client] A2[OpenAI Client] A3[Claude Code] A4[Custom Apps] end subgraph \"kiro2api 核心\" B[API Gateway] C[认证中间件] D[请求分析器] E[格式转换器] F[Token 管理器] G[流式处理器] H[监控系统] end subgraph \"认证层\" I1[Social Auth Pool] I2[IdC Auth Pool] I3[Token Cache] end subgraph \"后端服务\" J[AWS CodeWhisperer] end A1 --> B A2 --> B A3 --> B A4 --> B B --> C C --> D D --> E E --> F F --> G G --> H F --> I1 F --> I2 F --> I3 G --> J style B fill:#e1f5fe style F fill:#f3e5f5 style G fill:#e8f5e8 ``` ## 核心功能矩阵 | 特性分类 | 功能 | 支持状态 | 描述 | |----------|------|----------|------| | **API 兼容** | Anthropic API | ✅ | 完整的 Claude API 支持 | | | OpenAI API | ✅ | ChatCompletion 格式兼容 | | **负载管理** | 单账号 | ✅ | 基础 Token 管理 | | | 多账号池 | ✅ | 顺序负载均衡 | | | 故障转移 | ✅ | 自动切换机制 | | **认证方式** | Social 认证 | ✅ | AWS SSO 认证 | | | IdC 认证 | ✅ | 身份中心认证 | | | 混合认证 | ✅ | 多认证方式并存 | | **监控运维** | 基础日志 | ✅ | 标准日志输出 | | | 使用监控 | ✅ | 实时使用量统计 | | **性能优化** | 流式响应 | ✅ | SSE 实时传输 | | | 智能缓存 | ✅ | Token 缓存（无响应缓存） | | | 并发控制 | ✅ | Token 刷新并发控制 | ### 高级特性 | 特性 | 描述 | 技术实现 | |------|------|----------| | **多模态支持** | data URL 的 PNG/JPEG 图片 | Base64 编码 + 格式转换 | | **工具调用** | 完整 Anthropic 工具使用支持 | 状态机 + 生命周期管理 | | **格式转换** | Anthropic ↔ OpenAI ↔ CodeWhisperer | 智能协议转换器 | | **零延迟流式** | 实时流式传输优化 | EventStream 解析 + 对象池 | | **顺序选择** | 按配置顺序使用 Token | 顺序轮换 + 故障转移 | ## 技术栈 - **Web框架**: gin-gonic/gin v1.11.0 - **JSON处理**: bytedance/sonic v1.14.1 - **配置管理**: github.com/joho/godotenv v1.5.1 - **Go版本**: 1.24.0 - **容器化**: Docker & Docker Compose 支持 ## 快速开始 ### 基础运行 ```bash # 克隆并编译 git clone cd kiro2api go build -o kiro2api main.go # 配置环境变量 cp .env.example .env # 编辑 .env 文件，设置 KIRO_AUTH_TOKEN # 启动服务器 ./kiro2api # 测试API curl -X POST http://localhost:8080/v1/messages \\ -H \"Content-Type: application/json\" \\ -H \"Authorization: Bearer 123456\" \\ -d '{\"model\": \"claude-sonnet-4-20250514\", \"max_tokens\": 100, \"messages\": [{\"role\": \"user\", \"content\": \"你好\"}]}' ``` ### Docker 部署 #### 快速开始 Token获取方式： - Social tokens: 通常在 ~/.aws/sso/cache/kiro-auth-token.json - IdC tokens: 在 ~/.aws/sso/cache/ 目录下的相关JSON文件中 ```bash # 方式一：使用 docker-compose（推荐） docker-compose up -d # 方式二：预构建镜像 docker run -d \\ --name kiro2api \\ -p 8080:8080 \\ -e KIRO_AUTH_TOKEN='[{\"auth\":\"Social\",\"refreshToken\":\"your_token\"}]' \\ -e KIRO_CLIENT_TOKEN=\"123456\" \\ ghcr.io/caidaoli/kiro2api:latest # 方式三：本地构建 docker build -t kiro2api . docker run -d \\ --name kiro2api \\ -p 8080:8080 \\ --env-file .env \\ kiro2api ``` #### 配置管理 ##### 环境变量文件 ```bash # .env.docker # 多账号池配置 KIRO_AUTH_TOKEN='[ { \"auth\": \"Social\", \"refreshToken\": \"arn:aws:sso:us-east-1:999999999999:token/refresh/xxx\" }, { \"auth\": \"IdC\", \"refreshToken\": \"arn:aws:identitycenter::us-east-1:999999999999:account/instance/xxx\", \"clientId\": \"https://oidc.us-east-1.amazonaws.com/clients/xxx\", \"clientSecret\": \"xxx-secret-key-xxx\" } ]' # 服务配置 KIRO_CLIENT_TOKEN=your-secure-token PORT=8080 GIN_MODE=release # 生产级日志 LOG_LEVEL=info LOG_FORMAT=json LOG_CONSOLE=true ``` ##### Docker Secrets（注意事项） ```bash # 若使用 Docker Secrets，请将 `KIRO_AUTH_TOKEN` 设置为 secrets 文件路径： # 例如：/run/secrets/kiro_auth_token # # 说明：代码支持将 `KIRO_AUTH_TOKEN` 当作\"文件路径\"读取； # 但不支持 `*_FILE` 环境变量约定，也不读取 `KIRO_CLIENT_TOKEN_FILE`。 ``` #### 健康检查和监控 ```bash # 健康检查 docker exec kiro2api wget -qO- http://localhost:8080/v1/models # 查看日志 docker logs -f kiro2api # 监控资源使用 docker stats kiro2api # 进入容器调试 docker exec -it kiro2api sh ``` ## API 接口 ### 支持的端点 - `GET /` - 静态首页（Dashboard） - `GET /static/*` - 静态资源 - `GET /api/tokens` - Token 池状态与使用信息（无需认证） - `GET /v1/models` - 获取可用模型列表 - `POST /v1/messages` - Anthropic Claude API 兼容接口（支持流/非流） - `POST /v1/messages/count_tokens` - Token 计数接口 - `POST /v1/chat/completions` - OpenAI ChatCompletion API 兼容接口（支持流/非流） ### 认证方式 所有 `/v1/*` 端点都需要在请求头中提供认证信息（`/api/tokens` 等管理端点无需认证）： ```bash # 使用 Authorization Bearer 认证 Authorization: Bearer your-auth-token # 或使用 x-api-key 认证 x-api-key: your-auth-token ``` ### 请求示例 ```bash # Anthropic API 格式 curl -X POST http://localhost:8080/v1/messages \\ -H \"Content-Type: application/json\" \\ -H \"Authorization: Bearer 123456\" \\ -d '{ \"model\": \"claude-sonnet-4-20250514\", \"max_tokens\": 1000, \"messages\": [ {\"role\": \"user\", \"content\": \"你好，请介绍一下你自己\"} ] }' # OpenAI API 格式 curl -X POST http://localhost:8080/v1/chat/completions \\ -H \"Content-Type: application/json\" \\ -H \"Authorization: Bearer 123456\" \\ -d '{ \"model\": \"claude-sonnet-4-20250514\", \"messages\": [ {\"role\": \"user\", \"content\": \"解释一下机器学习的基本概念\"} ] }' # 流式请求（添加 \"stream\": true） curl -N -X POST http://localhost:8080/v1/messages \\ -H \"Content-Type: application/json\" \\ -H \"Authorization: Bearer 123456\" \\ -d '{ \"model\": \"claude-sonnet-4-20250514\", \"max_tokens\": 200, \"stream\": true, \"messages\": [{\"role\": \"user\", \"content\": \"讲个故事\"}] }' ``` ## 支持的模型 | 公开模型名称 | 内部 CodeWhisperer 模型 ID | |-------------|---------------------------| | `claude-sonnet-4-5-20250929` | `CLAUDE_SONNET_4_5_20250929_V1_0` | | `claude-sonnet-4-20250514` | `CLAUDE_SONNET_4_20250514_V1_0` | | `claude-3-7-sonnet-20250219` | `CLAUDE_3_7_SONNET_20250219_V1_0` | | `claude-3-5-haiku-20241022` | `auto` | ## 环境配置指南 ### 多账号池配置 #### 配置方式对比 | 配置方式 | 适用场景 | 优势 | 限制 | |----------|----------|------|------| | **JSON 配置** | 生产级部署 | 多认证方式、顺序负载均衡 | 配置相对复杂 | | **环境变量** | 快速测试 | 简单直接、向后兼容 | 功能有限 | #### JSON 格式配置（推荐） **多账号池配置示例：** ```bash # 完整的生产级配置 export KIRO_AUTH_TOKEN='[ { \"auth\": \"Social\", \"refreshToken\": \"arn:aws:sso:us-east-1:999999999999:token/refresh/social-token-1\", \"description\": \"开发团队主账号\" }, { \"auth\": \"Social\", \"refreshToken\": \"arn:aws:sso:us-east-1:999999999999:token/refresh/social-token-2\", \"description\": \"开发团队备用账号\" }, { \"auth\": \"IdC\", \"refreshToken\": \"arn:aws:identitycenter::us-east-1:999999999999:account/instance/idc-token\", \"clientId\": \"https://oidc.us-east-1.amazonaws.com/clients/enterprise-client\", \"clientSecret\": \"enterprise-secret-key\", \"description\": \"生产级账号\" } ]' ``` ### 系统配置 #### 基础服务配置 ```bash # === 核心配置 === KIRO_CLIENT_TOKEN=your-secure-api-key # API 认证密钥（建议使用强密码） PORT=8080 # 服务端口 GIN_MODE=release # 运行模式：debug/release/test ``` #### 生产级日志配置 ```bash # === 日志系统 === LOG_LEVEL=info # 日志级别：debug/info/warn/error LOG_FORMAT=json # 日志格式：text/json LOG_CONSOLE=true # 控制台输出开关 LOG_FILE=/var/log/kiro2api.log # 日志文件路径（可选） # === 结构化日志字段 === # 自动包含以下字段： # - timestamp: 时间戳 # - level: 日志级别 # - service: 服务名称 # - request_id: 请求唯一标识 # - user_id: 用户标识（如果可用） # - token_usage: Token 使用情况 # - response_time: 响应时间 ``` #### 工具配置 ```bash # === 工具限制 === MAX_TOOL_DESCRIPTION_LENGTH=10000 # 工具描述的最大长度（字符数，默认：10000） # 用于限制 tool description 字段的长度 # 防止超长内容导致上游 API 错误 ``` ## 故障排除 ### 故障诊断 #### Token 认证问题 ```bash # 检查配置 echo $KIRO_AUTH_TOKEN # 启用调试日志 LOG_LEVEL=debug ./kiro2api ``` | 错误类型 | 解决方案 | |----------|----------| | JSON 格式错误 | 使用 JSON 验证器检查格式 | | 认证方式错误 | 确认 `auth` 字段为 \"Social\" 或 \"IdC\" | | 参数缺失 | IdC 认证需要 `clientId` 和 `clientSecret` | | Token 过期 | 查看日志中的刷新状态 | #### API 连接问题 ```bash # 测试 API 连通性 curl -v -H \"Authorization: Bearer 123456\" \\ http://localhost:8080/v1/models # 测试流式响应 curl -N --max-time 60 -X POST \\ http://localhost:8080/v1/messages \\ -H \"Content-Type: application/json\" \\ -H \"Authorization: Bearer 123456\" \\ -d '{\"model\": \"claude-sonnet-4-20250514\", \"stream\": true, \"messages\": [{\"role\": \"user\", \"content\": \"测试\"}]}' ``` #### Docker 部署问题 | 问题类型 | 症状 | 解决方案 | |----------|------|----------| | **容器启动失败** | 容器立即退出 | 检查环境变量配置，查看容器日志 | | **端口冲突** | 端口已被占用 | 修改 docker-compose.yml 中的端口映射 | | **数据卷权限** | AWS SSO 缓存失败 | 确保容器用户有权限访问数据卷 | | **网络连接** | 无法访问外部 API | 检查 Docker 网络配置和防火墙设置 | ```bash # Docker 故障排除命令 # 查看容器状态 docker ps -a # 查看容器日志 docker logs kiro2api --tail 100 -f # 检查容器内部 docker exec -it kiro2api sh ps aux netstat -tlnp env | grep KIRO # 检查服务连通性（本地） docker exec kiro2api wget -qO- http://localhost:8080/v1/models || echo \"服务不可用\" # 重新构建和启动 docker-compose down -v docker-compose build --no-cache docker-compose up -d # 检查资源使用 docker stats kiro2api ``` #### Claude Code 集成问题 | 问题类型 | 症状 | 解决方案 | |----------|------|----------| | **代理连接失败** | Claude Code 无法连接到 kiro2api | 检查 baseURL 和网络连通性 | | **认证失败** | 401 Unauthorized 错误 | 验证 apiKey 配置和 KIRO_CLIENT_TOKEN | | **流式响应中断** | 流式输出不完整 | 检查网络稳定性和超时配置 | ```bash # Claude Code 集成调试 # 测试基础连接 curl -H \"Authorization: Bearer $KIRO_CLIENT_TOKEN\" \\ http://localhost:8080/v1/models # 测试流式响应 curl -N -H \"Authorization: Bearer $KIRO_CLIENT_TOKEN\" \\ -H \"Content-Type: application/json\" \\ -d '{\"model\":\"claude-sonnet-4-20250514\",\"stream\":true,\"messages\":[{\"role\":\"user\",\"content\":\"test\"}]}' \\ http://localhost:8080/v1/messages ``` ## 更多资源 - **详细开发指南**: [CLAUDE.md](./CLAUDE.md) - **包结构说明**: 分层架构设计，遵循 SOLID 原则 - **性能优化**: 缓存策略、并发控制、内存管理 - **核心开发任务**: 扩展功能、性能调优、高级特性 - **Claude Code 官方文档**: [claude.ai/code](https://claude.ai/code) - **Docker 最佳实践**: 容器化部署指南 ## 贡献指南 我们欢迎社区贡献！直接提交 Issue 或 Pull Request 即可。 ### 快速贡献 1. Fork 项目 2. 创建特性分支 (`git checkout -b feature/amazing-feature`) 3. 提交更改 (`git commit -m 'Add amazing feature'`) 4. 推送到分支 (`git push origin feature/amazing-feature`) 5. 创建 Pull Request\n"
+                  }
+                ],
+                "status": "success"
+              }
+            ]
+          },
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "6b89693c-9160-405c-b5f7-5b476454f42f",
+          "content": "\n\n\n",
+          "toolUses": [
+            {
+              "toolUseId": "tooluse_mWFvVYu6CsfnNiHKTrhEr5",
+              "name": "shell",
+              "input": {
+                "command": "mkdir -p /Users/jgao/Git/kiro2api/docs"
+              }
+            }
+          ],
+          "reasoningContent": {
+            "reasoningText": {
+              "text": "用户让我把整理的信息保存到 /Users/jgao/Git/kiro2api/docs 目录。我已经获取到了README的内容，现在我需要：\n\n1. 创建目录（如果不存在）\n2. 创建一个文档文件来保存这些信息\n\n让我先检查目录是否存在，然后创建文件。\n"
+            }
+          }
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "",
+          "userInputMessageContext": {
+            "toolResults": [
+              {
+                "toolUseId": "tooluse_mWFvVYu6CsfnNiHKTrhEr5",
+                "content": [
+                  {
+                    "json": {
+                      "stdout": "",
+                      "stderr": "",
+                      "exit_status": "exit status: 0"
+                    }
+                  }
+                ],
+                "status": "success"
+              }
+            ]
+          },
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "c67eb2ee-75df-4c92-a8e5-48f891b81aa9",
+          "content": "\n\n项目已经获取完毕，让我保存到 docs 目录：\n",
+          "toolUses": [
+            {
+              "toolUseId": "tooluse_X0aTMUWuVF12AXjvd0e7sF",
+              "name": "write",
+              "input": {
+                "path": "/Users/jgao/Git/kiro2api/docs/README.md",
+                "command": "create",
+                "content": "# kiro2api 项目分析\n\n## 项目简介\n\n**kiro2api** 是一个高性能 AI API 代理服务器，统一集成 Anthropic Claude、OpenAI 和 AWS CodeWhisperer。\n\n## 核心特性\n\n1. **Claude Code 原生集成** - 完整 Anthropic API 兼容，支持流式响应、工具调用、多模态图片处理\n2. **多账号池管理** - 顺序选择、故障转移、使用监控\n3. **双认证方式** - Social 认证（AWS SSO）和 IdC 认证（身份中心）\n4. **图片输入支持** - 支持 data URL 格式的 PNG/JPEG 图片\n\n## 支持的模型\n\n- claude-sonnet-4-5-20250929\n- claude-sonnet-4-20250514\n- claude-3-7-sonnet-20250219\n- claude-3-5-haiku-20241022\n\n## API 端点\n\n- `GET /` - 静态首页\n- `GET /api/tokens` - Token 池状态（无需认证）\n- `GET /v1/models` - 获取可用模型\n- `POST /v1/messages` - Anthropic API 兼容接口\n- `POST /v1/chat/completions` - OpenAI API 兼容接口\n\n## 技术栈\n\n- Go 1.24.0\n- Gin v1.11.0\n- bytedance/sonic v1.14.1\n- Docker 支持\n\n## 快速开始\n\n```bash\n# 编译\ngo build -o kiro2api main.go\n\n# 配置环境变量\ncp .env.example .env\n\n# 启动\n./kiro2api\n```\n\n或使用 Docker：\n```bash\ndocker run -d -p 8080:8080 \\\n  -e KIRO_AUTH_TOKEN='[{\"auth\":\"Social\",\"refreshToken\":\"your_token\"}]' \\\n  -e KIRO_CLIENT_TOKEN=\"123456\" \\\n  ghcr.io/caidaoli/kiro2api:latest\n```\n\n## 项目地址\n\nhttps://github.com/caidaoli/kiro2api"
+              }
+            }
+          ],
+          "reasoningContent": {
+            "reasoningText": {
+              "text": "用户要求我把我整理的信息保存到指定目录。我已经获取了README的完整内容，现在需要创建一个文档保存到 /Users/jgao/Git/kiro2api/docs 目录。\n\n根据系统提示，我应该\"使用markdown代码块\"而不是创建markdown文件。用户说的是\"整理的信息\"，我理解是把关于这个项目的摘要信息保存到docs目录。我可以创建一个README.md文件放在docs目录下。\n\n让我创建一个简洁的项目说明文档。\n"
+            }
+          }
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "",
+          "userInputMessageContext": {
+            "toolResults": [
+              {
+                "toolUseId": "tooluse_X0aTMUWuVF12AXjvd0e7sF",
+                "content": [
+                  {
+                    "text": "Successfully created /Users/jgao/Git/kiro2api/docs/README.md (59 lines)."
+                  }
+                ],
+                "status": "success"
+              }
+            ]
+          },
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "da650083-df45-4fbe-8f49-71eab007f861",
+          "content": "\n\n已整理并保存到 `/Users/jgao/Git/kiro2api/docs/README.md`。\n\n**kiro2api** 是一个 Go 语言开发的高性能 AI API 代理服务器，主要功能：\n- 统一代理 Claude、OpenAI 和 AWS CodeWhisperer\n- 支持多账号池管理和故障转移\n- 支持 Social/IdC 两种 AWS 认证方式\n- 提供完整的 Anthropic 和 OpenAI API 兼容接口",
+          "reasoningContent": {
+            "reasoningText": {
+              "text": "我已经把项目的主要信息整理并保存到了指定的 docs 目录。\n"
+            }
+          }
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "--- CONTEXT ENTRY BEGIN ---\nCurrent time: Sunday, 2026-05-31T09:35:32.594+08:00\n--- CONTEXT ENTRY END ---\n\n--- USER MESSAGE BEGIN ---\nUsers/jgao/Git/kiro2api/docs/PROTOCOLS_CN.md 看一下这个文件。总结一下\n--- USER MESSAGE END ---",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "51b61b73-2a1f-44d2-b106-697ca2f2e505",
+          "content": "\n\n\n",
+          "toolUses": [
+            {
+              "toolUseId": "tooluse_tVDwOiQg0murzghSlM37Gy",
+              "name": "read",
+              "input": {
+                "operations": [
+                  {
+                    "path": "/Users/jgao/Git/kiro2api/docs/PROTOCOLS_CN.md",
+                    "mode": "Line"
+                  }
+                ]
+              }
+            }
+          ],
+          "reasoningContent": {
+            "reasoningText": {
+              "text": "The user wants me to read the file at Users/jgao/Git/kiro2api/docs/PROTOCOLS_CN.md (they wrote \"Users/jgao\" without the leading slash, but the correct path should be /Users/jgao/Git/kiro2api/docs/PROTOCOLS_CN.md).\n"
+            }
+          }
+        }
+      }
+    ],
+    "currentMessage": {
+      "userInputMessage": {
+        "content": "",
+        "userInputMessageContext": {
+          "envState": {
+            "operatingSystem": "macos",
+            "currentWorkingDirectory": "/Users/jgao"
+          },
+          "toolResults": [
+            {
+              "toolUseId": "tooluse_tVDwOiQg0murzghSlM37Gy",
+              "content": [
+                {
+                  "text": "# AI 协议接口文档（Responses 中枢 / OpenAI Chat Completions / Anthropic Messages）\n\n> 本文档基于 `backend/internal/pkg/apicompat` 包源码整理，描述三套协议的字段定义、相互映射规则与流式事件序列。\n> 用途：为后续接入新上游（如 Kiro 转发）提供协议对照与转换规范。\n>\n> 来源文件：\n> - `types.go` — 全部结构体定义\n> - `anthropic_to_responses.go` / `responses_to_anthropic.go` — Anthropic ⇄ Responses\n> - `responses_to_anthropic_request.go` / `anthropic_to_responses_response.go` — 反方向补全\n> - `chatcompletions_to_responses.go` / `responses_to_chatcompletions.go` — Chat ⇄ Responses\n> - `chatcompletions_responses_bridge.go` — Responses → Chat 请求与流式桥接\n\n---\n\n## 0. 总体架构\n\n本系统以 **OpenAI Responses API** 作为「中枢格式（hub format）」。所有协议互转都经过 Responses，避免 N×N 两两转换：\n\n```\n                    ┌──────────────────────┐\n  Anthropic  ◄─────►│                      │◄─────► OpenAI Chat\n  Messages          │   Responses (中枢)    │        Completions\n  /v1/messages      │   /v1/responses      │        /v1/chat/completions\n                    └──────────────────────┘\n```\n\n转换链路（函数级）：\n\n| 方向 | 第一跳 | 第二跳 |\n|------|--------|--------|\n| Anthropic 请求 → OpenAI 上游 | `AnthropicToResponses` | （直接发 Responses 上游）|\n| OpenAI Responses 响应 → Anthropic 客户端 | `ResponsesToAnthropic` / 流式 `ResponsesEventToAnthropicEvents` | — |\n| Chat 请求 → Responses 上游 | `ChatCompletionsToResponses` | — |\n| Responses 响应 → Chat 客户端 | `ResponsesToChatCompletions` / 流式 `ResponsesEventToChatChunks` | — |\n| Responses 请求 → Anthropic 上游 | `ResponsesToAnthropicRequest` | — |\n| Responses 请求 → Chat 上游 | `ResponsesToChatCompletionsRequest` | — |\n| Anthropic 响应 → Responses | `AnthropicToResponsesResponse` | — |\n| Chat 请求 → Anthropic | `ChatCompletionsToResponses` → `ResponsesToAnthropicRequest` | 两跳 |\n\n> 对接 Kiro 时，最小工作量是实现 **Kiro 协议 ⇄ Responses** 一对转换，即可复用上述全部链路对接到 Anthropic / Chat 客户端。\n\n---\n\n## 1. Responses 协议（中枢格式 = OpenAI 新格式 = Codex 格式）\n\n> **重要澄清**：OpenAI 只有两套对话协议——老的 Chat Completions（`/v1/chat/completions`，见 [第 2 节](#2-openai-chat-completions-协议老格式)）和新的 **Responses API**（`/v1/responses`）。\n> **Responses 就是 OpenAI 的最新格式，也正是 Codex CLI / ChatGPT Codex 使用的格式**，并不存在第三种「Codex 专用协议」。本系统把它选作中枢格式，正因为它是 OpenAI 当前主推、表达力最强的协议（原生承载 reasoning、加密推理续接、工具调用、多模态）。\n>\n> Codex 路径在 Responses 基础上额外依赖以下字段/约定（来自 `openai_codex_transform.go`、`openai_gateway_service.go`）：\n> - **`instructions`** — Codex 模型强制要求非空，缺失会被本地 403 拦截（`ensureCodexOAuthInstructionsField`）。\n> - **`previous_response_id`** — 多轮续接，服务端有状态接续上一响应。\n> - **`include: [\"reasoning.encrypted_content\"]`** + input 中的 [`reasoning` 项](#responsesinputitem)（带 `encrypted_content`）— 跨轮携带加密推理上下文；精确重试时会被 `trimOpenAIEncryptedReasoningItems` 移除。\n> - **`store`** — 是否服务端存储；OAuth 透传路径与本系统转换路径取值不同。\n>\n> ⚠️ apicompat 的 `ResponsesRequest`/`ResponsesInputItem` 结构体**未显式定义** `encrypted_content` 等 Codex 扩展字段，这些在透传路径中以**原始 JSON**形式保留（gateway 直接操作 `map[string]any` / gjson）。对接 Kiro 多轮续接时需注意保留这类透传字段。\n\n### 1.1 请求：`POST /v1/responses`\n\n`ResponsesRequest`：\n\n| 字段 | JSON | 类型 | 说明 |\n|------|------|------|------|\n| Model | `model` | string | 模型名 |\n| Instructions | `instructions` | string,opt | 系统级指令（独立于 input）|\n| Input | `input` | string \\| [`[]ResponsesInputItem`](#responsesinputitem) | 必填，对话输入 |\n| MaxOutputTokens | `max_output_tokens` | *int,opt | 最大输出 token，下限 `minMaxOutputTokens=128` |\n| Temperature | `temperature` | *float64,opt | reasoning 模型不接受 |\n| TopP | `top_p` | *float64,opt | reasoning 模型不接受 |\n| Stream | `stream` | bool | 是否流式 |\n| Tools | `tools` | [`[]ResponsesTool`](#responsestool),opt | 工具定义 |\n| Include | `include` | []string,opt | 附加返回项，如 `reasoning.encrypted_content` |\n| Store | `store` | *bool,opt | 是否服务端存储（本系统恒置 false）|\n| ParallelToolCalls | `parallel_tool_calls` | *bool,opt | 并行工具调用 |\n| Reasoning | `reasoning` | [*ResponsesReasoning](#responsesreasoning),opt | 推理配置 |\n| Text | `text` | [*ResponsesText](#responsestext),opt | 文本输出配置 |\n| ToolChoice | `tool_choice` | rawJSON,opt | 工具选择策略 |\n| ServiceTier | `service_tier` | string,opt | 服务等级 |\n| PromptCacheKey | `prompt_cache_key` | string,opt | 提示缓存键 |\n| PreviousResponseID | `previous_response_id` | string,opt | 续接上一响应 |\n\n<a id=\"responsesreasoning\"></a>\n`ResponsesReasoning`：\n| 字段 | JSON | 值域 |\n|------|------|------|\n| Effort | `effort` | `low` \\| `medium` \\| `high` \\| `xhigh` |\n| Summary | `summary` | `auto` \\| `concise` \\| `detailed` |\n\n<a id=\"responsestext\"></a>\n`ResponsesText`：\n| 字段 | JSON | 值域 |\n|------|------|------|\n| Verbosity | `verbosity` | `low` \\| `medium` \\| `high` |\n\n<a id=\"responsesinputitem\"></a>\n### 1.2 输入项 `ResponsesInputItem`\n\n`Type` 决定其余字段的含义：\n\n| Type | 用途 | 关键字段 |\n|------|------|----------|\n| `\"\"`（空，按 Role 区分）| 角色消息 | `role`(developer/system/user/assistant)、`content`(string \\| [`[]ResponsesContentPart`](#responsescontentpart)) |\n| `message` | 角色消息（显式）| 同上 |\n| `function_call` | 助手发起工具调用 | `call_id`、`name`、`arguments`、`id` |\n| `function_call_output` | 工具结果回填 | `call_id`、`output`(string) |\n| `input_text` / `text` | 裸文本项（Codex 续接常见）| `text` |\n| `input_image` | 裸图片项 | `image_url`(data URI) |\n| `reasoning` | **Codex 加密推理项**（透传字段，结构体未显式定义）| `encrypted_content`、`summary[]` |\n\n<a id=\"responsescontentpart\"></a>\n`ResponsesContentPart`：\n| 字段 | JSON | 说明 |\n|------|------|------|\n| Type | `type` | `input_text` \\| `output_text` \\| `input_image` |\n| Text | `text` | 文本内容 |\n| ImageURL | `image_url` | `input_image` 的 data URI |\n\n> 注意：`function_call_output.output` 只接受字符串。工具结果里的图片需单独拆成 user 消息的 `input_image` part（见 3.2）。\n\n<a id=\"responsestool\"></a>\n### 1.3 工具 `ResponsesTool`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| Type | `type` | `function` \\| `web_search` \\| `local_shell` 等 |\n| Name | `name` | 函数名 |\n| Description | `description` | 描述 |\n| Parameters | `parameters` | JSON Schema |\n| Strict | `strict` | 严格模式 |\n\n### 1.4 响应：`ResponsesResponse`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| ID | `id` | 响应 ID |\n| Object | `object` | 恒为 `response` |\n| Model | `model` | 模型名 |\n| Status | `status` | `completed` \\| `incomplete` \\| `failed` |\n| Output | `output` | [`[]ResponsesOutput`](#responsesoutput) |\n| Usage | `usage` | [*ResponsesUsage](#responsesusage) |\n| IncompleteDetails | `incomplete_details` | status=incomplete 时存在，`reason`=`max_output_tokens`\\|`content_filter` |\n| Error | `error` | status=failed 时存在，`{code,message}` |\n\n<a id=\"responsesoutput\"></a>\n`ResponsesOutput`（按 `type` 区分）：\n\n| Type | 字段 | 说明 |\n|------|------|------|\n| `message` | `id`、`role`、`content[]`、`status` | 文本消息，content 为 `output_text` parts |\n| `reasoning` | `encrypted_content`、`summary[]` | 推理；`summary[].type=summary_text` |\n| `function_call` | `call_id`、`name`、`arguments` | 工具调用 |\n| `web_search_call` | `id`、`action{type,query}` | 联网搜索调用 |\n\n<a id=\"responsesusage\"></a>\n### 1.5 用量 `ResponsesUsage`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| InputTokens | `input_tokens` | 输入 token（兼容反序列化 `prompt_tokens`）|\n| OutputTokens | `output_tokens` | 输出 token（兼容 `completion_tokens`）|\n| TotalTokens | `total_tokens` | 合计（缺省时自动 = input+output）|\n| InputTokensDetails | `input_tokens_details` | `{cached_tokens, audio_tokens}` |\n| OutputTokensDetails | `output_tokens_details` | `{reasoning_tokens, audio_tokens, accepted_prediction_tokens, rejected_prediction_tokens}` |\n\n> `UnmarshalJSON` 做了兼容：上游若返回 Chat 风格的 `prompt_tokens`/`completion_tokens`/`prompt_tokens_details`/`completion_tokens_details`，会自动回填到对应字段。\n\n### 1.6 流式事件 `ResponsesStreamEvent`\n\nSSE 事件（`type` 字段决定语义）：\n\n| event type | 携带字段 | 含义 |\n|------------|----------|------|\n| `response.created` | `response` | 流开始，给出 id/model |\n| `response.output_item.added` | `item`、`output_index` | 新输出项（message/reasoning/function_call）开始 |\n| `response.output_text.delta` | `delta`、`output_index`、`content_index` | 文本增量 |\n| `response.output_text.done` | `text` | 文本块结束 |\n| `response.function_call_arguments.delta` | `delta`、`output_index` | 工具参数增量 |\n| `response.function_call_arguments.done` | `arguments` | 工具参数结束 |\n| `response.reasoning_summary_text.delta` | `delta`、`summary_index` | 推理摘要增量 |\n| `response.reasoning_summary_text.done` | — | 推理摘要结束 |\n| `response.output_item.done` | `item` | 输出项结束（web_search_call 在此合成结果）|\n| `response.completed` | `response` | 正常终止 |\n| `response.done` | `response` | 终止别名（Realtime/WS/透传路径）|\n| `response.incomplete` / `response.failed` | `response` | 异常终止 |\n\n> 终止事件的 usage 可能出现在 `response.usage`，也可能在事件顶层 `usage`（部分兼容上游）。两处都要兜底读取。\n\n---\n\n## 2. OpenAI Chat Completions 协议（老格式）\n\n### 2.1 请求：`POST /v1/chat/completions`\n\n`ChatCompletionsRequest`：\n\n| 字段 | JSON | 类型 | 说明 |\n|------|------|------|------|\n| Model | `model` | string | 模型名 |\n| Messages | `messages` | [`[]ChatMessage`](#chatmessage) | 对话消息 |\n| Instructions | `instructions` | string,opt | Responses 兼容字段 |\n| MaxTokens | `max_tokens` | *int,opt | 旧字段 |\n| MaxCompletionTokens | `max_completion_tokens` | *int,opt | 新字段，优先于 max_tokens |\n| Temperature | `temperature` | *float64,opt | reasoning 模型不接受 |\n| TopP | `top_p` | *float64,opt | reasoning 模型不接受 |\n| Stream | `stream` | bool | — |\n| StreamOptions | `stream_options` | `{include_usage}` | 流式是否带 usage |\n| Tools | `tools` | [`[]ChatTool`](#chattool) | 工具（新式）|\n| ToolChoice | `tool_choice` | rawJSON | 工具选择 |\n| ReasoningEffort | `reasoning_effort` | string | `low`\\|`medium`\\|`high`\\|`xhigh` |\n| ServiceTier | `service_tier` | string,opt | — |\n| Stop | `stop` | string \\| []string | 停止序列 |\n| Functions | `functions` | [`[]ChatFunction`](#chattool) | **遗留**函数调用（已弃用仍兼容）|\n| FunctionCall | `function_call` | rawJSON | **遗留**函数选择 |\n\n<a id=\"chatmessage\"></a>\n### 2.2 消息 `ChatMessage`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| Role | `role` | `system`\\|`user`\\|`assistant`\\|`tool`\\|`function` |\n| Content | `content` | string \\| [`[]ChatContentPart`](#chatcontentpart) |\n| ReasoningContent | `reasoning_content` | 推理内容（非标准扩展）|\n| Name | `name` | function 角色用作 call_id |\n| ToolCalls | `tool_calls` | [`[]ChatToolCall`](#chattoolcall) |\n| ToolCallID | `tool_call_id` | tool 角色的目标调用 |\n| FunctionCall | `function_call` | 遗留单函数调用 |\n\n<a id=\"chatcontentpart\"></a>\n`ChatContentPart`：`type`=`text`\\|`image_url`；`image_url`={url, detail}。\n\n<a id=\"chattoolcall\"></a>\n`ChatToolCall`：`index`(仅流式)、`id`、`type=function`、`function{name, arguments}`。\n\n<a id=\"chattool\"></a>\n`ChatTool` / `ChatFunction`：`ChatTool{type:function, function}`；`ChatFunction{name, description, parameters(JSON Schema), strict}`。\n\n### 2.3 响应 `ChatCompletionsResponse`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| ID | `id` | `chatcmpl-` 前缀 |\n| Object | `object` | `chat.completion` |\n| Created | `created` | Unix 秒 |\n| Model | `model` | — |\n| Choices | `choices` | [`[]ChatChoice`](#chatchoice) |\n| Usage | `usage` | [*ChatUsage](#chatusage) |\n\n<a id=\"chatchoice\"></a>\n`ChatChoice`：`index`、`message`、`finish_reason`(`stop`\\|`length`\\|`tool_calls`\\|`content_filter`)。\n\n<a id=\"chatusage\"></a>\n`ChatUsage`：`prompt_tokens`、`completion_tokens`、`total_tokens`、`prompt_tokens_details{cached_tokens,audio_tokens}`、`completion_tokens_details{reasoning_tokens,audio_tokens,accepted/rejected_prediction_tokens}`。\n\n### 2.4 流式 `ChatCompletionsChunk`\n\n`object=chat.completion.chunk`，`choices[].delta` 为 `ChatDelta{role, content(*string), reasoning_content(*string), tool_calls[]}`，`finish_reason` 为 `*string`（未结束时 null）。\n\n> `content` 用指针：区分「不存在」(omit) 与 「空串/null」。最终 finish chunk 带空串 content + finish_reason。\n\n---\n\n## 3. Anthropic Messages 协议\n\n### 3.1 请求：`POST /v1/messages`\n\n`AnthropicRequest`：\n\n| 字段 | JSON | 类型 | 说明 |\n|------|------|------|------|\n| Model | `model` | string | — |\n| MaxTokens | `max_tokens` | int | **必填** |\n| System | `system` | string \\| [`[]AnthropicContentBlock`](#anthropiccontentblock) | 系统提示 |\n| Messages | `messages` | [`[]AnthropicMessage`](#anthropicmessage) | — |\n| Tools | `tools` | [`[]AnthropicTool`](#anthropictool) | — |\n| Stream | `stream` | bool | — |\n| Temperature | `temperature` | *float64,opt | — |\n| TopP | `top_p` | *float64,opt | — |\n| StopSeqs | `stop_sequences` | []string | — |\n| Thinking | `thinking` | `{type, budget_tokens}` | type=`enabled`\\|`adaptive`\\|`disabled` |\n| ToolChoice | `tool_choice` | rawJSON | — |\n| Metadata | `metadata` | rawJSON | **原样透传**，含 `user_id`，用于上游判定是否官方 Claude Code |\n| OutputConfig | `output_config` | `{effort}` | effort=`low`\\|`medium`\\|`high`\\|`max` |\n\n> ⚠️ Metadata 必须透传：OAuth/Claude Code 路径依赖 `metadata.user_id` 判定请求来源，丢失会被归类为第三方 app。\n\n### 3.2 消息与内容块\n\n<a id=\"anthropicmessage\"></a>\n`AnthropicMessage`：`role`(`user`\\|`assistant`)、`content`(string \\| [`[]AnthropicContentBlock`](#anthropiccontentblock))。\n\n<a id=\"anthropiccontentblock\"></a>\n`AnthropicContentBlock`（`type` 区分）：\n\n| type | 字段 | 说明 |\n|------|------|------|\n| `text` | `text` | 文本 |\n| `thinking` | `thinking` | 思考内容 |\n| `image` | `source{type=base64, media_type, data}` | 图片 |\n| `tool_use` | `id`、`name`、`input`(rawJSON) | 工具调用 |\n| `tool_result` | `tool_use_id`、`content`(string\\|blocks)、`is_error` | 工具结果 |\n| `server_tool_use` | `id`、`name`、`input` | 服务端工具（如 web_search）|\n| `web_search_tool_result` | `tool_use_id`、`content` | 搜索结果 |\n\n所有块可带 `cache_control{type=ephemeral, ttl}`。\n\n<a id=\"anthropictool\"></a>\n`AnthropicTool`：`type`(如 `web_search_20250305`)、`name`、`description`、`input_schema`(JSON Schema)、`cache_control`。\n\n### 3.3 响应 `AnthropicResponse`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| ID | `id` | — |\n| Type | `type` | `message` |\n| Role | `role` | `assistant` |\n| Content | `content` | `[]AnthropicContentBlock` |\n| Model | `model` | — |\n| StopReason | `stop_reason` | `end_turn`\\|`max_tokens`\\|`tool_use`\\|... |\n| StopSequence | `stop_sequence` | *string |\n| Usage | `usage` | [AnthropicUsage](#anthropicusage) |\n\n<a id=\"anthropicusage\"></a>\n`AnthropicUsage`：`input_tokens`、`output_tokens`、`cache_creation_input_tokens`、`cache_read_input_tokens`。\n\n### 3.4 流式事件\n\n`AnthropicStreamEvent` 的 `type`：\n\n| event type | 携带字段 | 含义 |\n|------------|----------|------|\n| `message_start` | `message` | 消息开始，含初始 usage |\n| `content_block_start` | `index`、`content_block` | 内容块开始 |\n| `content_block_delta` | `index`、`delta` | 内容块增量 |\n| `content_block_stop` | `index` | 内容块结束 |\n| `message_delta` | `delta{stop_reason}`、`usage` | 终止信息 |\n| `message_stop` | — | 消息结束 |\n\n`AnthropicDelta.type`：`text_delta`(text) \\| `input_json_delta`(partial_json) \\| `thinking_delta`(thinking) \\| `signature_delta`(signature)。\n\n---\n\n## 4. 字段级映射规则\n\n### 4.1 Anthropic 请求 → Responses（`AnthropicToResponses`）\n\n| Anthropic | Responses | 规则 |\n|-----------|-----------|------|\n| `system`(string/blocks) | input 首项 `message{role:developer}` | 文本 → `input_text`；丢弃 `x-anthropic-billing-header:` 开头的块 |\n| user 消息 string | `message{role:user, content:[input_text]}` | — |\n| user `text` 块 | `input_text` part | — |\n| user `image` 块 | `input_image` part | `source` → data URI `data:<mt>;base64,<data>`（mt 缺省 image/png）|\n| user `tool_result` 块 | `function_call_output{call_id, output}` | output 仅取文本；内嵌 image 拆为独立 user 消息的 `input_image` |\n| assistant 文本块 | `message{role:assistant, content:[output_text]}` | 多块用 `\\n\\n` 连接 |\n| assistant `tool_use` 块 | `function_call{call_id, name, arguments}` | arguments 缺省 `{}` |\n| assistant `thinking` 块 | **丢弃** | OpenAI 不接受 thinking 作为输入 |\n| `max_tokens` | `max_output_tokens` | 下限 128 |\n| `temperature`/`top_p` | 同名 | **gpt-5* 模型剔除**（reasoning 模型不接受，否则上游 400）|\n| `output_config.effort` | `reasoning.effort` | 见 4.5；默认 `medium`；`summary:auto` |\n| `tools[].web_search*` | `{type:web_search}` | 服务端工具映射 |\n| 普通 `tools[]` | `{type:function, ...}` | `input_schema` 经 `normalizeToolParameters` 补 `properties:{}`；`strict:false` |\n| `tool_choice` | 见 4.4 | — |\n| 固定项 | `store:false`、`parallel_tool_calls:true`、`text.verbosity:medium`、`include:[reasoning.encrypted_content]` | — |\n\n### 4.2 Responses 响应 → Anthropic（`ResponsesToAnthropic`）\n\n| Responses output | Anthropic block | 规则 |\n|------------------|-----------------|------|\n| `reasoning.summary[].summary_text` | `thinking` 块 | 拼接所有 summary_text |\n| `message.content[].output_text` | `text` 块 | — |\n| `function_call` | `tool_use` 块 | `id=fromResponsesCallID(call_id)`；input 经 `sanitizeAnthropicToolUseInput` |\n| `web_search_call` | `server_tool_use` + `web_search_tool_result` 一对 | tool_use_id=`srvtoolu_`+item.id；结果体为空数组 |\n| 空输出 | 单个空 `text` 块 | 保证 content 非空 |\n\n`stop_reason`：`incomplete`+`max_output_tokens`→`max_tokens`；`completed`+有 tool_use→`tool_use`；否则 `end_turn`。\n\n### 4.3 用量映射\n\n**Responses → Anthropic**（`anthropicUsageFromResponsesUsage`）：\n- `cached = input_tokens_details.cached_tokens`\n- `input_tokens(Anthropic) = input_tokens - cached`（不小于 0）\n- `output_tokens` 直传\n- `cache_read_input_tokens = cached`\n\n**Responses → Chat**（`chatUsageFromResponsesUsage`）：\n- `prompt_tokens = input_tokens`，`completion_tokens = output_tokens`，`total = 两者和`\n- `prompt_tokens_details`/`completion_tokens_details` 仅在非零时输出\n\n### 4.4 tool_choice 映射\n\n| Anthropic | Responses | Chat（透传）|\n|-----------|-----------|------|\n| `{type:auto}` | `\"auto\"` | `\"auto\"` |\n| `{type:any}` | `\"required\"` | `\"required\"` |\n| `{type:none}` | `\"none\"` | `\"none\"` |\n| `{type:tool,name:X}` | `{type:function,name:X}` | — |\n| 未知 | 原样透传 | 原样透传 |\n\n反向（`convertResponsesToAnthropicToolChoice`）对称；额外支持遗留 `{type:function,function:{name:X}}` → `{type:tool,name:X}`。\n\n### 4.5 reasoning effort 映射\n\n| Anthropic | Responses | 反向 |\n|-----------|-----------|------|\n| `low` | `low` | `low` |\n| `medium` | `medium` | `medium` |\n| `high` | `high` | `high` |\n| `max` | `xhigh` | `xhigh`→`max` |\n\n> 仅 `max↔xhigh` 不对称（Anthropic Opus 最高档 ↔ OpenAI GPT-5.2+ 最高档），其余 1:1。\n\n反向 `ResponsesToAnthropicRequest` 还会按 effort 设默认 thinking budget：low=1024, medium=4096, high=10240, max=32768；非 low 时开启 `thinking{type:enabled}`。\n\n### 4.6 call_id 处理\n\n- `toResponsesCallID(id)`：**原样保留**。Claude Code 把 `tool_use.id` 原样回传为 `tool_result.tool_use_id`，Codex 续接要求 call_id 与原始 id 一致。\n- `fromResponsesCallID(id)`：剥离遗留 `fc_` 前缀（仅当后缀是 `toolu_`/`call_` 时）。\n- `fromResponsesCallIDToAnthropic(id)`：剥前缀；若无 `toolu_`/`call_` 前缀则补 `toolu_`。\n\n### 4.7 Chat 请求 → Responses（`ChatCompletionsToResponses`）\n\n| Chat | Responses |\n|------|-----------|\n| system 消息 | `message{role:system}` |\n| user 消息 | `message{role:user}`（支持多模态 parts）|\n| assistant 文本 | `message{role:assistant,output_text}`；`reasoning_content` 包成 `<thinking>...</thinking>` 前置 |\n| assistant `tool_calls[]` | 每个 → `function_call` |\n| tool 消息 | `function_call_output{call_id=tool_call_id}` |\n| function 消息（遗留）| `function_call_output{call_id=name}` |\n| `max_completion_tokens`>`max_tokens` | `max_output_tokens`（下限 128）|\n| `reasoning_effort` | `reasoning.effort`+`summary:auto` |\n| `tools[]`+`functions[]` | 合并为 `ResponsesTool[]` |\n| `function_call`(遗留) | → tool_choice |\n| 固定项 | `stream:true`、`store:false`、`include:[reasoning.encrypted_content]` |\n\n### 4.8 Responses → Chat 请求（`ResponsesToChatCompletionsRequest`）\n\n`max_output_tokens`→`max_completion_tokens`；`reasoning.effort`→`reasoning_effort`；tools/tool_choice 反向映射。用于只实现 `/v1/chat/completions` 的上游。\n\n---\n\n## 5. 流式事件序列与状态机\n\n### 5.1 Responses → Anthropic 流（`ResponsesEventToAnthropicState`）\n\n状态：`MessageStartSent`、`ContentBlockIndex`、`ContentBlockOpen`、`CurrentBlockType`(text/thinking/tool_use)、`CurrentToolName/Args/HadDelta`、`HasToolCall`、`OutputIndexToBlockIdx`(映射 output_index→块序号)、usage、ResponseID/Model。\n\n事件转换：\n\n| Responses 事件 | 处理 | 产出 Anthropic 事件 |\n|----------------|------|---------------------|\n| `response.created` | 记录 id/model | `message_start`（仅一次）|\n| `output_item.added` (function_call) | 关闭当前块，开 tool_use 块 | `content_block_start{tool_use}` |\n| `output_item.added` (reasoning) | 关闭当前块，开 thinking 块 | `content_block_start{thinking}` |\n| `output_item.added` (message) | — | 无（等首个 text delta 再开块）|\n| `output_text.delta` | 必要时先开 text 块 | `content_block_start{text}?` + `content_block_delta{text_delta}` |\n| `output_text.done` | 关闭块 | `content_block_stop` |\n| `function_call_arguments.delta` | 累积/透传 | `content_block_delta{input_json_delta}` |\n| `function_call_arguments.done` | 收尾 | `content_block_delta{input_json_delta}?` + `content_block_stop` |\n| `reasoning_summary_text.delta` | — | `content_block_delta{thinking_delta}` |\n| `reasoning_summary_text.done` | 关闭块 | `content_block_stop` |\n| `output_item.done` (web_search_call completed) | 合成 | server_tool_use 块(start+stop) + web_search_tool_result 块(start+stop) |\n| `response.completed/done/incomplete/failed` | 收尾 | 关闭块 + `message_delta{stop_reason,usage}` + `message_stop` |\n\n`FinalizeResponsesAnthropicStream`：上游异常断开时补发 `message_delta`+`message_stop`（幂等）。\n\n> **特殊处理**：工具名为 `Read` 时参数增量被缓冲不立即下发（`CurrentToolHadDelta` 逻辑），在 done 时经 `sanitizeAnthropicToolUseInput` 清洗（去掉 `pages:\"\"`）后一次性下发，避免 Claude Code 读文件工具的空 pages 报错。\n\n### 5.2 Responses → Chat 流（`ResponsesEventToChatState`）\n\n状态：`ID`、`Model`、`SentRole`、`SawToolCall`、`SawText`、`Finalized`、`NextToolCallIndex`、`OutputIndexToToolIndex`、`IncludeUsage`、`Usage`。\n\n| Responses 事件 | 产出 Chat chunk |\n|----------------|-----------------|\n| `response.created` | role chunk(`delta{role:assistant}`，仅一次)|\n| `output_text.delta` | `delta{content}` |\n| `output_item.added`(function_call) | `delta{tool_calls:[{index,id,type,function.name}]}` |\n| `function_call_arguments.delta` | `delta{tool_calls:[{index,function.arguments}]}` |\n| `reasoning_summary_text.delta` | `delta{reasoning_content}` |\n| `response.completed/...` | finish chunk(`finish_reason`) + 可选 usage chunk |\n\n`finish_reason`：incomplete+max→`length`；有 tool_call→`tool_calls`；否则 `stop`。\n\n### 5.3 BufferedResponseAccumulator（非流式兜底）\n\n当上游以 SSE 推送但终止事件 `output` 为空时，累积 delta（text/reasoning/function_call），通过 `BuildOutput()` 重建 `[]ResponsesOutput`（顺序：reasoning→message→function_calls），再用 `SupplementResponseOutput` 回填到空 `resp.Output`。\n\n---\n\n## 6. 对接 Kiro 的建议\n\nKiro 底层是 Claude 模型，但走 AWS CodeWhisperer/Q streaming 私有协议。推荐做法：\n\n1. **定义 Kiro 协议结构体**（请求/响应/流式事件），放入新文件如 `kiro_to_responses.go`。\n2. **实现一对中枢转换**：\n   - `KiroToResponses(req) (*ResponsesRequest, error)` — 入站请求转中枢；\n   - `ResponsesToKiro...` / 流式 `ResponsesEventToKiro...` — 出站响应转 Kiro。\n   或者若 Kiro 入站就是 Anthropic 格式，直接复用 `AnthropicToResponses`，只需实现 Kiro 上游协议的「Responses ⇄ Kiro 上游」转换。\n3. **复用映射语义**：effort（注意 max↔xhigh）、tool_choice（any↔required）、call_id 原样保留、usage 的 cached_tokens 扣减、web_search 合成等规则与本文一致。\n4. **流式状态机**参照 `ResponsesEventToAnthropicState` 实现：维护块索引、output_index→块号映射、tool 参数缓冲与收尾。\n5. **接入点**：转换完成后挂到现有网关 forward 链路（参考 `OpenAIGatewayService.ForwardAsAnthropic`）。\n\n> 合规提醒：对受订阅协议约束的服务做逆向中转可能违反其使用条款，需自行评估法律与封号风险。"
+                }
+              ],
+              "status": "success"
+            }
+          ],
+          "tools": [
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "top_level_only": {
+                        "type": "boolean",
+                        "description": "Only return top-level symbols (optional for get_document_symbols)"
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "Directory path (optional for search_symbols, generate_codebase_overview, search_codebase_map)"
+                      },
+                      "file_path": {
+                        "type": "string",
+                        "description": "File path (required for get_document_symbols, optional for pattern_search/pattern_rewrite/search_codebase_map)"
+                      },
+                      "operation": {
+                        "enum": [
+                          "search_symbols",
+                          "lookup_symbols",
+                          "get_document_symbols",
+                          "pattern_search",
+                          "pattern_rewrite",
+                          "generate_codebase_overview",
+                          "search_codebase_map"
+                        ],
+                        "type": "string",
+                        "description": "The code intelligence operation to perform"
+                      },
+                      "limit": {
+                        "type": "integer",
+                        "description": "Maximum results (optional)"
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "dry_run": {
+                        "type": "boolean",
+                        "description": "Preview changes without writing (optional for pattern_rewrite). After reviewing dry-run results, call again with dry_run=false to apply.",
+                        "default": true
+                      },
+                      "language": {
+                        "description": "Programming language (required for pattern_search/pattern_rewrite, optional for search_symbols)",
+                        "type": "string"
+                      },
+                      "symbol_name": {
+                        "type": "string",
+                        "description": "Symbol name (required for search_symbols)"
+                      },
+                      "symbols": {
+                        "description": "List of symbol names (required for lookup_symbols, max 10)",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "include_source": {
+                        "description": "Include source code in results (optional for lookup_symbols)",
+                        "type": "boolean"
+                      },
+                      "pattern": {
+                        "type": "string",
+                        "description": "AST pattern (required for pattern_search/pattern_rewrite)"
+                      },
+                      "replacement": {
+                        "description": "Replacement pattern (required for pattern_rewrite)",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "operation"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "name": "code",
+                "description": "\nCode intelligence with AST parsing and fuzzy search. Language auto-detected from file extension.\n\nCORE FEATURES:\n• Fuzzy search for symbols (classes, functions, methods)\n• Extracts function/class signatures via AST\n• Structural AST search and rewrite (ast-grep)\n• Codebase overview and directory exploration\n\nNOTE: LSP operations (find_references, goto_definition, get_hover, get_completions, get_diagnostics, rename_symbol) require LSP initialization.\n\n## Available Operations\n- search_symbols: Find symbol definitions by name\n- lookup_symbols: Batch lookup specific symbols\n- get_document_symbols: List all symbols in a file\n- pattern_search: AST-based structural search\n- pattern_rewrite: AST-based code transformation\n- generate_codebase_overview: High-level codebase structure\n- search_codebase_map: Focused directory exploration\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "pattern"
+                    ],
+                    "properties": {
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "limit": {
+                        "type": "integer",
+                        "description": "Maximum number of results to return"
+                      },
+                      "path": {
+                        "description": "Root directory to search from. Defaults to current working directory",
+                        "type": "string"
+                      },
+                      "pattern": {
+                        "type": "string",
+                        "description": "Glob pattern, e.g. '**/*.rs', 'src/**/*.{ts,tsx}'"
+                      },
+                      "max_depth": {
+                        "type": "integer",
+                        "description": "Maximum directory depth to traverse"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "name": "glob",
+                "description": "\nFind files and directories whose paths match a glob pattern. Respects .gitignore.\n\nWHEN TO USE:\n- Finding files by name pattern (e.g., \"*.rs\", \"**/*.tsx\")\n- Discovering project structure\n- Listing files in specific directories\n\nHOW TO USE:\n- Provide a glob pattern to match files\n- Optionally specify a root directory to search from\n- Optionally specify a limit on results and max depth\n\nPATTERNS:\n- \"*.rs\" - All .rs files in current directory\n- \"**/*.rs\" - All .rs files recursively\n- \"src/**/*.{ts,tsx}\" - All TypeScript files under src/\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "max_matches_per_file": {
+                        "description": "Maximum matches to return per file (content mode only)",
+                        "type": "integer"
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "Directory to search from, defaults to current working directory"
+                      },
+                      "case_sensitive": {
+                        "description": "Case-sensitive search, defaults to false",
+                        "type": "boolean"
+                      },
+                      "max_files": {
+                        "type": "integer",
+                        "description": "Maximum number of files to include in results"
+                      },
+                      "pattern": {
+                        "type": "string",
+                        "description": "Regex pattern to search for"
+                      },
+                      "include": {
+                        "type": "string",
+                        "description": "File filter glob, e.g. '*.rs', '*.{ts,tsx}'"
+                      },
+                      "output_mode": {
+                        "description": "Output format: content (default), files_with_matches, or count",
+                        "enum": [
+                          "content",
+                          "files_with_matches",
+                          "count"
+                        ],
+                        "type": "string"
+                      },
+                      "max_depth": {
+                        "type": "integer",
+                        "description": "Maximum directory depth to traverse"
+                      },
+                      "max_total_lines": {
+                        "type": "integer",
+                        "description": "Maximum total lines in output (content mode only)"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      }
+                    },
+                    "required": [
+                      "pattern"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "name": "grep",
+                "description": "\nFast text pattern search in files using regex. Respects .gitignore.\n\nWHEN TO USE:\n- Searching for literal text patterns, error messages, TODOs, config values\n- Finding files containing specific text\n\nWHEN NOT TO USE:\n- For semantic code understanding, use the code tool instead\n- For finding symbol definitions or usages, use the code tool\n\nHOW TO USE:\n- Provide a regex pattern to search for\n- Optionally specify a path to search from (defaults to current directory)\n- Optionally specify a file filter glob (e.g., \"*.rs\", \"*.{ts,tsx}\")\n\nOUTPUT MODES:\n- content: Show matching lines with file path and line number (default)\n- files_with_matches: Only show file paths that contain matches\n- count: Show count of matches per file\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [],
+                    "type": "object",
+                    "properties": {
+                      "doc_path": {
+                        "description": "Path to a specific doc to retrieve (e.g., \"features/tangent-mode.md\"). Use this to get full content of a doc from the index.",
+                        "type": "string"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "query": {
+                        "type": "string",
+                        "description": "The user's question about this assistant's usage, features, or capabilities"
+                      }
+                    }
+                  }
+                },
+                "name": "introspect",
+                "description": "\nLook up documentation about this chat application's own features, slash commands, settings, or capabilities.\n\nWHEN TO USE:\n- User asks about this assistant's features, commands, or settings\n- User wants to know what slash commands are available\n- User asks how to use a specific feature of this chat application\n\nWHEN NOT TO USE:\n- General coding questions, AWS help, or tasks the user wants you to perform\n- Questions unrelated to this chat application itself\n\nHOW TO USE:\n- Provide a query to search the documentation\n- Or provide a doc_path to retrieve a specific document\n- When mentioning commands in your response, always prefix them with '/' (e.g., '/chat save', '/chat load', '/context')\n- CRITICAL: Only provide information explicitly documented. If details are not documented, clearly state the information is not available rather than generating assumptions.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "command"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "sort_by": {
+                        "enum": [
+                          "relevance",
+                          "path",
+                          "name"
+                        ],
+                        "type": "string",
+                        "description": "Sort order for search results. Options: 'relevance' (default, by similarity score), 'path' or 'name' (alphabetically by file path). Optional for 'search' operations."
+                      },
+                      "operation_id": {
+                        "description": "Optional operation ID to cancel a specific operation. Used with 'cancel' command. If not provided, all active operations will be cancelled. Can be either the full operation ID or the short 8-character ID.",
+                        "type": "string"
+                      },
+                      "file_type": {
+                        "type": "string",
+                        "description": "Filter results by file type (e.g., 'Code', 'Markdown', 'Text'). Optional for 'search' operations."
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "snippet_length": {
+                        "description": "Maximum character length for text snippets in results. Text longer than this will be truncated. Optional for 'search' operations.",
+                        "type": "integer"
+                      },
+                      "name": {
+                        "description": "A descriptive name for the knowledge context. Required for 'add' operations. Can be used for 'remove' and 'update' operations to identify the context.",
+                        "type": "string"
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "File or directory path. Used in 'remove' operations to remove contexts by their source path, and required for 'update' operations to specify the new content location."
+                      },
+                      "value": {
+                        "description": "The content to store in knowledge base. Required for 'add' operations. Can be either text content or a file/directory path. If it's a valid file or directory path, the content will be indexed; otherwise it's treated as text.",
+                        "type": "string"
+                      },
+                      "command": {
+                        "type": "string",
+                        "description": "The knowledge operation to perform:\n- 'show': List all knowledge contexts (no additional parameters required)\n- 'add': Add content to knowledge base (requires 'name' and 'value')\n- 'remove': Remove content from knowledge base (requires one of: 'name', 'context_id', or 'path')\n- 'clear': Remove all knowledge contexts.\n- 'search': Search across knowledge contexts (requires 'query', optional: 'context_id', 'limit', 'offset', 'snippet_length', 'sort_by', 'file_type')\n- 'update': Update existing context with new content (requires 'path' and one of: 'name', 'context_id')\n- 'status': Show background operation status and progress\n- 'cancel': Cancel background operations (optional 'operation_id' to cancel specific operation, or cancel all if not provided)",
+                        "enum": [
+                          "show",
+                          "add",
+                          "remove",
+                          "clear",
+                          "search",
+                          "update",
+                          "status",
+                          "cancel"
+                        ]
+                      },
+                      "context_id": {
+                        "description": "The unique context identifier for targeted operations. Can be obtained from 'show' command. Used for 'remove', 'update', and 'search' operations to specify which context to operate on.",
+                        "type": "string"
+                      },
+                      "query": {
+                        "description": "The search query string. Required for 'search' operations. Performs semantic search across knowledge contexts to find relevant content.",
+                        "type": "string"
+                      },
+                      "limit": {
+                        "type": "integer",
+                        "description": "Maximum number of search results to return, use default value unless required more results or focused search. Optional for 'search' operations."
+                      },
+                      "offset": {
+                        "type": "integer",
+                        "description": "Number of results to skip for pagination. Optional for 'search' operations."
+                      }
+                    }
+                  }
+                },
+                "name": "knowledge",
+                "description": "A tool for indexing and searching content across chat sessions using semantic search.\n\n## Overview\nThis tool enables persistent storage and retrieval of information using semantic search (MiniLLM) or keyword search (BM25). Content remains available across sessions for later use.\n\n## When to use\n- When users ask to query your knowledge bases or kbs\n- When you need to search previously indexed content\n- When users request to index new content (code, markdown, CSV, PDF, and other text file formats)\n- When exploring unfamiliar content to find relevant information\n- When users ask about topics that might be in indexed knowledge bases\n\n## When not to use\n- When content has not been indexed yet and user hasn't requested indexing\n- When you need real-time or external information not in the knowledge base\n\n## Notes\n- Use 'show' command to list available knowledge bases before searching\n- Search can target specific knowledge bases (context_id) or all knowledge bases\n- Use default limit values unless specifically needed; fewer results for focused search\n- Pagination available via offset parameter for large result sets\n- 'add' command indexes new content; 'update' command refreshes existing knowledge bases\n- Unless there is a clear reason to modify the search query, use the user's original wording for better semantic matching"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "operations": {
+                        "type": "array",
+                        "description": "Array of operations to execute. Provide one element for single operation, multiple for batch.",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "description": "Path to the file or directory (required for Line, Directory modes)."
+                            },
+                            "limit": {
+                              "description": "Number of lines to read (optional, for Line mode).",
+                              "type": "integer"
+                            },
+                            "depth": {
+                              "description": "Depth of a recursive directory listing (optional, for Directory mode).",
+                              "default": 0,
+                              "type": "integer"
+                            },
+                            "offset": {
+                              "description": "Line offset from the start of the file to start reading from (optional, for Line mode).",
+                              "type": "integer"
+                            },
+                            "exclude_patterns": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "Glob patterns to exclude from directory listing (optional, for Directory mode). If omitted, uses defaults.",
+                              "default": [
+                                "node_modules",
+                                ".git",
+                                "dist",
+                                "build",
+                                "out",
+                                ".cache",
+                                "target"
+                              ]
+                            },
+                            "image_paths": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "List of paths to the images. Required for Image mode."
+                            },
+                            "mode": {
+                              "enum": [
+                                "Line",
+                                "Directory",
+                                "Image"
+                              ],
+                              "type": "string",
+                              "description": "The operation mode to run in: `Line` and `Directory` are for text files and directories respectively. `Image` is for image files, in this mode `image_paths` is required."
+                            }
+                          },
+                          "required": [
+                            "mode"
+                          ]
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "operations"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "name": "read",
+                "description": "Tool for reading files, directories and images. Always provide an 'operations' array.\n\nFor single operation: provide array with one element.\nFor batch operations: provide array with multiple elements.\n\nAvailable modes:\n- Line: Read lines from a file\n- Directory: List directory contents\n- Image: Read and process images\n\nExamples:\n1. Single: {\"operations\": [{\"mode\": \"Line\", \"path\": \"/file.txt\"}]}\n2. Batch: {\"operations\": [{\"mode\": \"Line\", \"path\": \"/file1.txt\"}, {\"mode\": \"Directory\", \"path\": \"/src\"}]}\n3. Image: {\"operations\": [{\"mode\": \"Image\", \"image_paths\": [\"/path/to/image.png\"]}]}"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "properties": {
+                      "command": {
+                        "type": "string",
+                        "description": "Command to execute"
+                      },
+                      "working_dir": {
+                        "type": "string",
+                        "description": "Optional working directory for command execution. If not specified, uses the current working directory."
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "command"
+                    ]
+                  }
+                },
+                "name": "shell",
+                "description": "\nA tool for executing bash commands.\n\nWHEN TO USE THIS TOOL:\n- Use only as a last-resort when no other available tool can accomplish the task\n\nHOW TO USE:\n- Provide the command to execute\n- Use the `working_dir` argument to execute a command in another directory (defaults to current working directory)\n\nLIMITATIONS:\n- Does not respect user's bash profile or aliases\n\nTIPS:\n- Use the fileRead and fileWrite tools for reading and modifying files\n- NEVER prefix commands with cd to execute a command in another directory. Use the `working_dir` argument instead\n\nRESULT FIELDS:\n- `stdout`, `stderr`, `exit_status` — standard command output fields.\n- `agent_notes` (optional) — instructions or context sent to you by the command via a side channel\n  that is independent of stdout/stderr. If present, read and follow these notes before acting on\n  the result.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "stages": {
+                        "items": {
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "depends_on": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "model": {
+                              "type": "string"
+                            },
+                            "prompt_template": {
+                              "description": "Task for this stage. Use {task} to reference the overall task.",
+                              "type": "string"
+                            },
+                            "role": {
+                              "type": "string",
+                              "description": "Agent to use for this stage. Available agents:\n- Jgao: 自定义默认Agent\n- Jgao: 自定义默认Agent\n- kiro_default: The default agent for Kiro CLI\n- kiro_planner: Specialized planning agent that helps break down ideas into implementation plans\n- kiro_guide: Guide agent that answers questions about Kiro CLI features using documentation",
+                              "enum": [
+                                "Jgao",
+                                "Jgao",
+                                "kiro_default",
+                                "kiro_planner",
+                                "kiro_guide"
+                              ]
+                            }
+                          },
+                          "type": "object",
+                          "required": [
+                            "name",
+                            "role",
+                            "prompt_template"
+                          ]
+                        },
+                        "type": "array"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "mode": {
+                        "description": "Execution mode: 'blocking' (wait for completion)",
+                        "type": "string",
+                        "enum": [
+                          "blocking"
+                        ]
+                      },
+                      "task": {
+                        "type": "string",
+                        "description": "Overall task description"
+                      }
+                    },
+                    "required": [
+                      "task",
+                      "stages"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "name": "subagent",
+                "description": "\nSpawn and coordinate multiple AI agents in a pipeline (DAG). Each stage runs as a\npersistent session. Stages with no depends_on start immediately in parallel.\n\nMODES:\n- background (not yet implemented): Fire-and-forget. Returns immediately, results arrive in inbox.\n- blocking (default): Waits for all stages to complete, returns consolidated results.\n\nUSE THIS when you need multi-step work with specialized agents:\n- Research → Implement → Review pipelines\n- Parallel research tracks that feed into a single implementer\n- Any workflow where stages have dependencies\n\nEach stage becomes a session you can monitor via ctrl+g in the TUI.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "command"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "task_list_description": {
+                        "type": "string",
+                        "description": "Required parameter of `create` command containing a BRIEF summary of the task list being created. The summary should be detailed enough to refer to without knowing the problem context beforehand."
+                      },
+                      "completed_task_ids": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Required parameter of `complete` command containing the IDs of EVERY completed task. Each task should be marked as completed IMMEDIATELY after it is finished."
+                      },
+                      "new_tasks": {
+                        "type": "array",
+                        "items": {
+                          "required": [
+                            "task_description"
+                          ],
+                          "properties": {
+                            "details": {
+                              "description": "Optional detailed information about the task",
+                              "type": "string"
+                            },
+                            "task_description": {
+                              "type": "string",
+                              "description": "The main task description"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "description": "Required parameter of `add` command containing a list of new tasks to be added to the task list."
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "new_description": {
+                        "description": "Optional parameter of `add` and `remove` containing a new task list description. Use this when the updated set of tasks significantly change the goal or overall procedure of the task list.",
+                        "type": "string"
+                      },
+                      "tasks": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "details": {
+                              "type": "string",
+                              "description": "Optional detailed information about the task"
+                            },
+                            "task_description": {
+                              "description": "The main task description",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "task_description"
+                          ]
+                        },
+                        "description": "Required parameter of `create` command containing the list of DISTINCT tasks to be added to the task list."
+                      },
+                      "remove_task_ids": {
+                        "description": "Required parameter of `remove` command containing the IDs of tasks to remove.",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "context_update": {
+                        "type": "string",
+                        "description": "Required parameter of `complete` command containing important task context. Use this command to track important information about the task AND information about files you have read."
+                      },
+                      "command": {
+                        "enum": [
+                          "create",
+                          "complete",
+                          "add",
+                          "remove",
+                          "list"
+                        ],
+                        "type": "string",
+                        "description": "The command to run. Allowed options are `create`, `complete`, `add`, `remove`, and `list`. Call `list` without arguments to see a list of all current tasks."
+                      },
+                      "modified_files": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Optional parameter of `complete` command containing a list of paths of files that were modified during the task. This is useful for tracking file changes that are important to the task.",
+                        "type": "array"
+                      }
+                    }
+                  }
+                },
+                "name": "todo_list",
+                "description": "A tool for creating a task list and keeping track of tasks. This tool should be requested EVERY time the user gives you a task that will take multiple steps. A task list should be made BEFORE executing any steps. Steps should be marked off AS YOU COMPLETE THEM. DO NOT display your own tasks or task list AT ANY POINT; this is done for you. Complete the tasks in the same order that you provide them. If the user tells you to skip a step, DO NOT mark it as completed."
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "required": [
+                      "region",
+                      "service_name",
+                      "operation_name",
+                      "label"
+                    ],
+                    "properties": {
+                      "positional_args": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Positional arguments for high-level commands (e.g., s3 cp, s3 mv, s3 sync, s3 rm). These are passed directly without -- prefix. Use this for source/destination paths in S3 commands."
+                      },
+                      "parameters": {
+                        "description": "The parameters for the operation. The parameter keys MUST conform to the AWS CLI specification. You should prefer to use JSON Syntax over shorthand syntax wherever possible. For parameters that are booleans, prioritize using flags with no value. Denote these flags with flag names as key and an empty string as their value. You should also prefer kebab case.",
+                        "type": "object"
+                      },
+                      "region": {
+                        "description": "Region name for calling the operation on AWS.",
+                        "type": "string"
+                      },
+                      "profile_name": {
+                        "description": "Optional: AWS profile name to use from ~/.aws/credentials. Defaults to default profile if not specified.",
+                        "type": "string"
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Human readable description of the api that is being called."
+                      },
+                      "operation_name": {
+                        "description": "The name of the operation to perform.",
+                        "type": "string"
+                      },
+                      "service_name": {
+                        "type": "string",
+                        "description": "The name of the AWS service. If you want to query s3, you should use s3api if possible. Must not start with a dash (-)."
+                      }
+                    }
+                  }
+                },
+                "name": "use_aws",
+                "description": "\nMake an AWS CLI api call with the specified service, operation, and parameters. All arguments MUST conform to the AWS CLI specification. Should the output of the invocation indicate a malformed command, invoke help to obtain the the correct command.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "required": [
+                      "url"
+                    ],
+                    "properties": {
+                      "mode": {
+                        "description": "Extraction mode: 'selective' for smart extraction (default), 'truncated' for first 8000 chars, 'full' for complete content",
+                        "type": "string",
+                        "enum": [
+                          "selective",
+                          "truncated",
+                          "full"
+                        ]
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "search_terms": {
+                        "type": "string",
+                        "description": "Optional: Keywords to find in selective mode. Returns ~10 lines before and after matches."
+                      },
+                      "url": {
+                        "description": "URL to fetch content from",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "name": "web_fetch",
+                "description": "\nFetch and extract content from a specific URL. Supports three modes: 'selective' (default, extracts relevant sections around search terms), 'truncated' (first 8000 chars), 'full' (complete content).\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "query"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "query": {
+                        "maxLength": 200,
+                        "type": "string",
+                        "description": "Search query (max 200 chars) - use concise keywords, not full sentences"
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "name": "web_search",
+                "description": "\nWebSearch looks up information that is outside the model's training data or cannot be reliably inferred from the current codebase/context.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "path": {
+                        "type": "string",
+                        "description": "Path to the file"
+                      },
+                      "content": {
+                        "description": "Required parameter of `create` and `insert` commands.",
+                        "type": "string"
+                      },
+                      "replaceAll": {
+                        "description": "Optional parameter of `strReplace` command. Default is false. When true, all instances of `oldStr` will be replaced with `newStr`.",
+                        "type": "boolean"
+                      },
+                      "command": {
+                        "type": "string",
+                        "description": "The commands to run. Allowed options are: `create`, `strReplace`, `insert`",
+                        "enum": [
+                          "create",
+                          "strReplace",
+                          "insert"
+                        ]
+                      },
+                      "insertLine": {
+                        "description": "Optional parameter of `insert` command. Line is 0-indexed. `content` will be inserted at the provided line. If not provided, content will be inserted at the end of the file on a new line, inserting a newline at the end of the file if it is missing.",
+                        "type": "integer"
+                      },
+                      "oldStr": {
+                        "description": "Required parameter of `strReplace` command containing the string in `path` to replace.",
+                        "type": "string"
+                      },
+                      "newStr": {
+                        "description": "Required parameter of `strReplace` command containing the new string.",
+                        "type": "string"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      }
+                    },
+                    "required": [
+                      "command",
+                      "path"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "name": "write",
+                "description": "\nA tool for creating and editing text files.\n\nWHEN TO USE THIS TOOL:\n- Use when you need to create a new file, or modify an existing file\n- Perfect for updating text-based file formats\n\nHOW TO USE:\n- Provide the path to the file you want to create or modify\n- Specify the operation to perform: one of `create`, `strReplace`, or `insert`\n- Use `create` to create a new file. Required parameter is `content`. Parent directories will be created if they are missing.\n- Use `strReplace` to replace and update the content of an existing file.\n- Use `insert` to insert content at a specific line, or append content to the end of a file.\n\nTIPS:\n- To append content to the end of a file, use `insert` with no `insert_line`\n"
+              }
+            }
+          ]
+        },
+        "origin": "KIRO_CLI",
+        "modelId": "minimax-m2.5"
+      }
+    },
+    "chatTriggerType": "MANUAL",
+    "agentTaskType": "vibe"
+  },
+  "profileArn": "arn:aws:codewhisperer:us-east-1:471112993982:profile/GMAUN4KMEDEV"
+}

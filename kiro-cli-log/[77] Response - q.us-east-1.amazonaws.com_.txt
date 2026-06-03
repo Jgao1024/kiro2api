@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Date: Sun, 31 May 2026 01:34:41 GMT
+Content-Type: application/vnd.amazon.eventstream
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-RequestId: 584c35cf-8c75-4f6d-bc16-00e8f166cb6f
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=47304000; includeSubDomains
+X-Frame-Options: DENY
+Cache-Control: no-cache
+X-Content-Type-Options: nosniff
+
+���…���`Q–�Ó�:event-type���initial-response:content-type���application/x-amz-json-1.0:message-type���event{"conversationId":""}w­Nè���“���\‘YŸv�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"","modelId":"minimax-m2.5"}!ñ=(���ã���[öïê��:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"ç”¨æˆ·æƒ³è®©æˆ‘æŠŠä¹‹å‰�æ•´ç�†çš„ä¿¡æ�¯ä¿�å­˜åˆ° /Users/jgao/Git/kiro2api/docs ç›®å½•ã€‚ä½†å®žé™…ä¸Šæˆ‘ä¹‹å‰�"}q`@™�������[Hç@R�:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"å¹¶æ²¡æœ‰æˆ�åŠŸèŽ·å�–åˆ°é¡¹ç›®çš„è¯¦ç»†ä¿¡æ�¯ï¼Œå�ªæ˜¯çœ‹åˆ°äº†GitHubé¡µé�¢çš„éƒ¨åˆ†å†…å®¹ã€‚æˆ‘éœ€è¦�å…ˆé‡�æ–°èŽ·å�–READMEçš„å†…å®¹ï¼Œç„¶å�Žä¿�å­˜åˆ°æŒ‡å®š"}¯G–|���Ô���[åîŽŒ�:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"ç›®å½•ã€‚\n\nè®©æˆ‘å…ˆå°�è¯•èŽ·å�–é¡¹ç›®çš„READMEå†…å®¹ï¼Œç„¶å�Žåˆ›å»ºdocsç›®å½•å¹¶ä¿�å­˜ã€‚\n"}wAÏ%���Ä���\�jŒ­�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"\n\nè®©æˆ‘å…ˆèŽ·å�–é¡¹ç›®çš„READMEä¿¡æ�¯ï¼Œç„¶å�Ž","modelId":"minimax-m2.5"}$:•Å���­���\�H™‘�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"ä¿�å­˜åˆ°æŒ‡å®šç›®å½•ï¼š\n","modelId":"minimax-m2.5"}h0ˆ@���£���R×À
+÷�:event-type��toolUseEvent:content-type���application/json:message-type���event{"name":"web_fetch","toolUseId":"tooluse_kFI2ytngNErRH7yye1z3qG"}t�†ú�������R[ÑF�:event-type��toolUseEvent:content-type���application/json:message-type���event{"input":"{\"mode\": \"full\", \"url\": \"https://raw.githubusercontent.com/caidaoli/kiro2api/main/README.md\"}","name":"web_fetch","toolUseId":"tooluse_kFI2ytngNErRH7yye1z3qG"}�#�P���¯���R�0çö�:event-type��toolUseEvent:content-type���application/json:message-type���event{"name":"web_fetch","stop":true,"toolUseId":"tooluse_kFI2ytngNErRH7yye1z3qG"}ø�\Í���“���\‘YŸv�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"","modelId":"minimax-m2.5"}!ñ=(���“���W�‹Fþ�:event-type���contextUsageEvent:content-type���application/json:message-type���event{"contextUsagePercentage":6.522449016571045}×ûH4���§���SUGœ¡�:event-type��meteringEvent:content-type���application/json:message-type���event{"unit":"credit","unitPlural":"credits","usage":0.06866625538971807}ËŠ«<

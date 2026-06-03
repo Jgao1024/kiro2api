@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Date: Sun, 31 May 2026 01:34:45 GMT
+Content-Type: application/vnd.amazon.eventstream
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-RequestId: eb788b23-495e-4876-862d-ee63c3dc8091
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=47304000; includeSubDomains
+X-Frame-Options: DENY
+Cache-Control: no-cache
+X-Content-Type-Options: nosniff
+
+���…���`Q–�Ó�:event-type���initial-response:content-type���application/x-amz-json-1.0:message-type���event{"conversationId":""}w­Nè���“���\‘YŸv�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"","modelId":"minimax-m2.5"}!ñ=(���õ���[�Oˆ8�:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"ç”¨æˆ·è®©æˆ‘æŠŠæ•´ç�†çš„ä¿¡æ�¯ä¿�å­˜åˆ° /Users/jgao/Git/kiro2api/docs ç›®å½•ã€‚æˆ‘å·²ç»�èŽ·å�–åˆ°äº†READMEçš„å†…å®¹ï¼ŒçŽ°åœ¨æˆ‘"}Ú0éñ���þ���[nŸ¹)�:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"éœ€è¦�ï¼š\n\n1. åˆ›å»ºç›®å½•ï¼ˆå¦‚æžœä¸�å­˜åœ¨ï¼‰\n2. åˆ›å»ºä¸€ä¸ªæ–‡æ¡£æ–‡ä»¶æ�¥ä¿�å­˜è¿™äº›ä¿¡æ�¯\n\nè®©æˆ‘å…ˆæ£€æŸ¥ç›®å½•æ˜¯å�¦å­˜åœ¨"}cdts�������[H�p��:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"ï¼Œç„¶å�Žåˆ›å»ºæ–‡ä»¶ã€‚\n"}
+ÿ}
+���™���\Ûé‡×�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"\n\n\n","modelId":"minimax-m2.5"}7oƒ����Ÿ���R³�_p�:event-type��toolUseEvent:content-type���application/json:message-type���event{"name":"shell","toolUseId":"tooluse_mWFvVYu6CsfnNiHKTrhEr5"}„c/z���ã���R�3R¾�:event-type��toolUseEvent:content-type���application/json:message-type���event{"input":"{\"command\": \"mkdir -p /Users/jgao/Git/kiro2api/docs\"}","name":"shell","toolUseId":"tooluse_mWFvVYu6CsfnNiHKTrhEr5"}ü�Í����«���Rç°A6�:event-type��toolUseEvent:content-type���application/json:message-type���event{"name":"shell","stop":true,"toolUseId":"tooluse_mWFvVYu6CsfnNiHKTrhEr5"}R£©'���“���\‘YŸv�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"","modelId":"minimax-m2.5"}!ñ=(���“���W�‹Fþ�:event-type���contextUsageEvent:content-type���application/json:message-type���event{"contextUsagePercentage":8.515305519104004}Î¸îJ���¦���Sh'µ��:event-type��meteringEvent:content-type���application/json:message-type���event{"unit":"credit","unitPlural":"credits","usage":0.0885250646766169}/¡Y�

@@ -1,0 +1,36 @@
+HTTP/1.1 200 OK
+Date: Sun, 31 May 2026 01:30:30 GMT
+Content-Type: application/x-amz-json-1.0
+Content-Length: 484
+Connection: keep-alive
+x-amzn-RequestId: d7f67ecf-3ad7-47c2-943b-8e097d092c35
+
+{
+  "profile": {
+    "arn": "arn:aws:codewhisperer:us-east-1:471112993982:profile/GMAUN4KMEDEV",
+    "optInFeatures": {
+      "apiKeys": {
+        "toggle": "ON"
+      },
+      "autonomousAgents": {
+        "toggle": "ON"
+      },
+      "byUserAnalytics": {
+        "s3Uri": "s3://aws-kiro-data-logs/kiro-logs/",
+        "toggle": "ON"
+      },
+      "dashboardAnalytics": {
+        "toggle": "ON"
+      },
+      "overageConfiguration": {
+        "overageStatus": "ENABLED"
+      }
+    },
+    "profileName": "KiroProfile-us-east-1",
+    "profileType": "KIRO",
+    "referenceTrackerConfiguration": {
+      "recommendationsWithReferences": "ALLOW"
+    },
+    "status": "ACTIVE"
+  }
+}

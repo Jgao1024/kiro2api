@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Date: Sun, 31 May 2026 01:36:14 GMT
+Content-Type: application/vnd.amazon.eventstream
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-RequestId: 2703192a-db21-4233-9570-a3327a6a0438
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=47304000; includeSubDomains
+X-Frame-Options: DENY
+Cache-Control: no-cache
+X-Content-Type-Options: nosniff
+
+���…���`Q–�Ó�:event-type���initial-response:content-type���application/x-amz-json-1.0:message-type���event{"conversationId":""}w­Nè���“���\‘YŸv�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"","modelId":"minimax-m2.5"}!ñ=(���ì���[t¿}Ë�:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"ç”¨æˆ·é—®\"æˆ‘åˆšå�šäº†ä»€ä¹ˆï¼Ÿ\"ï¼Œè®©æˆ‘å›žé¡¾ä¸€ä¸‹ä¹‹å‰�çš„å¯¹è¯�åŽ†å�²ï¼š\n\n1. ç”¨æˆ·è®©æˆ‘æŸ¥çœ‹ /Users/jgao/G"}QMwË���Ã���[7.Å��:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"it/kiro2api/docs/PROTOCOLS_CN.md æ–‡ä»¶å¹¶æ€»ç»“\n2. æˆ‘è¯»å�–äº†è¿™ä¸ªæ–‡ä»¶"},‹z���’���[2]#e�:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"è¯»å�–å¹¶æ€»ç»“ PROTOCOLS_CN"}=ïé›���…���[à�h÷�:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":".md æ–‡ä»¶ã€‚\n"}FºíA���Æ���\aªßÍ�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"\n\nä½ åˆšè®©æˆ‘è¯»å�–å¹¶æ€»ç»“äº† `/Users/jgao/Git","modelId":"minimax-m2.5"}�àâ ���¼���\ÒÈ'£�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"/kiro2api/docs/PROTOCOLS_CN.md` æ–‡ä»¶ã€‚","modelId":"minimax-m2.5"}òbj…���“���W�‹Fþ�:event-type���contextUsageEvent:content-type���application/json:message-type���event{"contextUsagePercentage":9.568877220153809}�Åï‘���§���SUGœ¡�:event-type��meteringEvent:content-type���application/json:message-type���event{"unit":"credit","unitPlural":"credits","usage":0.09933531177446102}ZÉ�Ö

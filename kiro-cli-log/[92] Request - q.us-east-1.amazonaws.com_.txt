@@ -1,0 +1,854 @@
+POST / HTTP/1.1
+content-type: application/x-amz-json-1.0
+x-amz-target: AmazonCodeWhispererStreamingService.GenerateAssistantResponse
+content-length: 58625
+user-agent: aws-sdk-rust/1.3.16 ua/2.1 api/codewhispererstreaming/0.1.16551 os/macos lang/rust/1.92.0 md/appVersion-2.4.1 app/AmazonQ-For-CLI
+x-amz-user-agent: aws-sdk-rust/1.3.16 ua/2.1 api/codewhispererstreaming/0.1.16551 os/macos lang/rust/1.92.0 m/F app/AmazonQ-For-CLI
+x-amzn-codewhisperer-optout: true
+authorization: Bearer aoaAAAAAGobnRU6VnfGywgRvv8ifHjV7dIfkdlaM7PEKZkPjSbseulXyimxZk2rmSrwavc4Qzg9bV0gXXoCLFyKjUCbe0:MGQCMHmsEYEwNhUCgLLmzBLkCVEk5BjZ0qKRpHj7OQQeKdjO0UnUdnMTZAoOseJiWqUa9wIwS9GuqbVv4lP5a6a0p4zQCKBWZZy4dV8vLOAAJxc8m6Ls0WglD3BOywgiLUVciIRx
+amz-sdk-request: attempt=1; max=3
+amz-sdk-invocation-id: 8a50f657-58fc-4607-997f-0d3ab849c623
+accept: */*
+accept-encoding: gzip
+host: q.us-east-1.amazonaws.com
+
+{
+  "conversationState": {
+    "conversationId": "706309e2-e1c2-4468-82f7-44b36728988e",
+    "history": [
+      {
+        "userInputMessage": {
+          "content": "--- CONTEXT ENTRY BEGIN ---\nThis summary contains ALL relevant information from our previous conversation including tool uses, results, code analysis, and file operations. YOU MUST reference this information when answering questions and explicitly acknowledge specific details from the summary when they're relevant to the current question.\n\nSUMMARY CONTENT:\n\n\n## OBJECTIVE\nUnderstand the kiro2api GitHub project and save the information to a local directory.\n\n## USER GUIDANCE\nUser asked to look at https://github.com/caidaoli/kiro2api and save the information to /Users/jgao/Git/kiro2api/docs directory.\n\n## COMPLETED\n- Fetched README.md from the kiro2api GitHub repository\n- Created the docs directory at /Users/jgao/Git/kiro2api/docs\n- Saved a summary of the project to README.md in the docs directory\n\n## TECHNICAL CONTEXT\n- Project: kiro2api - 高性能 AI API 代理服务器\n- Language: Go\n- Key features: Claude/OpenAI/CodeWhisperer integration, multi-account pool, Social/IdC auth\n- GitHub stars: 610, 224 commits\n\n## TOOLS EXECUTED\n- Created directory: /Users/jgao/Git/kiro2api/docs\n- Created file: /Users/jgao/Git/kiro2api/docs/README.md with project summary\n\n## NEXT STEPS\nNone - task completed.\n\n## TODO LIST\n- None\n\n## FACTUAL RECORD\n\n### Files Modified and Read\n_(Most frequently and recently accessed first. Indented items show summaries for the last 5 modifications.)_\n* /Users/jgao/Git/kiro2api/docs/README.md\n\n### Commands Executed\n* mkdir -p /Users/jgao/Git/kiro2api/docs\n\n--- CONTEXT ENTRY END ---\n\n\nThe current model is minimax-m2.5.\n",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "content": "I will fully incorporate this information when generating my responses, and explicitly acknowledge relevant parts of the summary when answering questions."
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "--- CONTEXT ENTRY BEGIN ---\nCurrent time: Sunday, 2026-05-31T09:35:32.594+08:00\n--- CONTEXT ENTRY END ---\n\n--- USER MESSAGE BEGIN ---\nUsers/jgao/Git/kiro2api/docs/PROTOCOLS_CN.md 看一下这个文件。总结一下\n--- USER MESSAGE END ---",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "51b61b73-2a1f-44d2-b106-697ca2f2e505",
+          "content": "\n\n\n",
+          "toolUses": [
+            {
+              "toolUseId": "tooluse_tVDwOiQg0murzghSlM37Gy",
+              "name": "read",
+              "input": {
+                "operations": [
+                  {
+                    "mode": "Line",
+                    "path": "/Users/jgao/Git/kiro2api/docs/PROTOCOLS_CN.md"
+                  }
+                ]
+              }
+            }
+          ],
+          "reasoningContent": {
+            "reasoningText": {
+              "text": "The user wants me to read the file at Users/jgao/Git/kiro2api/docs/PROTOCOLS_CN.md (they wrote \"Users/jgao\" without the leading slash, but the correct path should be /Users/jgao/Git/kiro2api/docs/PROTOCOLS_CN.md).\n"
+            }
+          }
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "",
+          "userInputMessageContext": {
+            "toolResults": [
+              {
+                "toolUseId": "tooluse_tVDwOiQg0murzghSlM37Gy",
+                "content": [
+                  {
+                    "text": "# AI 协议接口文档（Responses 中枢 / OpenAI Chat Completions / Anthropic Messages）\n\n> 本文档基于 `backend/internal/pkg/apicompat` 包源码整理，描述三套协议的字段定义、相互映射规则与流式事件序列。\n> 用途：为后续接入新上游（如 Kiro 转发）提供协议对照与转换规范。\n>\n> 来源文件：\n> - `types.go` — 全部结构体定义\n> - `anthropic_to_responses.go` / `responses_to_anthropic.go` — Anthropic ⇄ Responses\n> - `responses_to_anthropic_request.go` / `anthropic_to_responses_response.go` — 反方向补全\n> - `chatcompletions_to_responses.go` / `responses_to_chatcompletions.go` — Chat ⇄ Responses\n> - `chatcompletions_responses_bridge.go` — Responses → Chat 请求与流式桥接\n\n---\n\n## 0. 总体架构\n\n本系统以 **OpenAI Responses API** 作为「中枢格式（hub format）」。所有协议互转都经过 Responses，避免 N×N 两两转换：\n\n```\n                    ┌──────────────────────┐\n  Anthropic  ◄─────►│                      │◄─────► OpenAI Chat\n  Messages          │   Responses (中枢)    │        Completions\n  /v1/messages      │   /v1/responses      │        /v1/chat/completions\n                    └──────────────────────┘\n```\n\n转换链路（函数级）：\n\n| 方向 | 第一跳 | 第二跳 |\n|------|--------|--------|\n| Anthropic 请求 → OpenAI 上游 | `AnthropicToResponses` | （直接发 Responses 上游）|\n| OpenAI Responses 响应 → Anthropic 客户端 | `ResponsesToAnthropic` / 流式 `ResponsesEventToAnthropicEvents` | — |\n| Chat 请求 → Responses 上游 | `ChatCompletionsToResponses` | — |\n| Responses 响应 → Chat 客户端 | `ResponsesToChatCompletions` / 流式 `ResponsesEventToChatChunks` | — |\n| Responses 请求 → Anthropic 上游 | `ResponsesToAnthropicRequest` | — |\n| Responses 请求 → Chat 上游 | `ResponsesToChatCompletionsRequest` | — |\n| Anthropic 响应 → Responses | `AnthropicToResponsesResponse` | — |\n| Chat 请求 → Anthropic | `ChatCompletionsToResponses` → `ResponsesToAnthropicRequest` | 两跳 |\n\n> 对接 Kiro 时，最小工作量是实现 **Kiro 协议 ⇄ Responses** 一对转换，即可复用上述全部链路对接到 Anthropic / Chat 客户端。\n\n---\n\n## 1. Responses 协议（中枢格式 = OpenAI 新格式 = Codex 格式）\n\n> **重要澄清**：OpenAI 只有两套对话协议——老的 Chat Completions（`/v1/chat/completions`，见 [第 2 节](#2-openai-chat-completions-协议老格式)）和新的 **Responses API**（`/v1/responses`）。\n> **Responses 就是 OpenAI 的最新格式，也正是 Codex CLI / ChatGPT Codex 使用的格式**，并不存在第三种「Codex 专用协议」。本系统把它选作中枢格式，正因为它是 OpenAI 当前主推、表达力最强的协议（原生承载 reasoning、加密推理续接、工具调用、多模态）。\n>\n> Codex 路径在 Responses 基础上额外依赖以下字段/约定（来自 `openai_codex_transform.go`、`openai_gateway_service.go`）：\n> - **`instructions`** — Codex 模型强制要求非空，缺失会被本地 403 拦截（`ensureCodexOAuthInstructionsField`）。\n> - **`previous_response_id`** — 多轮续接，服务端有状态接续上一响应。\n> - **`include: [\"reasoning.encrypted_content\"]`** + input 中的 [`reasoning` 项](#responsesinputitem)（带 `encrypted_content`）— 跨轮携带加密推理上下文；精确重试时会被 `trimOpenAIEncryptedReasoningItems` 移除。\n> - **`store`** — 是否服务端存储；OAuth 透传路径与本系统转换路径取值不同。\n>\n> ⚠️ apicompat 的 `ResponsesRequest`/`ResponsesInputItem` 结构体**未显式定义** `encrypted_content` 等 Codex 扩展字段，这些在透传路径中以**原始 JSON**形式保留（gateway 直接操作 `map[string]any` / gjson）。对接 Kiro 多轮续接时需注意保留这类透传字段。\n\n### 1.1 请求：`POST /v1/responses`\n\n`ResponsesRequest`：\n\n| 字段 | JSON | 类型 | 说明 |\n|------|------|------|------|\n| Model | `model` | string | 模型名 |\n| Instructions | `instructions` | string,opt | 系统级指令（独立于 input）|\n| Input | `input` | string \\| [`[]ResponsesInputItem`](#responsesinputitem) | 必填，对话输入 |\n| MaxOutputTokens | `max_output_tokens` | *int,opt | 最大输出 token，下限 `minMaxOutputTokens=128` |\n| Temperature | `temperature` | *float64,opt | reasoning 模型不接受 |\n| TopP | `top_p` | *float64,opt | reasoning 模型不接受 |\n| Stream | `stream` | bool | 是否流式 |\n| Tools | `tools` | [`[]ResponsesTool`](#responsestool),opt | 工具定义 |\n| Include | `include` | []string,opt | 附加返回项，如 `reasoning.encrypted_content` |\n| Store | `store` | *bool,opt | 是否服务端存储（本系统恒置 false）|\n| ParallelToolCalls | `parallel_tool_calls` | *bool,opt | 并行工具调用 |\n| Reasoning | `reasoning` | [*ResponsesReasoning](#responsesreasoning),opt | 推理配置 |\n| Text | `text` | [*ResponsesText](#responsestext),opt | 文本输出配置 |\n| ToolChoice | `tool_choice` | rawJSON,opt | 工具选择策略 |\n| ServiceTier | `service_tier` | string,opt | 服务等级 |\n| PromptCacheKey | `prompt_cache_key` | string,opt | 提示缓存键 |\n| PreviousResponseID | `previous_response_id` | string,opt | 续接上一响应 |\n\n<a id=\"responsesreasoning\"></a>\n`ResponsesReasoning`：\n| 字段 | JSON | 值域 |\n|------|------|------|\n| Effort | `effort` | `low` \\| `medium` \\| `high` \\| `xhigh` |\n| Summary | `summary` | `auto` \\| `concise` \\| `detailed` |\n\n<a id=\"responsestext\"></a>\n`ResponsesText`：\n| 字段 | JSON | 值域 |\n|------|------|------|\n| Verbosity | `verbosity` | `low` \\| `medium` \\| `high` |\n\n<a id=\"responsesinputitem\"></a>\n### 1.2 输入项 `ResponsesInputItem`\n\n`Type` 决定其余字段的含义：\n\n| Type | 用途 | 关键字段 |\n|------|------|----------|\n| `\"\"`（空，按 Role 区分）| 角色消息 | `role`(developer/system/user/assistant)、`content`(string \\| [`[]ResponsesContentPart`](#responsescontentpart)) |\n| `message` | 角色消息（显式）| 同上 |\n| `function_call` | 助手发起工具调用 | `call_id`、`name`、`arguments`、`id` |\n| `function_call_output` | 工具结果回填 | `call_id`、`output`(string) |\n| `input_text` / `text` | 裸文本项（Codex 续接常见）| `text` |\n| `input_image` | 裸图片项 | `image_url`(data URI) |\n| `reasoning` | **Codex 加密推理项**（透传字段，结构体未显式定义）| `encrypted_content`、`summary[]` |\n\n<a id=\"responsescontentpart\"></a>\n`ResponsesContentPart`：\n| 字段 | JSON | 说明 |\n|------|------|------|\n| Type | `type` | `input_text` \\| `output_text` \\| `input_image` |\n| Text | `text` | 文本内容 |\n| ImageURL | `image_url` | `input_image` 的 data URI |\n\n> 注意：`function_call_output.output` 只接受字符串。工具结果里的图片需单独拆成 user 消息的 `input_image` part（见 3.2）。\n\n<a id=\"responsestool\"></a>\n### 1.3 工具 `ResponsesTool`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| Type | `type` | `function` \\| `web_search` \\| `local_shell` 等 |\n| Name | `name` | 函数名 |\n| Description | `description` | 描述 |\n| Parameters | `parameters` | JSON Schema |\n| Strict | `strict` | 严格模式 |\n\n### 1.4 响应：`ResponsesResponse`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| ID | `id` | 响应 ID |\n| Object | `object` | 恒为 `response` |\n| Model | `model` | 模型名 |\n| Status | `status` | `completed` \\| `incomplete` \\| `failed` |\n| Output | `output` | [`[]ResponsesOutput`](#responsesoutput) |\n| Usage | `usage` | [*ResponsesUsage](#responsesusage) |\n| IncompleteDetails | `incomplete_details` | status=incomplete 时存在，`reason`=`max_output_tokens`\\|`content_filter` |\n| Error | `error` | status=failed 时存在，`{code,message}` |\n\n<a id=\"responsesoutput\"></a>\n`ResponsesOutput`（按 `type` 区分）：\n\n| Type | 字段 | 说明 |\n|------|------|------|\n| `message` | `id`、`role`、`content[]`、`status` | 文本消息，content 为 `output_text` parts |\n| `reasoning` | `encrypted_content`、`summary[]` | 推理；`summary[].type=summary_text` |\n| `function_call` | `call_id`、`name`、`arguments` | 工具调用 |\n| `web_search_call` | `id`、`action{type,query}` | 联网搜索调用 |\n\n<a id=\"responsesusage\"></a>\n### 1.5 用量 `ResponsesUsage`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| InputTokens | `input_tokens` | 输入 token（兼容反序列化 `prompt_tokens`）|\n| OutputTokens | `output_tokens` | 输出 token（兼容 `completion_tokens`）|\n| TotalTokens | `total_tokens` | 合计（缺省时自动 = input+output）|\n| InputTokensDetails | `input_tokens_details` | `{cached_tokens, audio_tokens}` |\n| OutputTokensDetails | `output_tokens_details` | `{reasoning_tokens, audio_tokens, accepted_prediction_tokens, rejected_prediction_tokens}` |\n\n> `UnmarshalJSON` 做了兼容：上游若返回 Chat 风格的 `prompt_tokens`/`completion_tokens`/`prompt_tokens_details`/`completion_tokens_details`，会自动回填到对应字段。\n\n### 1.6 流式事件 `ResponsesStreamEvent`\n\nSSE 事件（`type` 字段决定语义）：\n\n| event type | 携带字段 | 含义 |\n|------------|----------|------|\n| `response.created` | `response` | 流开始，给出 id/model |\n| `response.output_item.added` | `item`、`output_index` | 新输出项（message/reasoning/function_call）开始 |\n| `response.output_text.delta` | `delta`、`output_index`、`content_index` | 文本增量 |\n| `response.output_text.done` | `text` | 文本块结束 |\n| `response.function_call_arguments.delta` | `delta`、`output_index` | 工具参数增量 |\n| `response.function_call_arguments.done` | `arguments` | 工具参数结束 |\n| `response.reasoning_summary_text.delta` | `delta`、`summary_index` | 推理摘要增量 |\n| `response.reasoning_summary_text.done` | — | 推理摘要结束 |\n| `response.output_item.done` | `item` | 输出项结束（web_search_call 在此合成结果）|\n| `response.completed` | `response` | 正常终止 |\n| `response.done` | `response` | 终止别名（Realtime/WS/透传路径）|\n| `response.incomplete` / `response.failed` | `response` | 异常终止 |\n\n> 终止事件的 usage 可能出现在 `response.usage`，也可能在事件顶层 `usage`（部分兼容上游）。两处都要兜底读取。\n\n---\n\n## 2. OpenAI Chat Completions 协议（老格式）\n\n### 2.1 请求：`POST /v1/chat/completions`\n\n`ChatCompletionsRequest`：\n\n| 字段 | JSON | 类型 | 说明 |\n|------|------|------|------|\n| Model | `model` | string | 模型名 |\n| Messages | `messages` | [`[]ChatMessage`](#chatmessage) | 对话消息 |\n| Instructions | `instructions` | string,opt | Responses 兼容字段 |\n| MaxTokens | `max_tokens` | *int,opt | 旧字段 |\n| MaxCompletionTokens | `max_completion_tokens` | *int,opt | 新字段，优先于 max_tokens |\n| Temperature | `temperature` | *float64,opt | reasoning 模型不接受 |\n| TopP | `top_p` | *float64,opt | reasoning 模型不接受 |\n| Stream | `stream` | bool | — |\n| StreamOptions | `stream_options` | `{include_usage}` | 流式是否带 usage |\n| Tools | `tools` | [`[]ChatTool`](#chattool) | 工具（新式）|\n| ToolChoice | `tool_choice` | rawJSON | 工具选择 |\n| ReasoningEffort | `reasoning_effort` | string | `low`\\|`medium`\\|`high`\\|`xhigh` |\n| ServiceTier | `service_tier` | string,opt | — |\n| Stop | `stop` | string \\| []string | 停止序列 |\n| Functions | `functions` | [`[]ChatFunction`](#chattool) | **遗留**函数调用（已弃用仍兼容）|\n| FunctionCall | `function_call` | rawJSON | **遗留**函数选择 |\n\n<a id=\"chatmessage\"></a>\n### 2.2 消息 `ChatMessage`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| Role | `role` | `system`\\|`user`\\|`assistant`\\|`tool`\\|`function` |\n| Content | `content` | string \\| [`[]ChatContentPart`](#chatcontentpart) |\n| ReasoningContent | `reasoning_content` | 推理内容（非标准扩展）|\n| Name | `name` | function 角色用作 call_id |\n| ToolCalls | `tool_calls` | [`[]ChatToolCall`](#chattoolcall) |\n| ToolCallID | `tool_call_id` | tool 角色的目标调用 |\n| FunctionCall | `function_call` | 遗留单函数调用 |\n\n<a id=\"chatcontentpart\"></a>\n`ChatContentPart`：`type`=`text`\\|`image_url`；`image_url`={url, detail}。\n\n<a id=\"chattoolcall\"></a>\n`ChatToolCall`：`index`(仅流式)、`id`、`type=function`、`function{name, arguments}`。\n\n<a id=\"chattool\"></a>\n`ChatTool` / `ChatFunction`：`ChatTool{type:function, function}`；`ChatFunction{name, description, parameters(JSON Schema), strict}`。\n\n### 2.3 响应 `ChatCompletionsResponse`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| ID | `id` | `chatcmpl-` 前缀 |\n| Object | `object` | `chat.completion` |\n| Created | `created` | Unix 秒 |\n| Model | `model` | — |\n| Choices | `choices` | [`[]ChatChoice`](#chatchoice) |\n| Usage | `usage` | [*ChatUsage](#chatusage) |\n\n<a id=\"chatchoice\"></a>\n`ChatChoice`：`index`、`message`、`finish_reason`(`stop`\\|`length`\\|`tool_calls`\\|`content_filter`)。\n\n<a id=\"chatusage\"></a>\n`ChatUsage`：`prompt_tokens`、`completion_tokens`、`total_tokens`、`prompt_tokens_details{cached_tokens,audio_tokens}`、`completion_tokens_details{reasoning_tokens,audio_tokens,accepted/rejected_prediction_tokens}`。\n\n### 2.4 流式 `ChatCompletionsChunk`\n\n`object=chat.completion.chunk`，`choices[].delta` 为 `ChatDelta{role, content(*string), reasoning_content(*string), tool_calls[]}`，`finish_reason` 为 `*string`（未结束时 null）。\n\n> `content` 用指针：区分「不存在」(omit) 与 「空串/null」。最终 finish chunk 带空串 content + finish_reason。\n\n---\n\n## 3. Anthropic Messages 协议\n\n### 3.1 请求：`POST /v1/messages`\n\n`AnthropicRequest`：\n\n| 字段 | JSON | 类型 | 说明 |\n|------|------|------|------|\n| Model | `model` | string | — |\n| MaxTokens | `max_tokens` | int | **必填** |\n| System | `system` | string \\| [`[]AnthropicContentBlock`](#anthropiccontentblock) | 系统提示 |\n| Messages | `messages` | [`[]AnthropicMessage`](#anthropicmessage) | — |\n| Tools | `tools` | [`[]AnthropicTool`](#anthropictool) | — |\n| Stream | `stream` | bool | — |\n| Temperature | `temperature` | *float64,opt | — |\n| TopP | `top_p` | *float64,opt | — |\n| StopSeqs | `stop_sequences` | []string | — |\n| Thinking | `thinking` | `{type, budget_tokens}` | type=`enabled`\\|`adaptive`\\|`disabled` |\n| ToolChoice | `tool_choice` | rawJSON | — |\n| Metadata | `metadata` | rawJSON | **原样透传**，含 `user_id`，用于上游判定是否官方 Claude Code |\n| OutputConfig | `output_config` | `{effort}` | effort=`low`\\|`medium`\\|`high`\\|`max` |\n\n> ⚠️ Metadata 必须透传：OAuth/Claude Code 路径依赖 `metadata.user_id` 判定请求来源，丢失会被归类为第三方 app。\n\n### 3.2 消息与内容块\n\n<a id=\"anthropicmessage\"></a>\n`AnthropicMessage`：`role`(`user`\\|`assistant`)、`content`(string \\| [`[]AnthropicContentBlock`](#anthropiccontentblock))。\n\n<a id=\"anthropiccontentblock\"></a>\n`AnthropicContentBlock`（`type` 区分）：\n\n| type | 字段 | 说明 |\n|------|------|------|\n| `text` | `text` | 文本 |\n| `thinking` | `thinking` | 思考内容 |\n| `image` | `source{type=base64, media_type, data}` | 图片 |\n| `tool_use` | `id`、`name`、`input`(rawJSON) | 工具调用 |\n| `tool_result` | `tool_use_id`、`content`(string\\|blocks)、`is_error` | 工具结果 |\n| `server_tool_use` | `id`、`name`、`input` | 服务端工具（如 web_search）|\n| `web_search_tool_result` | `tool_use_id`、`content` | 搜索结果 |\n\n所有块可带 `cache_control{type=ephemeral, ttl}`。\n\n<a id=\"anthropictool\"></a>\n`AnthropicTool`：`type`(如 `web_search_20250305`)、`name`、`description`、`input_schema`(JSON Schema)、`cache_control`。\n\n### 3.3 响应 `AnthropicResponse`\n\n| 字段 | JSON | 说明 |\n|------|------|------|\n| ID | `id` | — |\n| Type | `type` | `message` |\n| Role | `role` | `assistant` |\n| Content | `content` | `[]AnthropicContentBlock` |\n| Model | `model` | — |\n| StopReason | `stop_reason` | `end_turn`\\|`max_tokens`\\|`tool_use`\\|... |\n| StopSequence | `stop_sequence` | *string |\n| Usage | `usage` | [AnthropicUsage](#anthropicusage) |\n\n<a id=\"anthropicusage\"></a>\n`AnthropicUsage`：`input_tokens`、`output_tokens`、`cache_creation_input_tokens`、`cache_read_input_tokens`。\n\n### 3.4 流式事件\n\n`AnthropicStreamEvent` 的 `type`：\n\n| event type | 携带字段 | 含义 |\n|------------|----------|------|\n| `message_start` | `message` | 消息开始，含初始 usage |\n| `content_block_start` | `index`、`content_block` | 内容块开始 |\n| `content_block_delta` | `index`、`delta` | 内容块增量 |\n| `content_block_stop` | `index` | 内容块结束 |\n| `message_delta` | `delta{stop_reason}`、`usage` | 终止信息 |\n| `message_stop` | — | 消息结束 |\n\n`AnthropicDelta.type`：`text_delta`(text) \\| `input_json_delta`(partial_json) \\| `thinking_delta`(thinking) \\| `signature_delta`(signature)。\n\n---\n\n## 4. 字段级映射规则\n\n### 4.1 Anthropic 请求 → Responses（`AnthropicToResponses`）\n\n| Anthropic | Responses | 规则 |\n|-----------|-----------|------|\n| `system`(string/blocks) | input 首项 `message{role:developer}` | 文本 → `input_text`；丢弃 `x-anthropic-billing-header:` 开头的块 |\n| user 消息 string | `message{role:user, content:[input_text]}` | — |\n| user `text` 块 | `input_text` part | — |\n| user `image` 块 | `input_image` part | `source` → data URI `data:<mt>;base64,<data>`（mt 缺省 image/png）|\n| user `tool_result` 块 | `function_call_output{call_id, output}` | output 仅取文本；内嵌 image 拆为独立 user 消息的 `input_image` |\n| assistant 文本块 | `message{role:assistant, content:[output_text]}` | 多块用 `\\n\\n` 连接 |\n| assistant `tool_use` 块 | `function_call{call_id, name, arguments}` | arguments 缺省 `{}` |\n| assistant `thinking` 块 | **丢弃** | OpenAI 不接受 thinking 作为输入 |\n| `max_tokens` | `max_output_tokens` | 下限 128 |\n| `temperature`/`top_p` | 同名 | **gpt-5* 模型剔除**（reasoning 模型不接受，否则上游 400）|\n| `output_config.effort` | `reasoning.effort` | 见 4.5；默认 `medium`；`summary:auto` |\n| `tools[].web_search*` | `{type:web_search}` | 服务端工具映射 |\n| 普通 `tools[]` | `{type:function, ...}` | `input_schema` 经 `normalizeToolParameters` 补 `properties:{}`；`strict:false` |\n| `tool_choice` | 见 4.4 | — |\n| 固定项 | `store:false`、`parallel_tool_calls:true`、`text.verbosity:medium`、`include:[reasoning.encrypted_content]` | — |\n\n### 4.2 Responses 响应 → Anthropic（`ResponsesToAnthropic`）\n\n| Responses output | Anthropic block | 规则 |\n|------------------|-----------------|------|\n| `reasoning.summary[].summary_text` | `thinking` 块 | 拼接所有 summary_text |\n| `message.content[].output_text` | `text` 块 | — |\n| `function_call` | `tool_use` 块 | `id=fromResponsesCallID(call_id)`；input 经 `sanitizeAnthropicToolUseInput` |\n| `web_search_call` | `server_tool_use` + `web_search_tool_result` 一对 | tool_use_id=`srvtoolu_`+item.id；结果体为空数组 |\n| 空输出 | 单个空 `text` 块 | 保证 content 非空 |\n\n`stop_reason`：`incomplete`+`max_output_tokens`→`max_tokens`；`completed`+有 tool_use→`tool_use`；否则 `end_turn`。\n\n### 4.3 用量映射\n\n**Responses → Anthropic**（`anthropicUsageFromResponsesUsage`）：\n- `cached = input_tokens_details.cached_tokens`\n- `input_tokens(Anthropic) = input_tokens - cached`（不小于 0）\n- `output_tokens` 直传\n- `cache_read_input_tokens = cached`\n\n**Responses → Chat**（`chatUsageFromResponsesUsage`）：\n- `prompt_tokens = input_tokens`，`completion_tokens = output_tokens`，`total = 两者和`\n- `prompt_tokens_details`/`completion_tokens_details` 仅在非零时输出\n\n### 4.4 tool_choice 映射\n\n| Anthropic | Responses | Chat（透传）|\n|-----------|-----------|------|\n| `{type:auto}` | `\"auto\"` | `\"auto\"` |\n| `{type:any}` | `\"required\"` | `\"required\"` |\n| `{type:none}` | `\"none\"` | `\"none\"` |\n| `{type:tool,name:X}` | `{type:function,name:X}` | — |\n| 未知 | 原样透传 | 原样透传 |\n\n反向（`convertResponsesToAnthropicToolChoice`）对称；额外支持遗留 `{type:function,function:{name:X}}` → `{type:tool,name:X}`。\n\n### 4.5 reasoning effort 映射\n\n| Anthropic | Responses | 反向 |\n|-----------|-----------|------|\n| `low` | `low` | `low` |\n| `medium` | `medium` | `medium` |\n| `high` | `high` | `high` |\n| `max` | `xhigh` | `xhigh`→`max` |\n\n> 仅 `max↔xhigh` 不对称（Anthropic Opus 最高档 ↔ OpenAI GPT-5.2+ 最高档），其余 1:1。\n\n反向 `ResponsesToAnthropicRequest` 还会按 effort 设默认 thinking budget：low=1024, medium=4096, high=10240, max=32768；非 low 时开启 `thinking{type:enabled}`。\n\n### 4.6 call_id 处理\n\n- `toResponsesCallID(id)`：**原样保留**。Claude Code 把 `tool_use.id` 原样回传为 `tool_result.tool_use_id`，Codex 续接要求 call_id 与原始 id 一致。\n- `fromResponsesCallID(id)`：剥离遗留 `fc_` 前缀（仅当后缀是 `toolu_`/`call_` 时）。\n- `fromResponsesCallIDToAnthropic(id)`：剥前缀；若无 `toolu_`/`call_` 前缀则补 `toolu_`。\n\n### 4.7 Chat 请求 → Responses（`ChatCompletionsToResponses`）\n\n| Chat | Responses |\n|------|-----------|\n| system 消息 | `message{role:system}` |\n| user 消息 | `message{role:user}`（支持多模态 parts）|\n| assistant 文本 | `message{role:assistant,output_text}`；`reasoning_content` 包成 `<thinking>...</thinking>` 前置 |\n| assistant `tool_calls[]` | 每个 → `function_call` |\n| tool 消息 | `function_call_output{call_id=tool_call_id}` |\n| function 消息（遗留）| `function_call_output{call_id=name}` |\n| `max_completion_tokens`>`max_tokens` | `max_output_tokens`（下限 128）|\n| `reasoning_effort` | `reasoning.effort`+`summary:auto` |\n| `tools[]`+`functions[]` | 合并为 `ResponsesTool[]` |\n| `function_call`(遗留) | → tool_choice |\n| 固定项 | `stream:true`、`store:false`、`include:[reasoning.encrypted_content]` |\n\n### 4.8 Responses → Chat 请求（`ResponsesToChatCompletionsRequest`）\n\n`max_output_tokens`→`max_completion_tokens`；`reasoning.effort`→`reasoning_effort`；tools/tool_choice 反向映射。用于只实现 `/v1/chat/completions` 的上游。\n\n---\n\n## 5. 流式事件序列与状态机\n\n### 5.1 Responses → Anthropic 流（`ResponsesEventToAnthropicState`）\n\n状态：`MessageStartSent`、`ContentBlockIndex`、`ContentBlockOpen`、`CurrentBlockType`(text/thinking/tool_use)、`CurrentToolName/Args/HadDelta`、`HasToolCall`、`OutputIndexToBlockIdx`(映射 output_index→块序号)、usage、ResponseID/Model。\n\n事件转换：\n\n| Responses 事件 | 处理 | 产出 Anthropic 事件 |\n|----------------|------|---------------------|\n| `response.created` | 记录 id/model | `message_start`（仅一次）|\n| `output_item.added` (function_call) | 关闭当前块，开 tool_use 块 | `content_block_start{tool_use}` |\n| `output_item.added` (reasoning) | 关闭当前块，开 thinking 块 | `content_block_start{thinking}` |\n| `output_item.added` (message) | — | 无（等首个 text delta 再开块）|\n| `output_text.delta` | 必要时先开 text 块 | `content_block_start{text}?` + `content_block_delta{text_delta}` |\n| `output_text.done` | 关闭块 | `content_block_stop` |\n| `function_call_arguments.delta` | 累积/透传 | `content_block_delta{input_json_delta}` |\n| `function_call_arguments.done` | 收尾 | `content_block_delta{input_json_delta}?` + `content_block_stop` |\n| `reasoning_summary_text.delta` | — | `content_block_delta{thinking_delta}` |\n| `reasoning_summary_text.done` | 关闭块 | `content_block_stop` |\n| `output_item.done` (web_search_call completed) | 合成 | server_tool_use 块(start+stop) + web_search_tool_result 块(start+stop) |\n| `response.completed/done/incomplete/failed` | 收尾 | 关闭块 + `message_delta{stop_reason,usage}` + `message_stop` |\n\n`FinalizeResponsesAnthropicStream`：上游异常断开时补发 `message_delta`+`message_stop`（幂等）。\n\n> **特殊处理**：工具名为 `Read` 时参数增量被缓冲不立即下发（`CurrentToolHadDelta` 逻辑），在 done 时经 `sanitizeAnthropicToolUseInput` 清洗（去掉 `pages:\"\"`）后一次性下发，避免 Claude Code 读文件工具的空 pages 报错。\n\n### 5.2 Responses → Chat 流（`ResponsesEventToChatState`）\n\n状态：`ID`、`Model`、`SentRole`、`SawToolCall`、`SawText`、`Finalized`、`NextToolCallIndex`、`OutputIndexToToolIndex`、`IncludeUsage`、`Usage`。\n\n| Responses 事件 | 产出 Chat chunk |\n|----------------|-----------------|\n| `response.created` | role chunk(`delta{role:assistant}`，仅一次)|\n| `output_text.delta` | `delta{content}` |\n| `output_item.added`(function_call) | `delta{tool_calls:[{index,id,type,function.name}]}` |\n| `function_call_arguments.delta` | `delta{tool_calls:[{index,function.arguments}]}` |\n| `reasoning_summary_text.delta` | `delta{reasoning_content}` |\n| `response.completed/...` | finish chunk(`finish_reason`) + 可选 usage chunk |\n\n`finish_reason`：incomplete+max→`length`；有 tool_call→`tool_calls`；否则 `stop`。\n\n### 5.3 BufferedResponseAccumulator（非流式兜底）\n\n当上游以 SSE 推送但终止事件 `output` 为空时，累积 delta（text/reasoning/function_call），通过 `BuildOutput()` 重建 `[]ResponsesOutput`（顺序：reasoning→message→function_calls），再用 `SupplementResponseOutput` 回填到空 `resp.Output`。\n\n---\n\n## 6. 对接 Kiro 的建议\n\nKiro 底层是 Claude 模型，但走 AWS CodeWhisperer/Q streaming 私有协议。推荐做法：\n\n1. **定义 Kiro 协议结构体**（请求/响应/流式事件），放入新文件如 `kiro_to_responses.go`。\n2. **实现一对中枢转换**：\n   - `KiroToResponses(req) (*ResponsesRequest, error)` — 入站请求转中枢；\n   - `ResponsesToKiro...` / 流式 `ResponsesEventToKiro...` — 出站响应转 Kiro。\n   或者若 Kiro 入站就是 Anthropic 格式，直接复用 `AnthropicToResponses`，只需实现 Kiro 上游协议的「Responses ⇄ Kiro 上游」转换。\n3. **复用映射语义**：effort（注意 max↔xhigh）、tool_choice（any↔required）、call_id 原样保留、usage 的 cached_tokens 扣减、web_search 合成等规则与本文一致。\n4. **流式状态机**参照 `ResponsesEventToAnthropicState` 实现：维护块索引、output_index→块号映射、tool 参数缓冲与收尾。\n5. **接入点**：转换完成后挂到现有网关 forward 链路（参考 `OpenAIGatewayService.ForwardAsAnthropic`）。\n\n> 合规提醒：对受订阅协议约束的服务做逆向中转可能违反其使用条款，需自行评估法律与封号风险。"
+                  }
+                ],
+                "status": "success"
+              }
+            ]
+          },
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "82dd136e-2954-4e1c-9b50-780f4c70427f",
+          "content": "\n\n## PROTOCOLS_CN.md 总结\n\n这份文档描述了 **kiro2api 的三套 AI 协议转换机制**：\n\n### 核心架构\n- 以 **OpenAI Responses API** 作为「中枢格式」，所有协议互转都经过它，避免 N×N 两两转换\n- 支持：Anthropic Messages ↔ Responses ↔ OpenAI Chat Completions\n\n### 支持的协议\n1. **Responses**（中枢格式/Codex 格式）- 最新 OpenAI 格式，原生支持 reasoning、工具调用、多模态\n2. **Chat Completions**（老格式）- OpenAI 传统 API\n3. **Anthropic Messages** - Claude API\n\n### 关键映射规则\n| 方向 | 转换函数 |\n|------|----------|\n| Anthropic → Responses | `AnthropicToResponses` |\n| Responses → Anthropic | `ResponsesToAnthropic` |\n| Chat → Responses | `ChatCompletionsToResponses` |\n| Responses → Chat | `ResponsesToChatCompletions` |\n\n### 对接 Kiro 的建议\n- Kiro 底层是 Claude 模型，但走 AWS CodeWhisperer/Q streaming 私有协议\n- 只需实现 **Kiro ⇄ Responses** 一对转换，即可复用现有全部链路\n- 需注意：effort 映射（max↔xhigh）、tool_choice（any↔required）、call_id 保留、usage 计算等细节\n\n> 文档来源：`backend/internal/pkg/apicompat` 包源码",
+          "reasoningContent": {
+            "reasoningText": {
+              "text": "The user wants me to summarize the PROTOCOLS_CN.md file. Let me analyze what this document is about and provide a concise summary.\n\nThe document describes:\n1. An API compatibility layer that translates between 3 protocols: Anthropic Messages, OpenAI Chat Completions, and OpenAI Responses (the \"central\" format)\n2. All conversions go through the Responses format as a hub\n3. Detailed field mappings between protocols\n4. Streaming event handling\n5. Recommendations for integrating Kiro\n\nLet me provide a concise summary in Chinese since the user asked in Chinese.\n"
+            }
+          }
+        }
+      }
+    ],
+    "currentMessage": {
+      "userInputMessage": {
+        "content": "--- CONTEXT ENTRY BEGIN ---\nCurrent time: Sunday, 2026-05-31T09:36:13.077+08:00\n--- CONTEXT ENTRY END ---\n\n--- USER MESSAGE BEGIN ---\n我刚做了什么？\n--- USER MESSAGE END ---",
+        "userInputMessageContext": {
+          "envState": {
+            "operatingSystem": "macos",
+            "currentWorkingDirectory": "/Users/jgao"
+          },
+          "tools": [
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "pattern": {
+                        "description": "AST pattern (required for pattern_search/pattern_rewrite)",
+                        "type": "string"
+                      },
+                      "symbols": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "List of symbol names (required for lookup_symbols, max 10)"
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "Directory path (optional for search_symbols, generate_codebase_overview, search_codebase_map)"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "limit": {
+                        "type": "integer",
+                        "description": "Maximum results (optional)"
+                      },
+                      "file_path": {
+                        "type": "string",
+                        "description": "File path (required for get_document_symbols, optional for pattern_search/pattern_rewrite/search_codebase_map)"
+                      },
+                      "replacement": {
+                        "type": "string",
+                        "description": "Replacement pattern (required for pattern_rewrite)"
+                      },
+                      "operation": {
+                        "type": "string",
+                        "description": "The code intelligence operation to perform",
+                        "enum": [
+                          "search_symbols",
+                          "lookup_symbols",
+                          "get_document_symbols",
+                          "pattern_search",
+                          "pattern_rewrite",
+                          "generate_codebase_overview",
+                          "search_codebase_map"
+                        ]
+                      },
+                      "symbol_name": {
+                        "description": "Symbol name (required for search_symbols)",
+                        "type": "string"
+                      },
+                      "language": {
+                        "description": "Programming language (required for pattern_search/pattern_rewrite, optional for search_symbols)",
+                        "type": "string"
+                      },
+                      "top_level_only": {
+                        "description": "Only return top-level symbols (optional for get_document_symbols)",
+                        "type": "boolean"
+                      },
+                      "include_source": {
+                        "description": "Include source code in results (optional for lookup_symbols)",
+                        "type": "boolean"
+                      },
+                      "dry_run": {
+                        "default": true,
+                        "type": "boolean",
+                        "description": "Preview changes without writing (optional for pattern_rewrite). After reviewing dry-run results, call again with dry_run=false to apply."
+                      }
+                    },
+                    "required": [
+                      "operation"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "name": "code",
+                "description": "\nCode intelligence with AST parsing and fuzzy search. Language auto-detected from file extension.\n\nCORE FEATURES:\n• Fuzzy search for symbols (classes, functions, methods)\n• Extracts function/class signatures via AST\n• Structural AST search and rewrite (ast-grep)\n• Codebase overview and directory exploration\n\nNOTE: LSP operations (find_references, goto_definition, get_hover, get_completions, get_diagnostics, rename_symbol) require LSP initialization.\n\n## Available Operations\n- search_symbols: Find symbol definitions by name\n- lookup_symbols: Batch lookup specific symbols\n- get_document_symbols: List all symbols in a file\n- pattern_search: AST-based structural search\n- pattern_rewrite: AST-based code transformation\n- generate_codebase_overview: High-level codebase structure\n- search_codebase_map: Focused directory exploration\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "path": {
+                        "description": "Root directory to search from. Defaults to current working directory",
+                        "type": "string"
+                      },
+                      "max_depth": {
+                        "type": "integer",
+                        "description": "Maximum directory depth to traverse"
+                      },
+                      "pattern": {
+                        "type": "string",
+                        "description": "Glob pattern, e.g. '**/*.rs', 'src/**/*.{ts,tsx}'"
+                      },
+                      "limit": {
+                        "description": "Maximum number of results to return",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object",
+                    "required": [
+                      "pattern"
+                    ]
+                  }
+                },
+                "name": "glob",
+                "description": "\nFind files and directories whose paths match a glob pattern. Respects .gitignore.\n\nWHEN TO USE:\n- Finding files by name pattern (e.g., \"*.rs\", \"**/*.tsx\")\n- Discovering project structure\n- Listing files in specific directories\n\nHOW TO USE:\n- Provide a glob pattern to match files\n- Optionally specify a root directory to search from\n- Optionally specify a limit on results and max depth\n\nPATTERNS:\n- \"*.rs\" - All .rs files in current directory\n- \"**/*.rs\" - All .rs files recursively\n- \"src/**/*.{ts,tsx}\" - All TypeScript files under src/\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "case_sensitive": {
+                        "description": "Case-sensitive search, defaults to false",
+                        "type": "boolean"
+                      },
+                      "output_mode": {
+                        "description": "Output format: content (default), files_with_matches, or count",
+                        "enum": [
+                          "content",
+                          "files_with_matches",
+                          "count"
+                        ],
+                        "type": "string"
+                      },
+                      "max_total_lines": {
+                        "type": "integer",
+                        "description": "Maximum total lines in output (content mode only)"
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "max_depth": {
+                        "description": "Maximum directory depth to traverse",
+                        "type": "integer"
+                      },
+                      "max_files": {
+                        "description": "Maximum number of files to include in results",
+                        "type": "integer"
+                      },
+                      "pattern": {
+                        "type": "string",
+                        "description": "Regex pattern to search for"
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "Directory to search from, defaults to current working directory"
+                      },
+                      "include": {
+                        "type": "string",
+                        "description": "File filter glob, e.g. '*.rs', '*.{ts,tsx}'"
+                      },
+                      "max_matches_per_file": {
+                        "type": "integer",
+                        "description": "Maximum matches to return per file (content mode only)"
+                      }
+                    },
+                    "required": [
+                      "pattern"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "name": "grep",
+                "description": "\nFast text pattern search in files using regex. Respects .gitignore.\n\nWHEN TO USE:\n- Searching for literal text patterns, error messages, TODOs, config values\n- Finding files containing specific text\n\nWHEN NOT TO USE:\n- For semantic code understanding, use the code tool instead\n- For finding symbol definitions or usages, use the code tool\n\nHOW TO USE:\n- Provide a regex pattern to search for\n- Optionally specify a path to search from (defaults to current directory)\n- Optionally specify a file filter glob (e.g., \"*.rs\", \"*.{ts,tsx}\")\n\nOUTPUT MODES:\n- content: Show matching lines with file path and line number (default)\n- files_with_matches: Only show file paths that contain matches\n- count: Show count of matches per file\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "doc_path": {
+                        "description": "Path to a specific doc to retrieve (e.g., \"features/tangent-mode.md\"). Use this to get full content of a doc from the index.",
+                        "type": "string"
+                      },
+                      "query": {
+                        "type": "string",
+                        "description": "The user's question about this assistant's usage, features, or capabilities"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      }
+                    },
+                    "required": [],
+                    "type": "object"
+                  }
+                },
+                "name": "introspect",
+                "description": "\nLook up documentation about this chat application's own features, slash commands, settings, or capabilities.\n\nWHEN TO USE:\n- User asks about this assistant's features, commands, or settings\n- User wants to know what slash commands are available\n- User asks how to use a specific feature of this chat application\n\nWHEN NOT TO USE:\n- General coding questions, AWS help, or tasks the user wants you to perform\n- Questions unrelated to this chat application itself\n\nHOW TO USE:\n- Provide a query to search the documentation\n- Or provide a doc_path to retrieve a specific document\n- When mentioning commands in your response, always prefix them with '/' (e.g., '/chat save', '/chat load', '/context')\n- CRITICAL: Only provide information explicitly documented. If details are not documented, clearly state the information is not available rather than generating assumptions.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "command"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "offset": {
+                        "type": "integer",
+                        "description": "Number of results to skip for pagination. Optional for 'search' operations."
+                      },
+                      "sort_by": {
+                        "enum": [
+                          "relevance",
+                          "path",
+                          "name"
+                        ],
+                        "type": "string",
+                        "description": "Sort order for search results. Options: 'relevance' (default, by similarity score), 'path' or 'name' (alphabetically by file path). Optional for 'search' operations."
+                      },
+                      "snippet_length": {
+                        "type": "integer",
+                        "description": "Maximum character length for text snippets in results. Text longer than this will be truncated. Optional for 'search' operations."
+                      },
+                      "context_id": {
+                        "type": "string",
+                        "description": "The unique context identifier for targeted operations. Can be obtained from 'show' command. Used for 'remove', 'update', and 'search' operations to specify which context to operate on."
+                      },
+                      "command": {
+                        "description": "The knowledge operation to perform:\n- 'show': List all knowledge contexts (no additional parameters required)\n- 'add': Add content to knowledge base (requires 'name' and 'value')\n- 'remove': Remove content from knowledge base (requires one of: 'name', 'context_id', or 'path')\n- 'clear': Remove all knowledge contexts.\n- 'search': Search across knowledge contexts (requires 'query', optional: 'context_id', 'limit', 'offset', 'snippet_length', 'sort_by', 'file_type')\n- 'update': Update existing context with new content (requires 'path' and one of: 'name', 'context_id')\n- 'status': Show background operation status and progress\n- 'cancel': Cancel background operations (optional 'operation_id' to cancel specific operation, or cancel all if not provided)",
+                        "type": "string",
+                        "enum": [
+                          "show",
+                          "add",
+                          "remove",
+                          "clear",
+                          "search",
+                          "update",
+                          "status",
+                          "cancel"
+                        ]
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "File or directory path. Used in 'remove' operations to remove contexts by their source path, and required for 'update' operations to specify the new content location."
+                      },
+                      "limit": {
+                        "type": "integer",
+                        "description": "Maximum number of search results to return, use default value unless required more results or focused search. Optional for 'search' operations."
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "operation_id": {
+                        "description": "Optional operation ID to cancel a specific operation. Used with 'cancel' command. If not provided, all active operations will be cancelled. Can be either the full operation ID or the short 8-character ID.",
+                        "type": "string"
+                      },
+                      "file_type": {
+                        "type": "string",
+                        "description": "Filter results by file type (e.g., 'Code', 'Markdown', 'Text'). Optional for 'search' operations."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "A descriptive name for the knowledge context. Required for 'add' operations. Can be used for 'remove' and 'update' operations to identify the context."
+                      },
+                      "value": {
+                        "description": "The content to store in knowledge base. Required for 'add' operations. Can be either text content or a file/directory path. If it's a valid file or directory path, the content will be indexed; otherwise it's treated as text.",
+                        "type": "string"
+                      },
+                      "query": {
+                        "description": "The search query string. Required for 'search' operations. Performs semantic search across knowledge contexts to find relevant content.",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "name": "knowledge",
+                "description": "A tool for indexing and searching content across chat sessions using semantic search.\n\n## Overview\nThis tool enables persistent storage and retrieval of information using semantic search (MiniLLM) or keyword search (BM25). Content remains available across sessions for later use.\n\n## When to use\n- When users ask to query your knowledge bases or kbs\n- When you need to search previously indexed content\n- When users request to index new content (code, markdown, CSV, PDF, and other text file formats)\n- When exploring unfamiliar content to find relevant information\n- When users ask about topics that might be in indexed knowledge bases\n\n## When not to use\n- When content has not been indexed yet and user hasn't requested indexing\n- When you need real-time or external information not in the knowledge base\n\n## Notes\n- Use 'show' command to list available knowledge bases before searching\n- Search can target specific knowledge bases (context_id) or all knowledge bases\n- Use default limit values unless specifically needed; fewer results for focused search\n- Pagination available via offset parameter for large result sets\n- 'add' command indexes new content; 'update' command refreshes existing knowledge bases\n- Unless there is a clear reason to modify the search query, use the user's original wording for better semantic matching"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "operations"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "operations": {
+                        "type": "array",
+                        "minItems": 1,
+                        "description": "Array of operations to execute. Provide one element for single operation, multiple for batch.",
+                        "items": {
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "description": "Path to the file or directory (required for Line, Directory modes)."
+                            },
+                            "image_paths": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "List of paths to the images. Required for Image mode."
+                            },
+                            "limit": {
+                              "description": "Number of lines to read (optional, for Line mode).",
+                              "type": "integer"
+                            },
+                            "depth": {
+                              "type": "integer",
+                              "description": "Depth of a recursive directory listing (optional, for Directory mode).",
+                              "default": 0
+                            },
+                            "exclude_patterns": {
+                              "type": "array",
+                              "default": [
+                                "node_modules",
+                                ".git",
+                                "dist",
+                                "build",
+                                "out",
+                                ".cache",
+                                "target"
+                              ],
+                              "description": "Glob patterns to exclude from directory listing (optional, for Directory mode). If omitted, uses defaults.",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "mode": {
+                              "type": "string",
+                              "enum": [
+                                "Line",
+                                "Directory",
+                                "Image"
+                              ],
+                              "description": "The operation mode to run in: `Line` and `Directory` are for text files and directories respectively. `Image` is for image files, in this mode `image_paths` is required."
+                            },
+                            "offset": {
+                              "description": "Line offset from the start of the file to start reading from (optional, for Line mode).",
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "mode"
+                          ],
+                          "type": "object"
+                        }
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "name": "read",
+                "description": "Tool for reading files, directories and images. Always provide an 'operations' array.\n\nFor single operation: provide array with one element.\nFor batch operations: provide array with multiple elements.\n\nAvailable modes:\n- Line: Read lines from a file\n- Directory: List directory contents\n- Image: Read and process images\n\nExamples:\n1. Single: {\"operations\": [{\"mode\": \"Line\", \"path\": \"/file.txt\"}]}\n2. Batch: {\"operations\": [{\"mode\": \"Line\", \"path\": \"/file1.txt\"}, {\"mode\": \"Directory\", \"path\": \"/src\"}]}\n3. Image: {\"operations\": [{\"mode\": \"Image\", \"image_paths\": [\"/path/to/image.png\"]}]}"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "command"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "working_dir": {
+                        "description": "Optional working directory for command execution. If not specified, uses the current working directory.",
+                        "type": "string"
+                      },
+                      "command": {
+                        "type": "string",
+                        "description": "Command to execute"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      }
+                    }
+                  }
+                },
+                "name": "shell",
+                "description": "\nA tool for executing bash commands.\n\nWHEN TO USE THIS TOOL:\n- Use only as a last-resort when no other available tool can accomplish the task\n\nHOW TO USE:\n- Provide the command to execute\n- Use the `working_dir` argument to execute a command in another directory (defaults to current working directory)\n\nLIMITATIONS:\n- Does not respect user's bash profile or aliases\n\nTIPS:\n- Use the fileRead and fileWrite tools for reading and modifying files\n- NEVER prefix commands with cd to execute a command in another directory. Use the `working_dir` argument instead\n\nRESULT FIELDS:\n- `stdout`, `stderr`, `exit_status` — standard command output fields.\n- `agent_notes` (optional) — instructions or context sent to you by the command via a side channel\n  that is independent of stdout/stderr. If present, read and follow these notes before acting on\n  the result.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "task": {
+                        "type": "string",
+                        "description": "Overall task description"
+                      },
+                      "mode": {
+                        "enum": [
+                          "blocking"
+                        ],
+                        "description": "Execution mode: 'blocking' (wait for completion)",
+                        "type": "string"
+                      },
+                      "stages": {
+                        "items": {
+                          "properties": {
+                            "role": {
+                              "type": "string",
+                              "enum": [
+                                "Jgao",
+                                "Jgao",
+                                "kiro_default",
+                                "kiro_planner",
+                                "kiro_guide"
+                              ],
+                              "description": "Agent to use for this stage. Available agents:\n- Jgao: 自定义默认Agent\n- Jgao: 自定义默认Agent\n- kiro_default: The default agent for Kiro CLI\n- kiro_planner: Specialized planning agent that helps break down ideas into implementation plans\n- kiro_guide: Guide agent that answers questions about Kiro CLI features using documentation"
+                            },
+                            "prompt_template": {
+                              "type": "string",
+                              "description": "Task for this stage. Use {task} to reference the overall task."
+                            },
+                            "depends_on": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "model": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object",
+                          "required": [
+                            "name",
+                            "role",
+                            "prompt_template"
+                          ]
+                        },
+                        "type": "array"
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "task",
+                      "stages"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "name": "subagent",
+                "description": "\nSpawn and coordinate multiple AI agents in a pipeline (DAG). Each stage runs as a\npersistent session. Stages with no depends_on start immediately in parallel.\n\nMODES:\n- background (not yet implemented): Fire-and-forget. Returns immediately, results arrive in inbox.\n- blocking (default): Waits for all stages to complete, returns consolidated results.\n\nUSE THIS when you need multi-step work with specialized agents:\n- Research → Implement → Review pipelines\n- Parallel research tracks that feed into a single implementer\n- Any workflow where stages have dependencies\n\nEach stage becomes a session you can monitor via ctrl+g in the TUI.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "required": [
+                      "command"
+                    ],
+                    "properties": {
+                      "task_list_description": {
+                        "description": "Required parameter of `create` command containing a BRIEF summary of the task list being created. The summary should be detailed enough to refer to without knowing the problem context beforehand.",
+                        "type": "string"
+                      },
+                      "completed_task_ids": {
+                        "description": "Required parameter of `complete` command containing the IDs of EVERY completed task. Each task should be marked as completed IMMEDIATELY after it is finished.",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "modified_files": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array",
+                        "description": "Optional parameter of `complete` command containing a list of paths of files that were modified during the task. This is useful for tracking file changes that are important to the task."
+                      },
+                      "new_description": {
+                        "description": "Optional parameter of `add` and `remove` containing a new task list description. Use this when the updated set of tasks significantly change the goal or overall procedure of the task list.",
+                        "type": "string"
+                      },
+                      "new_tasks": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "task_description": {
+                              "description": "The main task description",
+                              "type": "string"
+                            },
+                            "details": {
+                              "type": "string",
+                              "description": "Optional detailed information about the task"
+                            }
+                          },
+                          "required": [
+                            "task_description"
+                          ]
+                        },
+                        "type": "array",
+                        "description": "Required parameter of `add` command containing a list of new tasks to be added to the task list."
+                      },
+                      "remove_task_ids": {
+                        "description": "Required parameter of `remove` command containing the IDs of tasks to remove.",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "command": {
+                        "description": "The command to run. Allowed options are `create`, `complete`, `add`, `remove`, and `list`. Call `list` without arguments to see a list of all current tasks.",
+                        "enum": [
+                          "create",
+                          "complete",
+                          "add",
+                          "remove",
+                          "list"
+                        ],
+                        "type": "string"
+                      },
+                      "tasks": {
+                        "items": {
+                          "required": [
+                            "task_description"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "task_description": {
+                              "type": "string",
+                              "description": "The main task description"
+                            },
+                            "details": {
+                              "type": "string",
+                              "description": "Optional detailed information about the task"
+                            }
+                          }
+                        },
+                        "description": "Required parameter of `create` command containing the list of DISTINCT tasks to be added to the task list.",
+                        "type": "array"
+                      },
+                      "context_update": {
+                        "description": "Required parameter of `complete` command containing important task context. Use this command to track important information about the task AND information about files you have read.",
+                        "type": "string"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      }
+                    }
+                  }
+                },
+                "name": "todo_list",
+                "description": "A tool for creating a task list and keeping track of tasks. This tool should be requested EVERY time the user gives you a task that will take multiple steps. A task list should be made BEFORE executing any steps. Steps should be marked off AS YOU COMPLETE THEM. DO NOT display your own tasks or task list AT ANY POINT; this is done for you. Complete the tasks in the same order that you provide them. If the user tells you to skip a step, DO NOT mark it as completed."
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "properties": {
+                      "operation_name": {
+                        "type": "string",
+                        "description": "The name of the operation to perform."
+                      },
+                      "parameters": {
+                        "description": "The parameters for the operation. The parameter keys MUST conform to the AWS CLI specification. You should prefer to use JSON Syntax over shorthand syntax wherever possible. For parameters that are booleans, prioritize using flags with no value. Denote these flags with flag names as key and an empty string as their value. You should also prefer kebab case.",
+                        "type": "object"
+                      },
+                      "profile_name": {
+                        "type": "string",
+                        "description": "Optional: AWS profile name to use from ~/.aws/credentials. Defaults to default profile if not specified."
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Human readable description of the api that is being called."
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "region": {
+                        "type": "string",
+                        "description": "Region name for calling the operation on AWS."
+                      },
+                      "positional_args": {
+                        "description": "Positional arguments for high-level commands (e.g., s3 cp, s3 mv, s3 sync, s3 rm). These are passed directly without -- prefix. Use this for source/destination paths in S3 commands.",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "service_name": {
+                        "type": "string",
+                        "description": "The name of the AWS service. If you want to query s3, you should use s3api if possible. Must not start with a dash (-)."
+                      }
+                    },
+                    "required": [
+                      "region",
+                      "service_name",
+                      "operation_name",
+                      "label"
+                    ]
+                  }
+                },
+                "name": "use_aws",
+                "description": "\nMake an AWS CLI api call with the specified service, operation, and parameters. All arguments MUST conform to the AWS CLI specification. Should the output of the invocation indicate a malformed command, invoke help to obtain the the correct command.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "description": "URL to fetch content from",
+                        "type": "string"
+                      },
+                      "search_terms": {
+                        "type": "string",
+                        "description": "Optional: Keywords to find in selective mode. Returns ~10 lines before and after matches."
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "mode": {
+                        "description": "Extraction mode: 'selective' for smart extraction (default), 'truncated' for first 8000 chars, 'full' for complete content",
+                        "enum": [
+                          "selective",
+                          "truncated",
+                          "full"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ]
+                  }
+                },
+                "name": "web_fetch",
+                "description": "\nFetch and extract content from a specific URL. Supports three modes: 'selective' (default, extracts relevant sections around search terms), 'truncated' (first 8000 chars), 'full' (complete content).\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "query": {
+                        "type": "string",
+                        "description": "Search query (max 200 chars) - use concise keywords, not full sentences",
+                        "maxLength": 200
+                      }
+                    },
+                    "type": "object",
+                    "required": [
+                      "query"
+                    ]
+                  }
+                },
+                "name": "web_search",
+                "description": "\nWebSearch looks up information that is outside the model's training data or cannot be reliably inferred from the current codebase/context.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "insertLine": {
+                        "description": "Optional parameter of `insert` command. Line is 0-indexed. `content` will be inserted at the provided line. If not provided, content will be inserted at the end of the file on a new line, inserting a newline at the end of the file if it is missing.",
+                        "type": "integer"
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "Required parameter of `create` and `insert` commands."
+                      },
+                      "path": {
+                        "description": "Path to the file",
+                        "type": "string"
+                      },
+                      "newStr": {
+                        "description": "Required parameter of `strReplace` command containing the new string.",
+                        "type": "string"
+                      },
+                      "command": {
+                        "enum": [
+                          "create",
+                          "strReplace",
+                          "insert"
+                        ],
+                        "description": "The commands to run. Allowed options are: `create`, `strReplace`, `insert`",
+                        "type": "string"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "oldStr": {
+                        "type": "string",
+                        "description": "Required parameter of `strReplace` command containing the string in `path` to replace."
+                      },
+                      "replaceAll": {
+                        "description": "Optional parameter of `strReplace` command. Default is false. When true, all instances of `oldStr` will be replaced with `newStr`.",
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object",
+                    "required": [
+                      "command",
+                      "path"
+                    ]
+                  }
+                },
+                "name": "write",
+                "description": "\nA tool for creating and editing text files.\n\nWHEN TO USE THIS TOOL:\n- Use when you need to create a new file, or modify an existing file\n- Perfect for updating text-based file formats\n\nHOW TO USE:\n- Provide the path to the file you want to create or modify\n- Specify the operation to perform: one of `create`, `strReplace`, or `insert`\n- Use `create` to create a new file. Required parameter is `content`. Parent directories will be created if they are missing.\n- Use `strReplace` to replace and update the content of an existing file.\n- Use `insert` to insert content at a specific line, or append content to the end of a file.\n\nTIPS:\n- To append content to the end of a file, use `insert` with no `insert_line`\n"
+              }
+            }
+          ]
+        },
+        "origin": "KIRO_CLI",
+        "modelId": "minimax-m2.5"
+      }
+    },
+    "chatTriggerType": "MANUAL",
+    "agentTaskType": "vibe"
+  },
+  "profileArn": "arn:aws:codewhisperer:us-east-1:471112993982:profile/GMAUN4KMEDEV"
+}

@@ -1,0 +1,887 @@
+POST / HTTP/1.1
+content-type: application/x-amz-json-1.0
+x-amz-target: AmazonCodeWhispererStreamingService.GenerateAssistantResponse
+content-length: 40529
+user-agent: aws-sdk-rust/1.3.16 ua/2.1 api/codewhispererstreaming/0.1.16551 os/macos lang/rust/1.92.0 md/appVersion-2.4.1 app/AmazonQ-For-CLI
+x-amz-user-agent: aws-sdk-rust/1.3.16 ua/2.1 api/codewhispererstreaming/0.1.16551 os/macos lang/rust/1.92.0 m/F app/AmazonQ-For-CLI
+x-amzn-codewhisperer-optout: true
+authorization: Bearer aoaAAAAAGobnRU6VnfGywgRvv8ifHjV7dIfkdlaM7PEKZkPjSbseulXyimxZk2rmSrwavc4Qzg9bV0gXXoCLFyKjUCbe0:MGQCMHmsEYEwNhUCgLLmzBLkCVEk5BjZ0qKRpHj7OQQeKdjO0UnUdnMTZAoOseJiWqUa9wIwS9GuqbVv4lP5a6a0p4zQCKBWZZy4dV8vLOAAJxc8m6Ls0WglD3BOywgiLUVciIRx
+amz-sdk-request: attempt=1; max=3
+amz-sdk-invocation-id: a2aa127d-3f79-4236-9d7c-9bd0824262df
+accept: */*
+accept-encoding: gzip
+host: q.us-east-1.amazonaws.com
+
+{
+  "conversationState": {
+    "conversationId": "706309e2-e1c2-4468-82f7-44b36728988e",
+    "history": [
+      {
+        "userInputMessage": {
+          "content": "\nThe current model is minimax-m2.5.\n",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "content": "I will fully incorporate this information when generating my responses, and explicitly acknowledge relevant parts of the summary when answering questions."
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "--- CONTEXT ENTRY BEGIN ---\nCurrent time: Sunday, 2026-05-31T09:31:06.862+08:00\n--- CONTEXT ENTRY END ---\n\n--- USER MESSAGE BEGIN ---\n你好\n--- USER MESSAGE END ---",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "564576ec-86b0-4768-bfca-59d113fb10c1",
+          "content": "你好！有什么我可以帮助你的吗？无论是代码、开发问题还是其他技术相关的任务，随时可以告诉我。"
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "--- CONTEXT ENTRY BEGIN ---\nCurrent time: Sunday, 2026-05-31T09:31:51.213+08:00\n--- CONTEXT ENTRY END ---\n\n--- USER MESSAGE BEGIN ---\n看一下https://github.com/caidaoli/kiro2api 这个项目是干嘛的？\n--- USER MESSAGE END ---",
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "b6e1ee3d-b24b-45e2-8ae8-979904a3d306",
+          "content": "",
+          "toolUses": [
+            {
+              "toolUseId": "tooluse_8pVyEPWJfQPUH7evfiSVCc",
+              "name": "web_fetch",
+              "input": {
+                "url": "https://github.com/caidaoli/kiro2api",
+                "mode": "truncated"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "",
+          "userInputMessageContext": {
+            "toolResults": [
+              {
+                "toolUseId": "tooluse_8pVyEPWJfQPUH7evfiSVCc",
+                "content": [
+                  {
+                    "text": "[Skip to content][1]\n\n## Navigation Menu\n\nToggle navigation\n[ Sign in ][2]\nAppearance settings\n* Platform\n  * AI CODE CREATION\n    * [\n      GitHub CopilotWrite better code with AI\n      ][3]\n    * [\n      GitHub SparkBuild and deploy intelligent apps\n      ][4]\n    * [\n      GitHub ModelsManage and compare prompts\n      ][5]\n    * [\n      MCP Registry^{New}Integrate external tools\n      ][6]\n  * DEVELOPER WORKFLOWS\n    * [\n      ActionsAutomate any workflow\n      ][7]\n    * [\n      CodespacesInstant dev environments\n      ][8]\n    * [\n      IssuesPlan and track work\n      ][9]\n    * [\n      Code ReviewManage code changes\n      ][10]\n  * APPLICATION SECURITY\n    * [\n      GitHub Advanced SecurityFind and fix vulnerabilities\n      ][11]\n    * [\n      Code securitySecure your code as you build\n      ][12]\n    * [\n      Secret protectionStop leaks before they start\n      ][13]\n  * EXPLORE\n    * [Why GitHub][14]\n    * [Documentation][15]\n    * [Blog][16]\n    * [Changelog][17]\n    * [Marketplace][18]\n  [View all features][19]\n* Solutions\n  * BY COMPANY SIZE\n    * [Enterprises][20]\n    * [Small and medium teams][21]\n    * [Startups][22]\n    * [Nonprofits][23]\n  * BY USE CASE\n    * [App Modernization][24]\n    * [DevSecOps][25]\n    * [DevOps][26]\n    * [CI/CD][27]\n    * [View all use cases][28]\n  * BY INDUSTRY\n    * [Healthcare][29]\n    * [Financial services][30]\n    * [Manufacturing][31]\n    * [Government][32]\n    * [View all industries][33]\n  [View all solutions][34]\n* Resources\n  * EXPLORE BY TOPIC\n    * [AI][35]\n    * [Software Development][36]\n    * [DevOps][37]\n    * [Security][38]\n    * [View all topics][39]\n  * EXPLORE BY TYPE\n    * [Customer stories][40]\n    * [Events & webinars][41]\n    * [Ebooks & reports][42]\n    * [Business insights][43]\n    * [GitHub Skills][44]\n  * SUPPORT & SERVICES\n    * [Documentation][45]\n    * [Customer support][46]\n    * [Community forum][47]\n    * [Trust center][48]\n    * [Partners][49]\n  [View all resources][50]\n* Open Source\n  * COMMUNITY\n    * [\n      GitHub SponsorsFund open source developers\n      ][51]\n  * PROGRAMS\n    * [Security Lab][52]\n    * [Maintainer Community][53]\n    * [Accelerator][54]\n    * [GitHub Stars][55]\n    * [Archive Program][56]\n  * REPOSITORIES\n    * [Topics][57]\n    * [Trending][58]\n    * [Collections][59]\n* Enterprise\n  * ENTERPRISE SOLUTIONS\n    * [\n      Enterprise platformAI-powered developer platform\n      ][60]\n  * AVAILABLE ADD-ONS\n    * [\n      GitHub Advanced SecurityEnterprise-grade security features\n      ][61]\n    * [\n      Copilot for BusinessEnterprise-grade AI features\n      ][62]\n    * [\n      Premium SupportEnterprise-grade 24/7 support\n      ][63]\n* [Pricing][64]\nSearch or jump to...\n\n# Search code, repositories, users, issues, pull requests...\n\nSearch\nClear\n[Search syntax tips][65]\n\n# Provide feedback\n\nWe read every piece of feedback, and take your input very seriously.\n\nInclude my email address so I can be contacted\nCancel Submit feedback\n\n# Saved searches\n\n## Use saved searches to filter your results more quickly\n\nName\nQuery\n\nTo see all available qualifiers, see our [documentation][66].\n\nCancel Create saved search\n[ Sign in ][67]\n[ Sign up ][68]\nAppearance settings\nResetting focus\nYou signed in with another tab or window. [Reload][69] to refresh your session. You signed out in another tab or window. [Reload][70] to refresh your session. You switched accounts on another tab or window. [Reload][71] to refresh your session. Dismiss alert\n[ caidaoli ][72] / ** [kiro2api][73] ** Public\n* [ Notifications ][74] You must be signed in to change notification settings\n* [ Fork 189 ][75]\n* [ Star 610 ][76]\n* [ Code ][77]\n* [ Issues 7 ][78]\n* [ Pull requests 4 ][79]\n* [ Actions ][80]\n* [ Projects ][81]\n* [ Security and quality 0 ][82]\n* [ Insights ][83]\nAdditional navigation options\n* [ Code ][84]\n* [ Issues ][85]\n* [ Pull requests ][86]\n* [ Actions ][87]\n* [ Projects ][88]\n* [ Security and quality ][89]\n* [ Insights ][90]\n\n# caidaoli/kiro2api\n\nmain\n[Branches][91][Tags][92]\nGo to file\nCode\nOpen more actions menu\n\n## Folders and files\n\n─────────────────────────────┬─────────────────────────────┬───────────────────┬────────────────\nName                         │Name                         │Last commit message│Last commit date\n─────────────────────────────┴─────────────────────────────┴───────────────────┴────────────────\n## Latest commit                                           \n                                                           \n## History                                                 \n                                                           \n[224 Commits][93]                                          \n[][94]224 Commits                                          \n─────────────────────────────┬─────────────────────────────┬───────────────────┬────────────────\n[.github/workflows][95]      │[.github/workflows][96]      │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[auth][97]                   │[auth][98]                   │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[config][99]                 │[config][100]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[converter][101]             │[converter][102]             │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[doc][103]                   │[doc][104]                   │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[logger][105]                │[logger][106]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[parser][107]                │[parser][108]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[server][109]                │[server][110]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[static][111]                │[static][112]                │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[types][113]                 │[types][114]                 │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[utils][115]                 │[utils][116]                 │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[.dockerignore][117]         │[.dockerignore][118]         │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[.env.example][119]          │[.env.example][120]          │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[.gitignore][121]            │[.gitignore][122]            │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[CLAUDE.md][123]             │[CLAUDE.md][124]             │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[Dockerfile][125]            │[Dockerfile][126]            │                   │                \n─────────────────────────────┼─────────────────────────────┼───────────────────┼────────────────\n[README.md][127]             │[README.md][128]             │             [Content truncated - showing first 8000 characters]"
+                  }
+                ],
+                "status": "success"
+              }
+            ]
+          },
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "8ce081e3-9667-499f-931a-bf6ee043c386",
+          "content": "让我获取 README 的具体内容：",
+          "toolUses": [
+            {
+              "toolUseId": "tooluse_gqrcoTC9KEZfw4Ghyll1Pm",
+              "name": "web_fetch",
+              "input": {
+                "url": "https://raw.githubusercontent.com/caidaoli/kiro2api/main/README.md",
+                "mode": "selective"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "userInputMessage": {
+          "content": "",
+          "userInputMessageContext": {
+            "toolResults": [
+              {
+                "toolUseId": "tooluse_gqrcoTC9KEZfw4Ghyll1Pm",
+                "content": [
+                  {
+                    "text": "Tool use was cancelled by the user"
+                  }
+                ],
+                "status": "error"
+              }
+            ]
+          },
+          "origin": "KIRO_CLI"
+        }
+      },
+      {
+        "assistantResponseMessage": {
+          "messageId": "ab469624-2c67-4411-86fc-414279ff2d86",
+          "content": "Tool uses were interrupted, waiting for the next user prompt"
+        }
+      }
+    ],
+    "currentMessage": {
+      "userInputMessage": {
+        "content": "--- CONTEXT ENTRY BEGIN ---\nCurrent time: Sunday, 2026-05-31T09:34:40.062+08:00\n--- CONTEXT ENTRY END ---\n\n--- USER MESSAGE BEGIN ---\n把你整理的信息，保存到/Users/jgao/Git/kiro2api/docs 目录。\n--- USER MESSAGE END ---",
+        "userInputMessageContext": {
+          "envState": {
+            "operatingSystem": "macos",
+            "currentWorkingDirectory": "/Users/jgao"
+          },
+          "tools": [
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "operation"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "language": {
+                        "type": "string",
+                        "description": "Programming language (required for pattern_search/pattern_rewrite, optional for search_symbols)"
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "file_path": {
+                        "type": "string",
+                        "description": "File path (required for get_document_symbols, optional for pattern_search/pattern_rewrite/search_codebase_map)"
+                      },
+                      "limit": {
+                        "type": "integer",
+                        "description": "Maximum results (optional)"
+                      },
+                      "replacement": {
+                        "description": "Replacement pattern (required for pattern_rewrite)",
+                        "type": "string"
+                      },
+                      "top_level_only": {
+                        "description": "Only return top-level symbols (optional for get_document_symbols)",
+                        "type": "boolean"
+                      },
+                      "include_source": {
+                        "type": "boolean",
+                        "description": "Include source code in results (optional for lookup_symbols)"
+                      },
+                      "symbol_name": {
+                        "type": "string",
+                        "description": "Symbol name (required for search_symbols)"
+                      },
+                      "symbols": {
+                        "description": "List of symbol names (required for lookup_symbols, max 10)",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "Directory path (optional for search_symbols, generate_codebase_overview, search_codebase_map)"
+                      },
+                      "operation": {
+                        "enum": [
+                          "search_symbols",
+                          "lookup_symbols",
+                          "get_document_symbols",
+                          "pattern_search",
+                          "pattern_rewrite",
+                          "generate_codebase_overview",
+                          "search_codebase_map"
+                        ],
+                        "description": "The code intelligence operation to perform",
+                        "type": "string"
+                      },
+                      "pattern": {
+                        "type": "string",
+                        "description": "AST pattern (required for pattern_search/pattern_rewrite)"
+                      },
+                      "dry_run": {
+                        "type": "boolean",
+                        "description": "Preview changes without writing (optional for pattern_rewrite). After reviewing dry-run results, call again with dry_run=false to apply.",
+                        "default": true
+                      }
+                    }
+                  }
+                },
+                "name": "code",
+                "description": "\nCode intelligence with AST parsing and fuzzy search. Language auto-detected from file extension.\n\nCORE FEATURES:\n• Fuzzy search for symbols (classes, functions, methods)\n• Extracts function/class signatures via AST\n• Structural AST search and rewrite (ast-grep)\n• Codebase overview and directory exploration\n\nNOTE: LSP operations (find_references, goto_definition, get_hover, get_completions, get_diagnostics, rename_symbol) require LSP initialization.\n\n## Available Operations\n- search_symbols: Find symbol definitions by name\n- lookup_symbols: Batch lookup specific symbols\n- get_document_symbols: List all symbols in a file\n- pattern_search: AST-based structural search\n- pattern_rewrite: AST-based code transformation\n- generate_codebase_overview: High-level codebase structure\n- search_codebase_map: Focused directory exploration\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string",
+                        "description": "Root directory to search from. Defaults to current working directory"
+                      },
+                      "max_depth": {
+                        "description": "Maximum directory depth to traverse",
+                        "type": "integer"
+                      },
+                      "pattern": {
+                        "type": "string",
+                        "description": "Glob pattern, e.g. '**/*.rs', 'src/**/*.{ts,tsx}'"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "limit": {
+                        "type": "integer",
+                        "description": "Maximum number of results to return"
+                      }
+                    },
+                    "required": [
+                      "pattern"
+                    ]
+                  }
+                },
+                "name": "glob",
+                "description": "\nFind files and directories whose paths match a glob pattern. Respects .gitignore.\n\nWHEN TO USE:\n- Finding files by name pattern (e.g., \"*.rs\", \"**/*.tsx\")\n- Discovering project structure\n- Listing files in specific directories\n\nHOW TO USE:\n- Provide a glob pattern to match files\n- Optionally specify a root directory to search from\n- Optionally specify a limit on results and max depth\n\nPATTERNS:\n- \"*.rs\" - All .rs files in current directory\n- \"**/*.rs\" - All .rs files recursively\n- \"src/**/*.{ts,tsx}\" - All TypeScript files under src/\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "properties": {
+                      "pattern": {
+                        "type": "string",
+                        "description": "Regex pattern to search for"
+                      },
+                      "max_total_lines": {
+                        "description": "Maximum total lines in output (content mode only)",
+                        "type": "integer"
+                      },
+                      "path": {
+                        "description": "Directory to search from, defaults to current working directory",
+                        "type": "string"
+                      },
+                      "output_mode": {
+                        "enum": [
+                          "content",
+                          "files_with_matches",
+                          "count"
+                        ],
+                        "description": "Output format: content (default), files_with_matches, or count",
+                        "type": "string"
+                      },
+                      "include": {
+                        "type": "string",
+                        "description": "File filter glob, e.g. '*.rs', '*.{ts,tsx}'"
+                      },
+                      "max_files": {
+                        "type": "integer",
+                        "description": "Maximum number of files to include in results"
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "max_depth": {
+                        "type": "integer",
+                        "description": "Maximum directory depth to traverse"
+                      },
+                      "max_matches_per_file": {
+                        "type": "integer",
+                        "description": "Maximum matches to return per file (content mode only)"
+                      },
+                      "case_sensitive": {
+                        "type": "boolean",
+                        "description": "Case-sensitive search, defaults to false"
+                      }
+                    },
+                    "required": [
+                      "pattern"
+                    ]
+                  }
+                },
+                "name": "grep",
+                "description": "\nFast text pattern search in files using regex. Respects .gitignore.\n\nWHEN TO USE:\n- Searching for literal text patterns, error messages, TODOs, config values\n- Finding files containing specific text\n\nWHEN NOT TO USE:\n- For semantic code understanding, use the code tool instead\n- For finding symbol definitions or usages, use the code tool\n\nHOW TO USE:\n- Provide a regex pattern to search for\n- Optionally specify a path to search from (defaults to current directory)\n- Optionally specify a file filter glob (e.g., \"*.rs\", \"*.{ts,tsx}\")\n\nOUTPUT MODES:\n- content: Show matching lines with file path and line number (default)\n- files_with_matches: Only show file paths that contain matches\n- count: Show count of matches per file\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "properties": {
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "doc_path": {
+                        "type": "string",
+                        "description": "Path to a specific doc to retrieve (e.g., \"features/tangent-mode.md\"). Use this to get full content of a doc from the index."
+                      },
+                      "query": {
+                        "description": "The user's question about this assistant's usage, features, or capabilities",
+                        "type": "string"
+                      }
+                    },
+                    "required": [],
+                    "type": "object"
+                  }
+                },
+                "name": "introspect",
+                "description": "\nLook up documentation about this chat application's own features, slash commands, settings, or capabilities.\n\nWHEN TO USE:\n- User asks about this assistant's features, commands, or settings\n- User wants to know what slash commands are available\n- User asks how to use a specific feature of this chat application\n\nWHEN NOT TO USE:\n- General coding questions, AWS help, or tasks the user wants you to perform\n- Questions unrelated to this chat application itself\n\nHOW TO USE:\n- Provide a query to search the documentation\n- Or provide a doc_path to retrieve a specific document\n- When mentioning commands in your response, always prefix them with '/' (e.g., '/chat save', '/chat load', '/context')\n- CRITICAL: Only provide information explicitly documented. If details are not documented, clearly state the information is not available rather than generating assumptions.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "properties": {
+                      "query": {
+                        "description": "The search query string. Required for 'search' operations. Performs semantic search across knowledge contexts to find relevant content.",
+                        "type": "string"
+                      },
+                      "operation_id": {
+                        "type": "string",
+                        "description": "Optional operation ID to cancel a specific operation. Used with 'cancel' command. If not provided, all active operations will be cancelled. Can be either the full operation ID or the short 8-character ID."
+                      },
+                      "file_type": {
+                        "description": "Filter results by file type (e.g., 'Code', 'Markdown', 'Text'). Optional for 'search' operations.",
+                        "type": "string"
+                      },
+                      "command": {
+                        "enum": [
+                          "show",
+                          "add",
+                          "remove",
+                          "clear",
+                          "search",
+                          "update",
+                          "status",
+                          "cancel"
+                        ],
+                        "description": "The knowledge operation to perform:\n- 'show': List all knowledge contexts (no additional parameters required)\n- 'add': Add content to knowledge base (requires 'name' and 'value')\n- 'remove': Remove content from knowledge base (requires one of: 'name', 'context_id', or 'path')\n- 'clear': Remove all knowledge contexts.\n- 'search': Search across knowledge contexts (requires 'query', optional: 'context_id', 'limit', 'offset', 'snippet_length', 'sort_by', 'file_type')\n- 'update': Update existing context with new content (requires 'path' and one of: 'name', 'context_id')\n- 'status': Show background operation status and progress\n- 'cancel': Cancel background operations (optional 'operation_id' to cancel specific operation, or cancel all if not provided)",
+                        "type": "string"
+                      },
+                      "offset": {
+                        "type": "integer",
+                        "description": "Number of results to skip for pagination. Optional for 'search' operations."
+                      },
+                      "name": {
+                        "description": "A descriptive name for the knowledge context. Required for 'add' operations. Can be used for 'remove' and 'update' operations to identify the context.",
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "The content to store in knowledge base. Required for 'add' operations. Can be either text content or a file/directory path. If it's a valid file or directory path, the content will be indexed; otherwise it's treated as text."
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "File or directory path. Used in 'remove' operations to remove contexts by their source path, and required for 'update' operations to specify the new content location."
+                      },
+                      "sort_by": {
+                        "type": "string",
+                        "description": "Sort order for search results. Options: 'relevance' (default, by similarity score), 'path' or 'name' (alphabetically by file path). Optional for 'search' operations.",
+                        "enum": [
+                          "relevance",
+                          "path",
+                          "name"
+                        ]
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "context_id": {
+                        "description": "The unique context identifier for targeted operations. Can be obtained from 'show' command. Used for 'remove', 'update', and 'search' operations to specify which context to operate on.",
+                        "type": "string"
+                      },
+                      "snippet_length": {
+                        "description": "Maximum character length for text snippets in results. Text longer than this will be truncated. Optional for 'search' operations.",
+                        "type": "integer"
+                      },
+                      "limit": {
+                        "description": "Maximum number of search results to return, use default value unless required more results or focused search. Optional for 'search' operations.",
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "command"
+                    ]
+                  }
+                },
+                "name": "knowledge",
+                "description": "A tool for indexing and searching content across chat sessions using semantic search.\n\n## Overview\nThis tool enables persistent storage and retrieval of information using semantic search (MiniLLM) or keyword search (BM25). Content remains available across sessions for later use.\n\n## When to use\n- When users ask to query your knowledge bases or kbs\n- When you need to search previously indexed content\n- When users request to index new content (code, markdown, CSV, PDF, and other text file formats)\n- When exploring unfamiliar content to find relevant information\n- When users ask about topics that might be in indexed knowledge bases\n\n## When not to use\n- When content has not been indexed yet and user hasn't requested indexing\n- When you need real-time or external information not in the knowledge base\n\n## Notes\n- Use 'show' command to list available knowledge bases before searching\n- Search can target specific knowledge bases (context_id) or all knowledge bases\n- Use default limit values unless specifically needed; fewer results for focused search\n- Pagination available via offset parameter for large result sets\n- 'add' command indexes new content; 'update' command refreshes existing knowledge bases\n- Unless there is a clear reason to modify the search query, use the user's original wording for better semantic matching"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "operations"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "operations": {
+                        "minItems": 1,
+                        "items": {
+                          "required": [
+                            "mode"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "path": {
+                              "description": "Path to the file or directory (required for Line, Directory modes).",
+                              "type": "string"
+                            },
+                            "offset": {
+                              "type": "integer",
+                              "description": "Line offset from the start of the file to start reading from (optional, for Line mode)."
+                            },
+                            "image_paths": {
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "List of paths to the images. Required for Image mode.",
+                              "type": "array"
+                            },
+                            "exclude_patterns": {
+                              "default": [
+                                "node_modules",
+                                ".git",
+                                "dist",
+                                "build",
+                                "out",
+                                ".cache",
+                                "target"
+                              ],
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "Glob patterns to exclude from directory listing (optional, for Directory mode). If omitted, uses defaults."
+                            },
+                            "limit": {
+                              "description": "Number of lines to read (optional, for Line mode).",
+                              "type": "integer"
+                            },
+                            "depth": {
+                              "description": "Depth of a recursive directory listing (optional, for Directory mode).",
+                              "type": "integer",
+                              "default": 0
+                            },
+                            "mode": {
+                              "type": "string",
+                              "description": "The operation mode to run in: `Line` and `Directory` are for text files and directories respectively. `Image` is for image files, in this mode `image_paths` is required.",
+                              "enum": [
+                                "Line",
+                                "Directory",
+                                "Image"
+                              ]
+                            }
+                          }
+                        },
+                        "description": "Array of operations to execute. Provide one element for single operation, multiple for batch.",
+                        "type": "array"
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "name": "read",
+                "description": "Tool for reading files, directories and images. Always provide an 'operations' array.\n\nFor single operation: provide array with one element.\nFor batch operations: provide array with multiple elements.\n\nAvailable modes:\n- Line: Read lines from a file\n- Directory: List directory contents\n- Image: Read and process images\n\nExamples:\n1. Single: {\"operations\": [{\"mode\": \"Line\", \"path\": \"/file.txt\"}]}\n2. Batch: {\"operations\": [{\"mode\": \"Line\", \"path\": \"/file1.txt\"}, {\"mode\": \"Directory\", \"path\": \"/src\"}]}\n3. Image: {\"operations\": [{\"mode\": \"Image\", \"image_paths\": [\"/path/to/image.png\"]}]}"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "properties": {
+                      "working_dir": {
+                        "type": "string",
+                        "description": "Optional working directory for command execution. If not specified, uses the current working directory."
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "command": {
+                        "description": "Command to execute",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "command"
+                    ]
+                  }
+                },
+                "name": "shell",
+                "description": "\nA tool for executing bash commands.\n\nWHEN TO USE THIS TOOL:\n- Use only as a last-resort when no other available tool can accomplish the task\n\nHOW TO USE:\n- Provide the command to execute\n- Use the `working_dir` argument to execute a command in another directory (defaults to current working directory)\n\nLIMITATIONS:\n- Does not respect user's bash profile or aliases\n\nTIPS:\n- Use the fileRead and fileWrite tools for reading and modifying files\n- NEVER prefix commands with cd to execute a command in another directory. Use the `working_dir` argument instead\n\nRESULT FIELDS:\n- `stdout`, `stderr`, `exit_status` — standard command output fields.\n- `agent_notes` (optional) — instructions or context sent to you by the command via a side channel\n  that is independent of stdout/stderr. If present, read and follow these notes before acting on\n  the result.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "task",
+                      "stages"
+                    ],
+                    "properties": {
+                      "mode": {
+                        "type": "string",
+                        "enum": [
+                          "blocking"
+                        ],
+                        "description": "Execution mode: 'blocking' (wait for completion)"
+                      },
+                      "task": {
+                        "type": "string",
+                        "description": "Overall task description"
+                      },
+                      "stages": {
+                        "type": "array",
+                        "items": {
+                          "required": [
+                            "name",
+                            "role",
+                            "prompt_template"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "prompt_template": {
+                              "type": "string",
+                              "description": "Task for this stage. Use {task} to reference the overall task."
+                            },
+                            "model": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "depends_on": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "role": {
+                              "enum": [
+                                "Jgao",
+                                "Jgao",
+                                "kiro_default",
+                                "kiro_planner",
+                                "kiro_guide"
+                              ],
+                              "type": "string",
+                              "description": "Agent to use for this stage. Available agents:\n- Jgao: 自定义默认Agent\n- Jgao: 自定义默认Agent\n- kiro_default: The default agent for Kiro CLI\n- kiro_planner: Specialized planning agent that helps break down ideas into implementation plans\n- kiro_guide: Guide agent that answers questions about Kiro CLI features using documentation"
+                            }
+                          }
+                        }
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "name": "subagent",
+                "description": "\nSpawn and coordinate multiple AI agents in a pipeline (DAG). Each stage runs as a\npersistent session. Stages with no depends_on start immediately in parallel.\n\nMODES:\n- background (not yet implemented): Fire-and-forget. Returns immediately, results arrive in inbox.\n- blocking (default): Waits for all stages to complete, returns consolidated results.\n\nUSE THIS when you need multi-step work with specialized agents:\n- Research → Implement → Review pipelines\n- Parallel research tracks that feed into a single implementer\n- Any workflow where stages have dependencies\n\nEach stage becomes a session you can monitor via ctrl+g in the TUI.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "required": [
+                      "command"
+                    ],
+                    "properties": {
+                      "command": {
+                        "type": "string",
+                        "enum": [
+                          "create",
+                          "complete",
+                          "add",
+                          "remove",
+                          "list"
+                        ],
+                        "description": "The command to run. Allowed options are `create`, `complete`, `add`, `remove`, and `list`. Call `list` without arguments to see a list of all current tasks."
+                      },
+                      "task_list_description": {
+                        "type": "string",
+                        "description": "Required parameter of `create` command containing a BRIEF summary of the task list being created. The summary should be detailed enough to refer to without knowing the problem context beforehand."
+                      },
+                      "tasks": {
+                        "items": {
+                          "required": [
+                            "task_description"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "details": {
+                              "description": "Optional detailed information about the task",
+                              "type": "string"
+                            },
+                            "task_description": {
+                              "description": "The main task description",
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "description": "Required parameter of `create` command containing the list of DISTINCT tasks to be added to the task list.",
+                        "type": "array"
+                      },
+                      "completed_task_ids": {
+                        "type": "array",
+                        "description": "Required parameter of `complete` command containing the IDs of EVERY completed task. Each task should be marked as completed IMMEDIATELY after it is finished.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "new_tasks": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "task_description": {
+                              "type": "string",
+                              "description": "The main task description"
+                            },
+                            "details": {
+                              "description": "Optional detailed information about the task",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "task_description"
+                          ]
+                        },
+                        "description": "Required parameter of `add` command containing a list of new tasks to be added to the task list.",
+                        "type": "array"
+                      },
+                      "new_description": {
+                        "description": "Optional parameter of `add` and `remove` containing a new task list description. Use this when the updated set of tasks significantly change the goal or overall procedure of the task list.",
+                        "type": "string"
+                      },
+                      "remove_task_ids": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Required parameter of `remove` command containing the IDs of tasks to remove.",
+                        "type": "array"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "modified_files": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array",
+                        "description": "Optional parameter of `complete` command containing a list of paths of files that were modified during the task. This is useful for tracking file changes that are important to the task."
+                      },
+                      "context_update": {
+                        "description": "Required parameter of `complete` command containing important task context. Use this command to track important information about the task AND information about files you have read.",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "name": "todo_list",
+                "description": "A tool for creating a task list and keeping track of tasks. This tool should be requested EVERY time the user gives you a task that will take multiple steps. A task list should be made BEFORE executing any steps. Steps should be marked off AS YOU COMPLETE THEM. DO NOT display your own tasks or task list AT ANY POINT; this is done for you. Complete the tasks in the same order that you provide them. If the user tells you to skip a step, DO NOT mark it as completed."
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "type": "object",
+                    "required": [
+                      "region",
+                      "service_name",
+                      "operation_name",
+                      "label"
+                    ],
+                    "properties": {
+                      "profile_name": {
+                        "description": "Optional: AWS profile name to use from ~/.aws/credentials. Defaults to default profile if not specified.",
+                        "type": "string"
+                      },
+                      "service_name": {
+                        "type": "string",
+                        "description": "The name of the AWS service. If you want to query s3, you should use s3api if possible. Must not start with a dash (-)."
+                      },
+                      "positional_args": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "Positional arguments for high-level commands (e.g., s3 cp, s3 mv, s3 sync, s3 rm). These are passed directly without -- prefix. Use this for source/destination paths in S3 commands."
+                      },
+                      "__tool_use_purpose": {
+                        "description": "A brief explanation why you are making this tool use.",
+                        "type": "string"
+                      },
+                      "operation_name": {
+                        "description": "The name of the operation to perform.",
+                        "type": "string"
+                      },
+                      "parameters": {
+                        "description": "The parameters for the operation. The parameter keys MUST conform to the AWS CLI specification. You should prefer to use JSON Syntax over shorthand syntax wherever possible. For parameters that are booleans, prioritize using flags with no value. Denote these flags with flag names as key and an empty string as their value. You should also prefer kebab case.",
+                        "type": "object"
+                      },
+                      "region": {
+                        "type": "string",
+                        "description": "Region name for calling the operation on AWS."
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Human readable description of the api that is being called."
+                      }
+                    }
+                  }
+                },
+                "name": "use_aws",
+                "description": "\nMake an AWS CLI api call with the specified service, operation, and parameters. All arguments MUST conform to the AWS CLI specification. Should the output of the invocation indicate a malformed command, invoke help to obtain the the correct command.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "mode": {
+                        "enum": [
+                          "selective",
+                          "truncated",
+                          "full"
+                        ],
+                        "type": "string",
+                        "description": "Extraction mode: 'selective' for smart extraction (default), 'truncated' for first 8000 chars, 'full' for complete content"
+                      },
+                      "search_terms": {
+                        "description": "Optional: Keywords to find in selective mode. Returns ~10 lines before and after matches.",
+                        "type": "string"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "url": {
+                        "description": "URL to fetch content from",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "name": "web_fetch",
+                "description": "\nFetch and extract content from a specific URL. Supports three modes: 'selective' (default, extracts relevant sections around search terms), 'truncated' (first 8000 chars), 'full' (complete content).\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "query"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "query": {
+                        "maxLength": 200,
+                        "type": "string",
+                        "description": "Search query (max 200 chars) - use concise keywords, not full sentences"
+                      },
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      }
+                    }
+                  }
+                },
+                "name": "web_search",
+                "description": "\nWebSearch looks up information that is outside the model's training data or cannot be reliably inferred from the current codebase/context.\n"
+              }
+            },
+            {
+              "toolSpecification": {
+                "inputSchema": {
+                  "json": {
+                    "required": [
+                      "command",
+                      "path"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "__tool_use_purpose": {
+                        "type": "string",
+                        "description": "A brief explanation why you are making this tool use."
+                      },
+                      "replaceAll": {
+                        "type": "boolean",
+                        "description": "Optional parameter of `strReplace` command. Default is false. When true, all instances of `oldStr` will be replaced with `newStr`."
+                      },
+                      "command": {
+                        "type": "string",
+                        "enum": [
+                          "create",
+                          "strReplace",
+                          "insert"
+                        ],
+                        "description": "The commands to run. Allowed options are: `create`, `strReplace`, `insert`"
+                      },
+                      "oldStr": {
+                        "type": "string",
+                        "description": "Required parameter of `strReplace` command containing the string in `path` to replace."
+                      },
+                      "path": {
+                        "type": "string",
+                        "description": "Path to the file"
+                      },
+                      "newStr": {
+                        "description": "Required parameter of `strReplace` command containing the new string.",
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "Required parameter of `create` and `insert` commands."
+                      },
+                      "insertLine": {
+                        "description": "Optional parameter of `insert` command. Line is 0-indexed. `content` will be inserted at the provided line. If not provided, content will be inserted at the end of the file on a new line, inserting a newline at the end of the file if it is missing.",
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "name": "write",
+                "description": "\nA tool for creating and editing text files.\n\nWHEN TO USE THIS TOOL:\n- Use when you need to create a new file, or modify an existing file\n- Perfect for updating text-based file formats\n\nHOW TO USE:\n- Provide the path to the file you want to create or modify\n- Specify the operation to perform: one of `create`, `strReplace`, or `insert`\n- Use `create` to create a new file. Required parameter is `content`. Parent directories will be created if they are missing.\n- Use `strReplace` to replace and update the content of an existing file.\n- Use `insert` to insert content at a specific line, or append content to the end of a file.\n\nTIPS:\n- To append content to the end of a file, use `insert` with no `insert_line`\n"
+              }
+            }
+          ]
+        },
+        "origin": "KIRO_CLI",
+        "modelId": "minimax-m2.5"
+      }
+    },
+    "chatTriggerType": "MANUAL",
+    "agentTaskType": "vibe"
+  },
+  "profileArn": "arn:aws:codewhisperer:us-east-1:471112993982:profile/GMAUN4KMEDEV"
+}

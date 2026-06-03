@@ -1,0 +1,49 @@
+POST / HTTP/1.1
+content-type: application/x-amz-json-1.0
+x-amz-target: AmazonCodeWhispererService.SendTelemetryEvent
+content-length: 709
+user-agent: aws-sdk-rust/1.3.16 ua/2.1 api/codewhispererruntime/0.1.16551 os/macos lang/rust/1.92.0 md/appVersion-2.4.1 app/AmazonQ-For-CLI
+x-amz-user-agent: aws-sdk-rust/1.3.16 ua/2.1 api/codewhispererruntime/0.1.16551 os/macos lang/rust/1.92.0 m/F app/AmazonQ-For-CLI
+x-amzn-codewhisperer-optout: true
+authorization: Bearer aoaAAAAAGobnRU6VnfGywgRvv8ifHjV7dIfkdlaM7PEKZkPjSbseulXyimxZk2rmSrwavc4Qzg9bV0gXXoCLFyKjUCbe0:MGQCMHmsEYEwNhUCgLLmzBLkCVEk5BjZ0qKRpHj7OQQeKdjO0UnUdnMTZAoOseJiWqUa9wIwS9GuqbVv4lP5a6a0p4zQCKBWZZy4dV8vLOAAJxc8m6Ls0WglD3BOywgiLUVciIRx
+amz-sdk-request: attempt=1; max=3
+amz-sdk-invocation-id: 28466b1b-ba8d-4308-9ad1-5dc39aab78b9
+accept: */*
+accept-encoding: gzip
+host: q.us-east-1.amazonaws.com
+
+{
+  "clientToken": "a5af6daf-7bcc-44bd-823d-2e5d9560ccb9",
+  "telemetryEvent": {
+    "chatAddMessageEvent": {
+      "conversationId": "706309e2-e1c2-4468-82f7-44b36728988e",
+      "messageId": "6b89693c-9160-405c-b5f7-5b476454f42f",
+      "timeToFirstChunkMilliseconds": 1325.769834,
+      "timeBetweenChunks": [
+        0.012958,
+        0.00925,
+        486.133042,
+        0.032625,
+        0.019625,
+        80.26750000000001,
+        0.0185,
+        0.004333,
+        0.004625,
+        133.1395,
+        0.017667,
+        0.028458999999999998
+      ],
+      "responseLength": 339
+    }
+  },
+  "optOutPreference": "OPTOUT",
+  "userContext": {
+    "ideCategory": "CLI",
+    "operatingSystem": "MAC",
+    "product": "CodeWhisperer",
+    "clientId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "ideVersion": "2.4.1"
+  },
+  "profileArn": "arn:aws:codewhisperer:us-east-1:471112993982:profile/GMAUN4KMEDEV",
+  "modelId": "minimax-m2.5"
+}

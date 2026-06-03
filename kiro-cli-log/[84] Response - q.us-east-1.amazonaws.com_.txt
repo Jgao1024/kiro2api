@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Date: Sun, 31 May 2026 01:34:54 GMT
+Content-Type: application/vnd.amazon.eventstream
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-RequestId: ebe01174-f80a-4153-a099-4e5119b378da
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=47304000; includeSubDomains
+X-Frame-Options: DENY
+Cache-Control: no-cache
+X-Content-Type-Options: nosniff
+
+���…���`Q–�Ó�:event-type���initial-response:content-type���application/x-amz-json-1.0:message-type���event{"conversationId":""}w­Nè���“���\‘YŸv�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"","modelId":"minimax-m2.5"}!ñ=(���Æ���[ÿÎJn�:event-type���reasoningContentEvent:content-type���application/json:message-type���event{"text":"æˆ‘å·²ç»�æŠŠé¡¹ç›®çš„ä¸»è¦�ä¿¡æ�¯æ•´ç�†å¹¶ä¿�å­˜åˆ°äº†æŒ‡å®šçš„ docs ç›®å½•ã€‚\n"}î¬{‚���½���\ï¨���:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"\n\nå·²æ•´ç�†å¹¶ä¿�å­˜åˆ° `/Users/jgao/Git","modelId":"minimax-m2.5"}Ð�Í_�������\�Cžc�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"/kiro2api/docs/README.md`ã€‚\n\n**kiro2api** æ˜¯ä¸€ä¸ª Go è¯­è¨€å¼€å�‘çš„é«˜æ€§èƒ½ AI API ä»£ç�†æœ�åŠ¡å™¨ï¼Œä¸»è¦�","modelId":"minimax-m2.5"}ÓMá·���ý���\·[VZ�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"åŠŸèƒ½ï¼š\n- ç»Ÿä¸€ä»£ç�† Claudeã€�OpenAI å’Œ AWS CodeWhisperer\n- æ”¯æŒ�å¤šè´¦å�·æ± ç®¡ç�†å’Œæ•…éšœè½¬ç§»","modelId":"minimax-m2.5"}’�Ð)���ù���\BÛðš�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"\n- æ”¯æŒ� Social/IdC ä¸¤ç§� AWS è®¤è¯�æ–¹å¼�\n- æ��ä¾›å®Œæ•´çš„ Anthropic å’Œ OpenAI API å…¼å®¹æŽ¥å�£","modelId":"minimax-m2.5"}•+ˆ±���“���W�‹Fþ�:event-type���contextUsageEvent:content-type���application/json:message-type���event{"contextUsagePercentage":8.834183692932129}E¶ô`���§���SUGœ¡�:event-type��meteringEvent:content-type���application/json:message-type���event{"unit":"credit","unitPlural":"credits","usage":0.09192345107794361}¡�‹9

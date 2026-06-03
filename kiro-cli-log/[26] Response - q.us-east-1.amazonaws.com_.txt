@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Date: Sun, 31 May 2026 01:32:01 GMT
+Content-Type: application/vnd.amazon.eventstream
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-RequestId: 8a84a8a9-0709-4930-85bb-c16d891c9a9a
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=47304000; includeSubDomains
+X-Frame-Options: DENY
+Cache-Control: no-cache
+X-Content-Type-Options: nosniff
+
+�������`Q��س�:event-type���initial-response:content-type���application/x-amz-json-1.0:message-type���event{"conversationId":""}w­Nو�������\sى�%�:event-type���assistantResponseEvent:content-type���application/json:message-type���event{"content":"","modelId":"glm-5"}('v��������Rط�
+��:event-type��toolUseEvent:content-type���application/json:message-type���event{"name":"web_fetch","toolUseId":"tooluse_8pVyEPWJfQPUH7evfiSVCc"}�Yخٍ�������R/PخF�:event-type��toolUseEvent:content-type���application/json:message-type���event{"input":"","name":"web_fetch","toolUseId":"tooluse_8pVyEPWJfQPUH7evfiSVCc"}ّ.I��������R�0���:event-type��toolUseEvent:content-type���application/json:message-type���event{"input":"{\"url\": \"","name":"web_fetch","toolUseId":"tooluse_8pVyEPWJfQPUH7evfiSVCc"}V.�،�������R�����:event-type��toolUseEvent:content-type���application/json:message-type���event{"input":"https://","name":"web_fetch","toolUseId":"tooluse_8pVyEPWJfQPUH7evfiSVCc"}�������ج���Rج�يk�:event-type��toolUseEvent:content-type���application/json:message-type���event{"input":"github.com/caidaoli/kiro2api\"","name":"web_fetch","toolUseId":"tooluse_8pVyEPWJfQPUH7evfiSVCc"}س=خ����ا���R؛r�z�:event-type��toolUseEvent:content-type���application/json:message-type���event{"input":", \"mode\": \"truncated\"","name":"web_fetch","toolUseId":"tooluse_8pVyEPWJfQPUH7evfiSVCc"}rف5ى�������R�0ه��:event-type��toolUseEvent:content-type���application/json:message-type���event{"input":"}","name":"web_fetch","toolUseId":"tooluse_8pVyEPWJfQPUH7evfiSVCc"}ه9���������R�0ه��:event-type��toolUseEvent:content-type���application/json:message-type���event{"name":"web_fetch","stop":true,"toolUseId":"tooluse_8pVyEPWJfQPUH7evfiSVCc"}
+B�غ�������W��F��:event-type���contextUsageEvent:content-type���application/json:message-type���event{"contextUsagePercentage":5.331500053405762}�GfJ�������SUG���:event-type��meteringEvent:content-type���application/json:message-type���event{"unit":"credit","unitPlural":"credits","usage":0.12624890215588724}�`b�

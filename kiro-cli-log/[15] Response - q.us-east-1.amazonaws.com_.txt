@@ -1,0 +1,102 @@
+HTTP/1.1 200 OK
+Date: Sun, 31 May 2026 01:30:30 GMT
+Content-Type: application/x-amz-json-1.0
+Content-Length: 1501
+Connection: keep-alive
+x-amzn-RequestId: dabfe0e2-e41b-4f24-ba30-b1414c52bb40
+
+{
+  "defaultModel": {
+    "modelId": "deepseek-3.2"
+  },
+  "models": [
+    {
+      "description": "Experimental preview of DeepSeek V3.2",
+      "modelId": "deepseek-3.2",
+      "modelName": "deepseek-3.2",
+      "promptCaching": {
+        "supportsPromptCaching": false
+      },
+      "rateMultiplier": 0.25,
+      "rateUnit": "Credit",
+      "supportedInputTypes": [
+        "TEXT",
+        "IMAGE"
+      ],
+      "tokenLimits": {
+        "maxInputTokens": 164000,
+        "maxOutputTokens": 64000
+      }
+    },
+    {
+      "description": "The MiniMax M2.5 model",
+      "modelId": "minimax-m2.5",
+      "modelName": "minimax-m2.5",
+      "promptCaching": {
+        "supportsPromptCaching": false
+      },
+      "rateMultiplier": 0.25,
+      "rateUnit": "Credit",
+      "supportedInputTypes": [
+        "TEXT"
+      ],
+      "tokenLimits": {
+        "maxInputTokens": 196000,
+        "maxOutputTokens": 64000
+      }
+    },
+    {
+      "description": "Experimental preview of MiniMax M2.1",
+      "modelId": "minimax-m2.1",
+      "modelName": "minimax-m2.1",
+      "promptCaching": {
+        "supportsPromptCaching": false
+      },
+      "rateMultiplier": 0.15,
+      "rateUnit": "Credit",
+      "supportedInputTypes": [
+        "TEXT",
+        "IMAGE"
+      ],
+      "tokenLimits": {
+        "maxInputTokens": 196000,
+        "maxOutputTokens": 64000
+      }
+    },
+    {
+      "description": "The GLM-5 model",
+      "modelId": "glm-5",
+      "modelName": "glm-5",
+      "promptCaching": {
+        "supportsPromptCaching": false
+      },
+      "rateMultiplier": 0.5,
+      "rateUnit": "Credit",
+      "supportedInputTypes": [
+        "TEXT"
+      ],
+      "tokenLimits": {
+        "maxInputTokens": 200000,
+        "maxOutputTokens": 64000
+      }
+    },
+    {
+      "description": "Experimental preview of Qwen3 Coder Next",
+      "modelId": "qwen3-coder-next",
+      "modelName": "qwen3-coder-next",
+      "promptCaching": {
+        "supportsPromptCaching": false
+      },
+      "rateMultiplier": 0.05,
+      "rateUnit": "Credit",
+      "supportedInputTypes": [
+        "TEXT",
+        "IMAGE"
+      ],
+      "tokenLimits": {
+        "maxInputTokens": 256000,
+        "maxOutputTokens": 64000
+      }
+    }
+  ]
+}

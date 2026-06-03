@@ -1,0 +1,44 @@
+HTTP/1.1 200 OK
+Date: Sun, 31 May 2026 01:30:53 GMT
+Content-Type: application/x-amz-json-1.0
+Content-Length: 800
+Connection: keep-alive
+x-amzn-RequestId: 45c9afa7-4e3f-4b46-81c7-e82ad38aff6c
+
+{
+  "nextDateReset": 1.780272E9,
+  "overageConfiguration": {
+    "overageStatus": "ENABLED"
+  },
+  "subscriptionInfo": {
+    "overageCapability": "OVERAGE_CAPABLE",
+    "subscriptionManagementTarget": "MANAGE",
+    "subscriptionTitle": "KIRO POWER",
+    "type": "Q_DEVELOPER_STANDALONE_POWER",
+    "upgradeCapability": "UPGRADE_INCAPABLE"
+  },
+  "usageBreakdownList": [
+    {
+      "bonuses": [],
+      "currency": "USD",
+      "currentOverages": 0,
+      "currentOveragesWithPrecision": 0.0,
+      "currentUsage": 2760,
+      "currentUsageWithPrecision": 2760.17,
+      "displayName": "Credit",
+      "displayNamePlural": "Credits",
+      "nextDateReset": 1.780272E9,
+      "overageCap": 10000,
+      "overageCapWithPrecision": 10000.0,
+      "overageCharges": 0.0,
+      "overageRate": 0.04,
+      "resourceType": "CREDIT",
+      "unit": "INVOCATIONS",
+      "usageLimit": 10000,
+      "usageLimitWithPrecision": 10000.0
+    }
+  ],
+  "userInfo": {
+    "userId": "d-9567af5588.e7e4cab8-0051-702c-8a9a-a45039142d22"
+  }
+}

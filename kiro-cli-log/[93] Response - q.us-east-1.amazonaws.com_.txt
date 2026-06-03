@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Date: Sun, 31 May 2026 01:36:18 GMT
+Content-Type: application/x-amz-json-1.0
+Content-Length: 2
+Connection: keep-alive
+x-amzn-RequestId: 703c54a5-44c9-4362-8b40-1489080a9cb6
+X-XSS-Protection: 1; mode=block
+Strict-Transport-Security: max-age=47304000; includeSubDomains
+X-Frame-Options: DENY
+Cache-Control: no-cache
+X-Content-Type-Options: nosniff
+
+{}
